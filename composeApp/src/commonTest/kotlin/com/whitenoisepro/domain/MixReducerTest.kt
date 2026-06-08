@@ -68,6 +68,44 @@ class MixReducerTest {
     }
 
     @Test
+    fun saveCurrentMixUpdatesExistingEquivalentMixInsteadOfDuplicating() {
+        val existing = baseMix.copy(
+            id = "saved-night-rain",
+            updatedAtEpochMillis = 10L,
+        )
+        val state = MixState(
+            currentMix = baseMix.copy(id = "current-draft"),
+            savedMixes = listOf(existing),
+        )
+
+        val saved = MixReducer.reduce(
+            state = state,
+            intent = MixIntent.SaveCurrentMix(savedMixId = "new-duplicate-id", nowEpochMillis = 99L),
+        )
+
+        assertEquals(1, saved.savedMixes.size)
+        assertEquals("saved-night-rain", saved.savedMixes.single().id)
+        assertEquals(99L, saved.savedMixes.single().updatedAtEpochMillis)
+    }
+
+    @Test
+    fun saveCurrentMixCreatesDistinctEntryWhenLayersChange() {
+        val existing = baseMix.copy(id = "saved-night-rain")
+        val edited = baseMix.copy(
+            id = "current-draft",
+            layers = baseMix.layers + SoundLayer.create("fan-layer", "fan", 0.2f),
+        )
+        val state = MixState(currentMix = edited, savedMixes = listOf(existing))
+
+        val saved = MixReducer.reduce(
+            state = state,
+            intent = MixIntent.SaveCurrentMix(savedMixId = "saved-edited", nowEpochMillis = 99L),
+        )
+
+        assertEquals(listOf("saved-edited", "saved-night-rain"), saved.savedMixes.map { it.id })
+    }
+
+    @Test
     fun deleteSavedMixAndTrackRecentMixes() {
         val saved = SoundMix(id = "saved-1", title = "海边", updatedAtEpochMillis = 1L)
         val state = MixState(currentMix = baseMix, savedMixes = listOf(saved))

@@ -1,11 +1,8 @@
-# settings-trust Specification
+# settings-trust Spec Delta
 
-## Purpose
+## MODIFIED Requirements
 
-定义 Settings 中面向用户的隐私、后台媒体控制和未开放能力说明，避免展示不可用的伪功能。文案必须准确反映本地存储、无账号和媒体通知行为，并为 closed testing 提供可理解的信任信息。
-
-## Requirements
-### Requirement: Release-ready Settings trust copy
+### Requirement: Release-ready settings content
 
 The Settings screen SHALL display privacy, local-data, generated-audio, and background media-control rationale suitable for closed testing.
 
@@ -26,17 +23,3 @@ The Settings screen SHALL display privacy, local-data, generated-audio, and back
 - **WHEN** the user opens Settings in a release candidate
 - **THEN** Settings explains that Android system media controls are for background and lock-screen playback
 - **AND** it does not describe marketing notifications or request notification runtime permission
-
-### Requirement: Placeholder functionality must not appear available
-
-The Settings screen SHALL hide or disable features that are not implemented for the current MVP.
-
-#### Scenario: Billing is not integrated
-
-- **WHEN** billing is not integrated
-- **THEN** Restore Purchases is not shown as an available Settings row
-
-#### Scenario: Offline downloads are not implemented
-
-- **WHEN** offline downloads are not implemented
-- **THEN** Offline Downloads is shown as unavailable or hidden, not as an enabled toggle

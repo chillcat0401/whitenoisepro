@@ -65,6 +65,7 @@ fun WhiteNoiseProApp(
                     onTogglePlay = { store.dispatch(AppIntent.TogglePlayback) },
                     onToggleFavorite = { store.dispatch(AppIntent.ToggleFavoriteCurrent) },
                     onMasterVolumeChange = { volume -> store.dispatch(AppIntent.SetMasterVolume(volume)) },
+                    onStartRecommendedTimer = { store.dispatch(AppIntent.StartRecommendedBedtimeTimer) },
                 )
                 AppTab.Mixer -> MixerScreen(
                     state = state,

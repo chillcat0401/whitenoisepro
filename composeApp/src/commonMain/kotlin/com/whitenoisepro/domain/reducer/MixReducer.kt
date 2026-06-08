@@ -71,8 +71,9 @@ object MixReducer {
         }
 
         is MixIntent.SaveCurrentMix -> {
+            val existingEquivalent = state.savedMixes.firstOrNull { it.isSameMixContentAs(state.currentMix) }
             val saved = state.currentMix.copy(
-                id = intent.savedMixId,
+                id = existingEquivalent?.id ?: intent.savedMixId,
                 updatedAtEpochMillis = intent.nowEpochMillis,
             )
             state.copy(savedMixes = state.savedMixes.upsert(saved))
@@ -116,6 +117,25 @@ object MixReducer {
 
     private fun List<SoundMix>.upsert(mix: SoundMix): List<SoundMix> =
         listOf(mix) + filterNot { it.id == mix.id }
+
+    private fun SoundMix.isSameMixContentAs(other: SoundMix): Boolean =
+        title == other.title &&
+            masterVolume == other.masterVolume &&
+            isFavorite == other.isFavorite &&
+            layers.map { it.comparableContent() } == other.layers.map { it.comparableContent() }
+
+    private fun SoundLayer.comparableContent(): LayerContent =
+        LayerContent(
+            soundId = soundId,
+            volume = volume,
+            isMuted = isMuted,
+        )
+
+    private data class LayerContent(
+        val soundId: String,
+        val volume: Float,
+        val isMuted: Boolean,
+    )
 
     private fun MixState.updateMatchingMixes(
         mixId: String,

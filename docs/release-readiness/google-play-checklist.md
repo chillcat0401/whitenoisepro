@@ -1,6 +1,6 @@
 # Google Play Release Readiness Checklist
 
-复核日期：2026-06-07
+复核日期：2026-06-08
 
 官方依据：
 
@@ -13,12 +13,12 @@
 
 WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 Google Play closed testing，除非以下 gate 完成：
 
-- 四个第一方生成声音已替换 `silence_loop.wav`，仍需真实设备主观 QA。
+- 八个第一方生成声音已打包并通过机器 QA，仍需真实设备主观 QA。
 - Mixer 已支持 layer 音量、静音和移除；Saved Mixes 已支持播放、重命名、收藏和删除。
 - Timer 已支持 15/30/45/60/120 分钟、自定义时长、延长、取消和淡出停止。
 - adaptive launcher、round、monochrome 和 512×512 商店图标已准备。
 - 独立 upload key 和已签名 release AAB 已准备；密钥仍需完成离线备份。
-- 隐私政策 URL 已发布，并能从 Settings 打开。
+- 隐私政策和开发者信息模板已准备；公开 URL、开发者主体、联系邮箱和生效日期仍需发布前补齐。
 - Data safety 工作表与代码行为一致。
 - MediaSession 通知权限豁免结论已复核，Manifest 不声明不必要的 `POST_NOTIFICATIONS`。
 - Settings placeholder 已处理为实现、禁用或隐藏。
@@ -58,9 +58,10 @@ WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 
 
 - closed testing feedback loop 已准备。
 - tester 招募名单和联系渠道已准备。
-- 隐私政策 URL 已发布。
+- 隐私政策 URL 已发布，且 Settings / Play Console / Data safety 使用同一 URL。
+- 开发者主体、支持邮箱和隐私联系邮箱已确认。
 - Data safety 草案完成。
-- 四个第一方声音已覆盖默认混音，生成清单与哈希已记录。
+- 八个第一方声音已覆盖默认混音和声音库，生成清单与哈希已记录。
 - 商店图标已生成并通过尺寸、RGBA 与文件大小校验。
 - 已启用 Play App Signing，并在 Play Console 核对 upload certificate。
 - 真实设备音频 QA 至少完成一轮。
@@ -99,6 +100,7 @@ WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 
 - closed/open test 的主要阻断问题已处理。
 - targetSdk 满足当前 Google Play 要求。当前项目 targetSdk 为 36。
 - 隐私政策 URL 稳定可访问，非 PDF，非地理封锁。
+- 开发者信息与 Play Console、隐私政策、商店详情一致。
 - Data safety 答案与代码和第三方 SDK 行为一致。
 - 商店截图展示真实应用状态，不使用 debug placeholder。
 

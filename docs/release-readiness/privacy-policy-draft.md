@@ -1,6 +1,6 @@
 # WhiteNoisePro Privacy Policy Draft
 
-状态：草案，发布前需要补齐开发者主体、联系邮箱和公开 URL。
+状态：模板草案，发布前需要补齐所有 `[待补充：...]` 占位。不得使用未确认的开发者主体、邮箱、地址、URL 或生效日期。
 
 ## 隐私政策
 
@@ -9,9 +9,13 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 ## 开发者信息
 
 - 应用名称：WhiteNoisePro
-- 开发者主体：待补充
-- 隐私联系邮箱：待补充
-- 生效日期：待补充
+- 开发者主体：[待补充：个人或公司法定/展示名称]
+- 隐私联系邮箱：[待补充：privacy/support email]
+- 支持邮箱：[待补充：support email，可与隐私联系邮箱相同]
+- 开发者所在地 / 地址：[待补充：按 Play Console 和公开政策要求填写]
+- 隐私政策公开 URL：[待补充：https URL，非 PDF，公开可访问]
+- 生效日期：[待补充：YYYY-MM-DD]
+- 最近更新日期：[待补充：YYYY-MM-DD]
 
 ## 当前数据处理声明
 
@@ -35,13 +39,18 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 
 这些本地偏好不会上传到开发者服务器。
 
+## 音频素材来源
+
+当前 MVP 使用随应用打包的第一方程序化生成声音，包括白噪声、粉噪声、棕噪声、柔和风扇、细雨、远海、夜林和暖炉。这些声音不包含第三方录音或采样，不通过网络下载，也不需要用户提供音频、麦克风或录音权限。
+
 ## 权限用途
 
 应用可能使用以下 Android 权限：
 
 - Foreground service：用于后台持续播放助眠声音。
 - Foreground service media playback：用于声明后台媒体播放类型。
-- Notifications：用于在 Android 13+ 上展示后台 / 锁屏媒体控制，不用于营销通知。
+
+当前 Manifest 不声明 `POST_NOTIFICATIONS`。应用仅使用 Android MediaSession 媒体控制，让系统在播放时提供后台 / 锁屏控制；这些控制不用于营销通知。
 
 ## 数据共享
 
@@ -64,7 +73,7 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 如对隐私政策有疑问，请联系：
 
 ```text
-待补充邮箱
+[待补充：privacy/support email]
 ```
 
 ## 发布要求

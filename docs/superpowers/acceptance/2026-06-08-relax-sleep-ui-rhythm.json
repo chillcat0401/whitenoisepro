@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-08-relax-sleep-ui-rhythm",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-08-relax-sleep-ui-rhythm/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-08-relax-sleep-ui-rhythm.md",
+    "review": "docs/code-review-relax-sleep-ui-rhythm-2026-06-08.md",
+    "verification": [
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:testDebugUnitTest",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:lintDebug",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:assembleDebug",
+      "openspec validate relax-sleep-ui-rhythm --strict"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "仍建议在 360x800、390x844、430x932 和真机夜间亮度下做视觉 QA",
+    "截图级 UI 回归尚未接入自动化"
+  ],
+  "verifiedAt": "2026-06-08"
+}

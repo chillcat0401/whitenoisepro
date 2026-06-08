@@ -46,6 +46,7 @@ sealed interface AppIntent {
     data class SelectCategory(val category: String) : AppIntent
     data class SelectTimerPreset(val minutes: Int) : AppIntent
     data class SetCustomTimerDuration(val minutes: Int) : AppIntent
+    data object StartRecommendedBedtimeTimer : AppIntent
     data object StartTimer : AppIntent
     data class ExtendTimer(val minutes: Int) : AppIntent
     data object CancelTimer : AppIntent
@@ -183,6 +184,7 @@ class AppStore(
             is AppIntent.SelectCategory -> state = state.copy(selectedCategory = intent.category)
             is AppIntent.SelectTimerPreset -> prepareTimer(intent.minutes)
             is AppIntent.SetCustomTimerDuration -> prepareCustomTimer(intent.minutes)
+            AppIntent.StartRecommendedBedtimeTimer -> startRecommendedBedtimeTimer()
             AppIntent.StartTimer -> startTimer()
             is AppIntent.ExtendTimer -> extendTimer(intent.minutes)
             AppIntent.CancelTimer -> cancelTimer()
@@ -283,6 +285,16 @@ class AppStore(
         startTimerJob()
     }
 
+    private fun startRecommendedBedtimeTimer() {
+        state = state.copy(
+            timerState = TimerReducer.reduce(
+                state.timerState,
+                TimerIntent.SelectPreset(recommendedBedtimeTimerMinutes),
+            ),
+        )
+        startTimer()
+    }
+
     private fun extendTimer(minutes: Int) {
         updateTimer(TimerIntent.Extend(minutes))
         if (state.timerState.isActive) {
@@ -366,3 +378,5 @@ class AppStore(
         const val TimerTickMillis = 1_000L
     }
 }
+
+const val recommendedBedtimeTimerMinutes: Int = 30

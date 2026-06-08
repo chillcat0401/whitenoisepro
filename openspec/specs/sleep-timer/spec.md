@@ -12,6 +12,19 @@ The system SHALL support timer presets and custom timer duration.
 - **WHEN** the user selects 15 minutes, 30 minutes, 45 minutes, 1 hour, or 2 hours
 - **THEN** the timer duration updates to the selected preset
 
+#### Scenario: First-time user starts a bedtime session
+
+- **WHEN** the user opens Home or Timer before starting playback
+- **THEN** the UI presents a recommended 30 or 45 minute sleep timer path
+- **AND** the user can start the timer without navigating through unrelated settings
+
+#### Scenario: User starts recommended timer from Home
+
+- **WHEN** the user selects the recommended bedtime timer action from Home
+- **THEN** the app prepares the selected duration
+- **AND** starts playback if playback is not already active
+- **AND** shows remaining timer state in the Mini Player
+
 ### Requirement: Active timer countdown
 The system SHALL track active timer countdown and expose remaining time to Home, Timer, and Mini Player.
 

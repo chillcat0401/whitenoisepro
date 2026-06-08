@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-08-google-play-readiness-core-polish",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-08-google-play-readiness-core-polish/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-08-google-play-readiness-core-polish.md",
+    "review": "docs/code-review-google-play-readiness-core-polish-2026-06-08.md",
+    "verification": [
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:testDebugUnitTest --tests com.whitenoisepro.presentation.SettingsContentTest --tests com.whitenoisepro.domain.MixReducerTest --tests com.whitenoisepro.presentation.AppStoreTest --tests com.whitenoisepro.app.AppShellTest",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:testDebugUnitTest",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:lintDebug",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:assembleDebug",
+      "openspec validate google-play-readiness-core-polish --strict"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "隐私政策公开 URL、开发者主体、支持邮箱、隐私邮箱、地址和生效日期仍需 owner 补齐",
+    "真实设备音频、后台、锁屏、蓝牙和打断 QA 仍需人工证据",
+    "Play Console closed testing tester opt-in 和 Play App Signing 状态仍需账号侧确认"
+  ],
+  "verifiedAt": "2026-06-08"
+}

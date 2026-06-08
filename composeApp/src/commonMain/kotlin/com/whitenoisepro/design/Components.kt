@@ -39,7 +39,7 @@ fun PrimaryButton(
     androidx.compose.material3.Button(
         onClick = onClick,
         enabled = enabled,
-        modifier = modifier.heightIn(min = WnpDimens.MinTouchTarget),
+        modifier = modifier.heightIn(min = WnpDimens.MinTouchTarget + WnpSpacing.Xs),
         shape = RoundedCornerShape(WnpRadius.Button),
         colors = ButtonDefaults.buttonColors(
             containerColor = WnpColors.Primary,
@@ -154,8 +154,8 @@ fun SettingsRow(
     Row(
         modifier = rowModifier
             .fillMaxWidth()
-            .heightIn(min = 56.dp)
-            .padding(vertical = WnpSpacing.Sm),
+            .heightIn(min = 64.dp)
+            .padding(vertical = WnpSpacing.Md),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -178,7 +178,7 @@ fun SettingsRow(
             }
         }
         if (trailing != null) {
-            Spacer(Modifier.width(WnpSpacing.Md))
+            Spacer(Modifier.width(WnpSpacing.Lg))
             trailing()
         }
     }
@@ -215,7 +215,7 @@ fun SectionHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = WnpSpacing.Lg, bottom = WnpSpacing.Sm),
+            .padding(top = WnpSpacing.Xl, bottom = WnpSpacing.Md),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {

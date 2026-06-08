@@ -34,8 +34,14 @@ object WnpSpacing {
     val Lg = 16.dp
     val Xl = 24.dp
     val Xxl = 32.dp
-    val ScreenHorizontal = 16.dp
-    val ScreenBottomWithPlayer = 168.dp
+    val ScreenHorizontal = 20.dp
+    val ScreenTop = 24.dp
+    val PageGap = 24.dp
+    val SectionGap = 20.dp
+    val CardPadding = 18.dp
+    val HeroPadding = 30.dp
+    val BottomBreathingRoom = 32.dp
+    val ScreenBottomWithPlayer = 184.dp
 }
 
 object WnpRadius {
@@ -47,8 +53,9 @@ object WnpRadius {
 
 object WnpDimens {
     val MinTouchTarget = 44.dp
-    val BottomNavHeight = 64.dp
-    val MiniPlayerHeight = 64.dp
+    val BottomNavHeight = 68.dp
+    val MiniPlayerHeight = 76.dp
+    val BottomChromeGap = 8.dp
 }
 
 object WnpTypography {

@@ -30,6 +30,18 @@ class DesignTokenTest {
     @Test
     fun radiusAndSpacingTokensExist() {
         assertEquals(8.dp, WnpRadius.Card)
-        assertEquals(16.dp, WnpSpacing.ScreenHorizontal)
+        assertEquals(20.dp, WnpSpacing.ScreenHorizontal)
+        assertEquals(24.dp, WnpSpacing.ScreenTop)
+        assertEquals(24.dp, WnpSpacing.PageGap)
+        assertEquals(20.dp, WnpSpacing.SectionGap)
+        assertEquals(18.dp, WnpSpacing.CardPadding)
+        assertEquals(30.dp, WnpSpacing.HeroPadding)
+    }
+
+    @Test
+    fun bottomChromeUsesRelaxedHeights() {
+        assertEquals(76.dp, WnpDimens.MiniPlayerHeight)
+        assertEquals(68.dp, WnpDimens.BottomNavHeight)
+        assertEquals(8.dp, WnpDimens.BottomChromeGap)
     }
 }

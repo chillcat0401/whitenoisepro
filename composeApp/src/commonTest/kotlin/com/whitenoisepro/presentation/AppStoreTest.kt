@@ -300,7 +300,7 @@ class AppStoreTest {
     }
 
     @Test
-    fun saveCurrentMixUpsertsSavedMixAndPersists() = runTest {
+    fun saveCurrentMixUpdatesEquivalentSavedMixAndPersists() = runTest {
         val repository = RecordingRepository()
         val store = AppStore(
             repository = repository,
@@ -315,9 +315,9 @@ class AppStoreTest {
         store.dispatch(AppIntent.SaveCurrentMix)
         advanceUntilIdle()
 
-        assertEquals("saved-current", store.state.mixState.savedMixes.first().id)
+        assertEquals("deep-night-noise", store.state.mixState.savedMixes.first().id)
         assertEquals(123L, store.state.mixState.savedMixes.first().updatedAtEpochMillis)
-        assertEquals("saved-current", repository.savedSnapshots.last().savedMixes.first().id)
+        assertEquals("deep-night-noise", repository.savedSnapshots.last().savedMixes.first().id)
     }
 
     @Test
@@ -424,6 +424,33 @@ class AppStoreTest {
         assertEquals(0L, store.state.timerState.remainingMillis)
         assertEquals(null, store.state.timerState.startedAtEpochMillis)
         assertEquals(0L, repository.savedSnapshots.last().timerDefaults.remainingMillis)
+    }
+
+    @Test
+    fun recommendedBedtimeTimerStartsThirtyMinutePlaybackFromHomePath() = runTest {
+        val playback = RecordingPlaybackEngine()
+        val runtime = RecordingPlatformSleepTimerRuntime()
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = playback,
+            platformSleepTimerRuntime = runtime,
+            scope = this,
+            playbackObservationScope = backgroundScope,
+            clock = FixedClock(now = 1_000L),
+        )
+        advanceUntilIdle()
+
+        assertEquals(30, recommendedBedtimeTimerMinutes)
+        store.dispatch(AppIntent.StartRecommendedBedtimeTimer)
+        runCurrent()
+
+        assertEquals(30 * 60 * 1000L, store.state.timerState.durationMillis)
+        assertTrue(store.state.timerState.isActive)
+        assertEquals(listOf("deep-night-noise"), playback.playedMixIds)
+        assertEquals(30 * 60 * 1000L, runtime.scheduled.single().remainingMillis)
+
+        store.dispatch(AppIntent.CancelTimer)
+        runCurrent()
     }
 
     @Test

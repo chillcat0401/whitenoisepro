@@ -1,6 +1,6 @@
 # Google Play Data Safety Worksheet
 
-复核日期：2026-06-05
+复核日期：2026-06-08
 
 当前判断仅覆盖现有 MVP 代码。任何新增 SDK 或数据行为都必须重新评估。
 
@@ -21,8 +21,9 @@
 ```text
 FOREGROUND_SERVICE
 FOREGROUND_SERVICE_MEDIA_PLAYBACK
-当前不声明 `POST_NOTIFICATIONS`；MediaSession 通知属于 Android 13+ 权限行为豁免项。
 ```
+
+当前不声明 `POST_NOTIFICATIONS`；仅使用 MediaSession 媒体控制，不用于营销通知。
 
 ## 数据收集判断
 
@@ -51,14 +52,29 @@ FOREGROUND_SERVICE_MEDIA_PLAYBACK
 
 如果未来加入云同步，这些项必须重新进入 Data safety。
 
+## 音频与媒体输入
+
+当前应用不收集用户音频，不请求麦克风，不上传播放记录。八个发布声音均为本地打包的第一方程序化生成音频：
+
+- 白噪声。
+- 粉噪声。
+- 棕噪声。
+- 柔和风扇。
+- 细雨。
+- 远海。
+- 夜林。
+- 暖炉。
+
+音频生成 manifest 位于 `docs/audio-assets/generated-audio-manifest.json`。
+
 ## Data Safety 初始答案方向
 
 在当前代码行为下：
 
 - Data collected: No。
 - Data shared: No。
-- Security practices: 需要根据最终实现填写。
-- Data deletion: 当前无云端数据；如提供支持邮箱，可作为查询入口说明。
+- Security practices: 当前无用户数据传输；本地偏好由 Android 应用沙箱保护。
+- Data deletion: 当前无云端数据；用户可卸载应用清除本地数据。支持邮箱需要在开发者信息模板补齐后同步。
 
 注意：
 
@@ -76,3 +92,4 @@ FOREGROUND_SERVICE_MEDIA_PLAYBACK
 - 加入客服表单或反馈上传。
 - 加入远程配置或 A/B testing。
 - 加入第三方音频 CDN 或联网播放。
+- 改变 Manifest 权限或新增普通通知。

@@ -23,6 +23,19 @@
 
 这些资产不含第三方录音或采样，使用固定 seed 和周期 inverse FFT 生成。closed testing 前仍必须完成真实设备主观试听和长时间 loop QA。
 
+## 资产证据表
+
+| 声音 | 文件 | 来源 | 授权状态 | 机器 QA | 人工 QA |
+| --- | --- | --- | --- | --- | --- |
+| 白噪声 | `white_noise_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 粉噪声 | `pink_noise_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 棕噪声 | `brown_noise_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 柔和风扇 | `fan_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 细雨 | `rain_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 远海 | `ocean_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 夜林 | `forest_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 暖炉 | `fireplace_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+
 ## 单个声音资产验收标准
 
 每个发布声音必须记录：
@@ -93,3 +106,12 @@
 - 程序化资产清单、哈希和生成脚本与 APK 一致。
 - 所有后续第三方候选声音有授权记录。
 - 应用中不存在 `silence_loop.wav`。
+
+## 人工 QA 记录模板
+
+| 日期 | 设备 | Android 版本 | 输出设备 | 场景 | 结果 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 默认混音 10 分钟 | [待补充：pass/fail] | [待补充] |
+| [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 锁屏后台播放 | [待补充：pass/fail] | [待补充] |
+| [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 蓝牙媒体键 | [待补充：pass/fail] | [待补充] |
+| [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 来电 / 其他音频打断 | [待补充：pass/fail] | [待补充] |

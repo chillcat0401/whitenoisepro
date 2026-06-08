@@ -56,6 +56,24 @@ fun miniPlayerSubtitle(state: AppState): String =
         "${state.mixState.currentMix.layers.size} 个声音层"
     }
 
+data class ScaffoldContentPadding(
+    val start: androidx.compose.ui.unit.Dp,
+    val top: androidx.compose.ui.unit.Dp,
+    val end: androidx.compose.ui.unit.Dp,
+    val bottom: androidx.compose.ui.unit.Dp,
+)
+
+fun scaffoldContentPadding(): ScaffoldContentPadding =
+    ScaffoldContentPadding(
+        start = WnpSpacing.ScreenHorizontal,
+        top = WnpSpacing.ScreenTop,
+        end = WnpSpacing.ScreenHorizontal,
+        bottom = WnpDimens.BottomNavHeight +
+            WnpDimens.BottomChromeGap +
+            WnpDimens.MiniPlayerHeight +
+            WnpSpacing.BottomBreathingRoom,
+    )
+
 @Composable
 fun AppScaffold(
     selectedTab: AppTab,
@@ -72,12 +90,13 @@ fun AppScaffold(
             .fillMaxSize()
             .background(WnpColors.Background),
     ) {
+        val scaffoldPadding = scaffoldContentPadding()
         content(
             PaddingValues(
-                start = WnpSpacing.ScreenHorizontal,
-                top = WnpSpacing.Lg,
-                end = WnpSpacing.ScreenHorizontal,
-                bottom = WnpDimens.BottomNavHeight + WnpDimens.MiniPlayerHeight + WnpSpacing.Xl,
+                start = scaffoldPadding.start,
+                top = scaffoldPadding.top,
+                end = scaffoldPadding.end,
+                bottom = scaffoldPadding.bottom,
             ),
         )
 
@@ -91,6 +110,7 @@ fun AppScaffold(
                 onPlayPause = onPlayPause,
                 modifier = Modifier.padding(horizontal = WnpSpacing.ScreenHorizontal),
             )
+            Spacer(Modifier.height(WnpDimens.BottomChromeGap))
             BottomNav(
                 selectedTab = selectedTab,
                 onTabSelected = onTabSelected,
@@ -141,14 +161,14 @@ fun MiniPlayer(
             .height(WnpDimens.MiniPlayerHeight)
             .clip(RoundedCornerShape(WnpRadius.Card))
             .background(WnpColors.SurfaceHigh)
-            .padding(horizontal = WnpSpacing.Md, vertical = WnpSpacing.Sm),
+            .padding(horizontal = WnpSpacing.Lg, vertical = WnpSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         SoundIcon(label = title, active = isPlaying, modifier = Modifier.size(40.dp))
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = WnpSpacing.Md),
+                .padding(horizontal = WnpSpacing.Lg),
         ) {
             Text(
                 text = title,
@@ -198,7 +218,7 @@ fun BottomNav(
                     .weight(1f)
                     .clip(RoundedCornerShape(WnpRadius.Button))
                     .clickable { onTabSelected(tab) }
-                    .padding(vertical = WnpSpacing.Xs),
+                    .padding(vertical = WnpSpacing.Sm),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {

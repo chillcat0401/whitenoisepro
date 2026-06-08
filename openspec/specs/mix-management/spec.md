@@ -34,6 +34,16 @@ The system SHALL let users save, edit, delete, favorite, and play named mixes.
 - **WHEN** the user saves a mix with at least one layer
 - **THEN** the mix appears in Saved Mixes with name, sound summary, favorite state, and play action
 
+#### Scenario: User saves an unchanged mix twice
+
+- **WHEN** the current mix has the same title, layer sound ids, layer volumes, muted states, and master volume as an existing saved mix
+- **THEN** saving updates the existing saved mix timestamp instead of creating a duplicate row
+
+#### Scenario: User saves a modified mix
+
+- **WHEN** the current mix differs from existing saved mixes by title, layers, layer volume, muted state, or master volume
+- **THEN** saving creates or upserts a distinct saved mix entry
+
 #### Scenario: User plays saved mix
 - **WHEN** the user taps play on a saved mix
 - **THEN** the saved mix becomes the current mix and playback starts or is prepared according to playback state

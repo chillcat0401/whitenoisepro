@@ -54,7 +54,11 @@ data class SettingsContent(
                         rows = listOf(
                             SettingsRowContent(
                                 title = "隐私政策",
-                                subtitle = "无账号、无广告，偏好仅本地保存",
+                                subtitle = "无账号、无广告、无分析；偏好仅本地保存，开发者信息待补充",
+                            ),
+                            SettingsRowContent(
+                                title = "声音来源",
+                                subtitle = "当前声音为本地打包的第一方程序化生成音频",
                             ),
                             SettingsRowContent(
                                 title = "后台媒体控制",
