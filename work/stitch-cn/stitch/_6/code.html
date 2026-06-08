@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>设置</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#d38a6e",
+                      "on-tertiary": "#53220d",
+                      "tertiary-fixed": "#ffdbce",
+                      "on-secondary-fixed-variant": "#2c4a5e",
+                      "surface-container-high": "#282a2e",
+                      "inverse-primary": "#166965",
+                      "outline-variant": "#3f4948",
+                      "surface-container": "#1e2024",
+                      "surface-container-lowest": "#0c0e12",
+                      "primary-fixed-dim": "#8ad3ce",
+                      "inverse-on-surface": "#2f3035",
+                      "on-secondary-fixed": "#001e2e",
+                      "secondary-fixed-dim": "#accae3",
+                      "on-background": "#e2e2e8",
+                      "on-tertiary-fixed-variant": "#6e3721",
+                      "tertiary-fixed-dim": "#ffb599",
+                      "on-primary-fixed-variant": "#00504c",
+                      "on-primary": "#003735",
+                      "primary": "#8ad3ce",
+                      "background": "#111317",
+                      "primary-fixed": "#a6f0ea",
+                      "on-tertiary-container": "#572510",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "on-primary-container": "#003a38",
+                      "surface": "#111317",
+                      "surface-container-low": "#1a1c20",
+                      "on-error": "#690005",
+                      "secondary-fixed": "#c8e6ff",
+                      "surface-variant": "#333539",
+                      "outline": "#889391",
+                      "on-secondary": "#133347",
+                      "surface-dim": "#111317",
+                      "on-tertiary-fixed": "#370e00",
+                      "primary-container": "#5fa8a3",
+                      "surface-bright": "#37393e",
+                      "inverse-surface": "#e2e2e8",
+                      "on-secondary-container": "#9ebcd4",
+                      "secondary-container": "#2e4c61",
+                      "on-surface": "#e2e2e8",
+                      "tertiary": "#ffb599",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed": "#00201e",
+                      "surface-tint": "#8ad3ce",
+                      "surface-container-highest": "#333539",
+                      "on-surface-variant": "#bec9c7",
+                      "secondary": "#accae3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "12px",
+                      "touch_target_min": "48px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "8px",
+                      "container_margin": "20px",
+                      "md": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-lg": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "10px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-lg": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="Token/Color/Background Token/Text/Body bg-background text-on-background font-body-lg text-body-lg antialiased h-screen w-full overflow-hidden flex flex-col">
+<header class="Component/TopAppBar flex justify-between items-center px-container_margin h-[64px] w-full bg-background shrink-0 z-10 pt-[env(safe-area-inset-top)] box-content">
+<button class="w-[48px] h-[48px] flex items-center justify-start text-on-surface transition-colors duration-300 hover:text-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="Token/Text/Title font-headline-md text-headline-md font-semibold text-primary">设置</h1>
+<div class="w-[48px]"></div>
+</header>
+<main class="flex-1 overflow-y-auto px-container_margin pt-md pb-[200px] flex flex-col gap-xl">
+<section class="flex flex-col gap-sm">
+<h2 class="Token/Text/Title font-label-lg text-label-lg text-primary px-sm uppercase tracking-wider">偏好设置</h2>
+<div class="Token/Color/Surface bg-surface-container-low rounded-xl flex flex-col overflow-hidden border border-white/5">
+<button class="Component/SettingsRow flex items-center justify-between w-full min-h-[48px] px-md py-sm transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">dark_mode</span>
+<span class="font-body-lg text-body-lg text-on-surface">主题</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="font-body-md text-body-md">跟随系统</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</button>
+<div class="h-[1px] w-full bg-white/5 ml-[56px]"></div>
+<button class="Component/SettingsRow flex items-center justify-between w-full min-h-[48px] px-md py-sm transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">high_quality</span>
+<span class="font-body-lg text-body-lg text-on-surface">音频质量</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="font-body-md text-body-md">高 (320kbps)</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</button>
+</div>
+</section>
+<section class="flex flex-col gap-sm">
+<h2 class="Token/Text/Title font-label-lg text-label-lg text-primary px-sm uppercase tracking-wider">播放设置</h2>
+<div class="Token/Color/Surface bg-surface-container-low rounded-xl flex flex-col overflow-hidden border border-white/5">
+<div class="Component/ToggleRow flex items-center justify-between w-full min-h-[48px] px-md py-sm">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">replay</span>
+<span class="font-body-lg text-body-lg text-on-surface">启动时播放上次混音</span>
+</div>
+<div class="min-w-[44px] min-h-[44px] flex items-center justify-center">
+<button class="w-[48px] h-[24px] bg-primary rounded-full relative flex items-center p-[2px] transition-colors">
+<div class="w-[20px] h-[20px] bg-on-primary rounded-full absolute right-[2px] shadow-sm"></div>
+</button>
+</div>
+</div>
+<div class="h-[1px] w-full bg-white/5 ml-[56px]"></div>
+<div class="Component/ToggleRow flex items-center justify-between w-full min-h-[48px] px-md py-sm">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">download</span>
+<span class="font-body-lg text-body-lg text-on-surface">离线下载</span>
+</div>
+<div class="min-w-[44px] min-h-[44px] flex items-center justify-center">
+<button class="w-[48px] h-[24px] bg-surface-container-highest border border-outline-variant rounded-full relative flex items-center p-[2px] transition-colors">
+<div class="w-[20px] h-[20px] bg-outline rounded-full absolute left-[2px]"></div>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-sm">
+<h2 class="Token/Text/Title font-label-lg text-label-lg text-primary px-sm uppercase tracking-wider">关于</h2>
+<div class="Token/Color/Surface bg-surface-container-low rounded-xl flex flex-col overflow-hidden border border-white/5">
+<button class="Component/SettingsRow flex items-center justify-between w-full min-h-[48px] px-md py-sm transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">policy</span>
+<span class="font-body-lg text-body-lg text-on-surface">隐私政策</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</button>
+</div>
+</section>
+<div class="pt-md pb-xl flex justify-center">
+<button class="border border-outline-variant text-primary rounded-full px-xl min-h-[48px] flex items-center justify-center font-label-lg text-label-lg transition-colors hover:bg-surface-container-low">
+                恢复购买
+            </button>
+</div>
+</main>
+<div class="fixed bottom-[calc(88px+env(safe-area-inset-bottom))] left-0 w-full px-container_margin z-40">
+<div class="Component/MiniPlayer bg-surface-variant rounded-xl p-sm flex items-center justify-between shadow-lg shadow-black/40 border border-white/5">
+<div class="flex items-center gap-sm">
+<div class="w-[40px] h-[40px] bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">rainy</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium leading-tight">Midnight Storm</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Playing • 45m left</span>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="w-[48px] h-[48px] flex items-center justify-center rounded-full text-on-surface transition-opacity hover:opacity-80">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+</div>
+</div>
+<nav class="Component/BottomNav fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md pb-[max(16px,env(safe-area-inset-bottom))] pt-base bg-surface-container dark:bg-surface-container border-t border-white/10 min-h-[80px]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 scale-95 active:scale-90 transition-transform hover:opacity-80 min-w-[64px] min-h-[48px]">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-sm text-label-sm mt-1">首页</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 scale-95 active:scale-90 transition-transform hover:opacity-80 min-w-[64px] min-h-[48px]">
+<span class="material-symbols-outlined text-[24px]">tune</span>
+<span class="font-label-sm text-label-sm mt-1">混音</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 scale-95 active:scale-90 transition-transform hover:opacity-80 min-w-[64px] min-h-[48px]">
+<span class="material-symbols-outlined text-[24px]">timer</span>
+<span class="font-label-sm text-label-sm mt-1">定时</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 scale-95 active:scale-90 transition-transform hover:opacity-80 min-w-[64px] min-h-[48px]">
+<span class="material-symbols-outlined text-[24px]">library_music</span>
+<span class="font-label-sm text-label-sm mt-1">库</span>
+</button>
+</nav>
+</body></html>

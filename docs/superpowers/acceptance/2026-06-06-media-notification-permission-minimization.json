@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-media-notification-permission-minimization",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-media-notification-permission-minimization/tasks.md",
+    "plan": null,
+    "review": "docs/code-review-media-notification-permission-2026-06-06.md",
+    "verification": [
+      "Current merged manifest and Gradle checks pass",
+      "Archived review records BUILD SUCCESSFUL"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "tdd: Original Settings RED output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "Future non-MediaSession notifications require a new permission review",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

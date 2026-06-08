@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-launcher-branding-baseline",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-launcher-branding-baseline/tasks.md",
+    "plan": null,
+    "review": "docs/code-review-launcher-branding-2026-06-07.md",
+    "verification": [
+      "Current deterministic icon Node test passes",
+      "Current Gradle checks and APK resource packaging pass"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "tdd: No explicit historical RED result was retained",
+    "explore: No explore.md was retained"
+  ],
+  "remainingRisks": [
+    "Launcher mask appearance remains a physical-device visual check",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

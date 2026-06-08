@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-08",
+  "ownership": "First-party generated assets; no third-party recordings or samples.",
+  "parameters": {
+    "sampleRate": 44100,
+    "sampleCount": 524288,
+    "targetRms": 0.1,
+    "maxPeak": 0.78
+  },
+  "assets": [
+    {
+      "id": "white_noise",
+      "file": "white_noise_loop.wav",
+      "seed": 22247953,
+      "profile": "white",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "4f7262ebde14818e20f08ee20cab10fd337cc96cc9fc9781952d5caceeff8668",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -20.00000081133674,
+        "peakDbfs": -6.358160512378559,
+        "boundaryDelta": 0.2586443678090762,
+        "p99AdjacentDelta": 0.27249977111117896,
+        "seamRatio": 0.9491544405868516
+      }
+    },
+    {
+      "id": "pink_noise",
+      "file": "pink_noise_loop.wav",
+      "seed": 38374178,
+      "profile": "pink",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "d63867a98c76593347b416d43cda8843adfb0763c16c05331b96766971fc5e92",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -20.00000005946696,
+        "peakDbfs": -6.8894254966171555,
+        "boundaryDelta": 0.040192876979888305,
+        "p99AdjacentDelta": 0.14194158757286293,
+        "seamRatio": 0.28316491077187705
+      }
+    },
+    {
+      "id": "brown_noise",
+      "file": "brown_noise_loop.wav",
+      "seed": 56073267,
+      "profile": "brown",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "4d7da65b6a749c7134f55ac290c7102101942a42091aa7029e9aafdc4eff3be7",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -19.99999925027387,
+        "peakDbfs": -7.36448528342482,
+        "boundaryDelta": 0.00933866389965514,
+        "p99AdjacentDelta": 0.03064058351390118,
+        "seamRatio": 0.3047808764940239
+      }
+    },
+    {
+      "id": "fan",
+      "file": "fan_loop.wav",
+      "seed": 73968964,
+      "profile": "fan",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "537e2f5d3c6efa94f8e237abe0b2beff74045b8037ba25a884bfcfe1b41b0139",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -20.000000293573756,
+        "peakDbfs": -6.665007288043082,
+        "boundaryDelta": 0.03759880367442854,
+        "p99AdjacentDelta": 0.09018219550157171,
+        "seamRatio": 0.41692047377326563
+      }
+    },
+    {
+      "id": "rain",
+      "file": "rain_loop.wav",
+      "seed": 91864661,
+      "profile": "rain",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "9f90a819ed4062dea8fc8a1b50b283836b501e3ce46ceaa62a42ca3381f84b56",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -20.000000120383035,
+        "peakDbfs": -6.326800496721662,
+        "boundaryDelta": 0.0228278450880459,
+        "p99AdjacentDelta": 0.20084231086153753,
+        "seamRatio": 0.1136605379121714
+      }
+    },
+    {
+      "id": "ocean",
+      "file": "ocean_loop.wav",
+      "seed": 109760358,
+      "profile": "ocean",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "dc8511d0d31cd98a3d820696e6b906970f9b9039ae838d999456975ab9d9762c",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -19.999999060809703,
+        "peakDbfs": -6.748197857425325,
+        "boundaryDelta": 0.020050660725730154,
+        "p99AdjacentDelta": 0.027436140018921477,
+        "seamRatio": 0.7308120133481646
+      }
+    },
+    {
+      "id": "forest",
+      "file": "forest_loop.wav",
+      "seed": 127651959,
+      "profile": "forest",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "950b08f186562e8623baf014d48465022f36033a01ee9579178b1b90455300fa",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -19.99999958245002,
+        "peakDbfs": -6.608662492997875,
+        "boundaryDelta": 0.030060731833857234,
+        "p99AdjacentDelta": 0.06759849848933377,
+        "seamRatio": 0.4446952595936795
+      }
+    },
+    {
+      "id": "fireplace",
+      "file": "fireplace_loop.wav",
+      "seed": 145547656,
+      "profile": "fireplace",
+      "generator": "deterministic radix-2 inverse FFT",
+      "sha256": "720e0f3d4bcbd94a3432556256efa5cd4f5043685b46a2fe939e812eb5c9925b",
+      "bytes": 1048620,
+      "qa": {
+        "durationSeconds": 11.888616780045352,
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "rmsDbfs": -19.99999966721191,
+        "peakDbfs": -6.4067994105968555,
+        "boundaryDelta": 0.01748710592974639,
+        "p99AdjacentDelta": 0.14377269814142277,
+        "seamRatio": 0.1216302271279983
+      }
+    }
+  ]
+}

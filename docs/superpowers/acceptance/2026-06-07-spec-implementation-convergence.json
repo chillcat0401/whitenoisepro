@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-spec-implementation-convergence",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-spec-implementation-convergence/tasks.md",
+    "plan": null,
+    "review": "docs/code-review-spec-implementation-convergence-2026-06-07.md",
+    "verification": [
+      "Current Gradle and Node regression suites pass",
+      "Current OpenSpec main specifications pass strict validation"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "tdd: Archived tasks name multiple RED tests, but original RED output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "New controls still require physical-device interaction and layout QA",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}

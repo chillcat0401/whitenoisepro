@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Sleep - 正在播放</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#d38a6e",
+                        "on-tertiary": "#53220d",
+                        "tertiary-fixed": "#ffdbce",
+                        "on-secondary-fixed-variant": "#2c4a5e",
+                        "surface-container-high": "#282a2e",
+                        "inverse-primary": "#166965",
+                        "outline-variant": "#3f4948",
+                        "surface-container": "#1e2024",
+                        "surface-container-lowest": "#0c0e12",
+                        "primary-fixed-dim": "#8ad3ce",
+                        "inverse-on-surface": "#2f3035",
+                        "on-secondary-fixed": "#001e2e",
+                        "secondary-fixed-dim": "#accae3",
+                        "on-background": "#e2e2e8",
+                        "on-tertiary-fixed-variant": "#6e3721",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "on-primary-fixed-variant": "#00504c",
+                        "on-primary": "#003735",
+                        "primary": "#8ad3ce",
+                        "background": "#111317",
+                        "primary-fixed": "#a6f0ea",
+                        "on-tertiary-container": "#572510",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#003a38",
+                        "surface": "#111317",
+                        "surface-container-low": "#1a1c20",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#c8e6ff",
+                        "surface-variant": "#333539",
+                        "outline": "#889391",
+                        "on-secondary": "#133347",
+                        "surface-dim": "#111317",
+                        "on-tertiary-fixed": "#370e00",
+                        "primary-container": "#5fa8a3",
+                        "surface-bright": "#37393e",
+                        "inverse-surface": "#e2e2e8",
+                        "on-secondary-container": "#9ebcd4",
+                        "secondary-container": "#2e4c61",
+                        "on-surface": "#e2e2e8",
+                        "tertiary": "#ffb599",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#00201e",
+                        "surface-tint": "#8ad3ce",
+                        "surface-container-highest": "#333539",
+                        "on-surface-variant": "#bec9c7",
+                        "secondary": "#accae3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "touch_target_min": "48px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "container_margin": "20px",
+                        "md": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-lg": ["Inter", "sans-serif"],
+                        "display": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-lg": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #8ad3ce;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .custom-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #8ad3ce;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container Token/Color/Background Token/Text/Body">
+<!-- TopAppBar -->
+<header class="Component/TopAppBar docked full-width top-0 bg-background dark:bg-background text-primary dark:text-primary flex justify-between items-center px-container_margin h-touch_target_min min-h-[44px] w-full z-40 sticky pt-[env(safe-area-inset-top)] Token/Color/Background">
+<button aria-label="Settings" class="w-touch_target_min min-w-[44px] min-h-[44px] flex items-center justify-start text-on-surface-variant hover:bg-surface-container transition-colors duration-300 ease-in-out rounded-full">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg font-semibold text-primary dark:text-primary text-center absolute left-1/2 -translate-x-1/2 Token/Text/Title">今晚</h1>
+<button aria-label="User Profile" class="w-touch_target_min min-w-[44px] min-h-[44px] flex items-center justify-end hover:bg-surface-container transition-colors duration-300 ease-in-out rounded-full">
+<div class="w-[32px] h-[32px] rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArRUPB9guR7KQbdje_je43iqe3zzlr7H3q7BBJHB2EpSwMpBPQdDRDvXPeEn6eTcEMFCT4nHmX7A4GVBJrCoIHNIOeC848bq-eiYxbPZ2wZ2wuTj4Ib3ESjVhsFVFeCLIIcDggYPddNKeCvxkyKkZ_lrJHi0FJ3L1QR6c7qRS0L5gKK3YXfOSfU9ZfRlo3Fi6ZjivpS0vtBgUyXWgrBEmM9JSGBQ5OJQgQ7ZmmHN6vvYps06kmzWuODEQtpWuBADF_Pca3XQU0uqQv"/>
+</div>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-container_margin pb-[calc(140px+env(safe-area-inset-bottom))] pt-md overflow-y-auto overflow-x-hidden space-y-xl flex flex-col">
+<!-- Featured Mix Card -->
+<section class="Component/MixCard relative w-full rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.5)] bg-surface-container-low border border-white/5 Token/Color/Surface flex flex-col">
+<div class="absolute inset-0 z-0">
+<img alt="A dark, moody scene of raindrops tracking down a glass window pane. The background is blurred, showing out-of-focus city lights in deep blues and charcoal tones. The lighting is low and atmospheric, evoking a sense of calm and quietude perfect for sleep." class="w-full h-full object-cover opacity-60" data-alt="A dark, moody scene of raindrops tracking down a glass window pane. The background is blurred, showing out-of-focus city lights in deep blues and charcoal tones. The lighting is low and atmospheric, evoking a sense of calm and quietude perfect for sleep." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiTUmVAfS7-2UcMeDSLFEJ1n17ureOQr-RMrlehN9cc1xH0oTzMbNnGEdgr6NUrx0zLaUy8zA_Idmcbb810qBSAFTNgnCMkBvHEPBG_FFBRi_g_91eNC9H2ITLDhYd8qr-PieKqlFTHqcoUETMpVy0YxHQYeTbpVLa48S2iaWuBacGjqt0NT-bD_z-Wu0BsLcRY6FEyCBvwEZqi7BV979xFJ0e-YbVf6aIlVOfKkvzAOgmMvUgUGCbR2Z6A90IJ3_PMz_hLAZl5f8d"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+</div>
+<div class="relative z-10 p-lg flex flex-col min-h-[280px] justify-between">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-base">
+<span class="inline-flex items-center px-sm py-xs bg-surface-variant/80 backdrop-blur-md text-on-surface-variant font-label-lg text-label-lg rounded-full border border-white/10 w-fit">正在播放</span>
+<h2 class="font-display text-display text-on-surface Token/Text/Title">雨窗</h2>
+</div>
+<button aria-label="More options" class="w-touch_target_min min-w-[44px] min-h-[44px] flex items-center justify-center bg-surface-variant/50 backdrop-blur-md rounded-full text-on-surface border border-white/10 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[24px]">more_vert</span>
+</button>
+</div>
+<!-- Playback Controls -->
+<div class="flex flex-col items-center gap-md mt-auto w-full">
+<button aria-label="Play" class="w-[80px] min-w-[80px] h-[80px] min-h-[80px] bg-primary text-on-primary rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(138,211,206,0.3)] hover:scale-105 active:scale-95 transition-transform duration-300">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex items-center gap-md w-full justify-center">
+<button aria-label="Favorite" class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-xs p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<span class="font-label-sm text-label-sm">收藏</span>
+</button>
+<button aria-label="Timer" class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-xs p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">timer</span>
+<span class="font-label-sm text-label-sm">45 分钟</span>
+</button>
+<button aria-label="Edit Mix" class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center gap-xs p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">tune</span>
+<span class="font-label-sm text-label-sm">编辑</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Volume Control -->
+<section class="bg-surface-container rounded-xl p-md border border-white/5 flex items-center gap-md Token/Color/Surface min-h-[44px]">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">volume_down</span>
+<input aria-label="Volume slider" class="w-full h-[44px] bg-transparent rounded-full appearance-none outline-none custom-slider flex items-center" max="100" min="0" style="background-image: linear-gradient(#333539, #333539); background-size: 100% 6px; background-position: center; background-repeat: no-repeat;" type="range" value="70"/>
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">volume_up</span>
+</section>
+<!-- Recently Used -->
+<section class="space-y-md flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface px-xs Token/Text/Title">最近使用</h3>
+<div class="flex gap-md overflow-x-auto pb-sm snap-x no-scrollbar" style="scrollbar-width: none;">
+<!-- Recent Item 1 -->
+<button class="snap-start min-w-[140px] min-h-[44px] flex flex-col items-center gap-sm bg-surface-container-low p-md rounded-xl border border-white/5 hover:bg-surface-container transition-colors text-left group Token/Color/Surface">
+<div class="w-[64px] h-[64px] bg-surface-variant rounded-full flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]">air</span>
+</div>
+<div class="text-center w-full flex flex-col">
+<p class="font-body-md text-body-md text-on-surface truncate Token/Text/Body">箱式风扇</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">白噪音</p>
+</div>
+</button>
+<!-- Recent Item 2 -->
+<button class="snap-start min-w-[140px] min-h-[44px] flex flex-col items-center gap-sm bg-surface-container-low p-md rounded-xl border border-white/5 hover:bg-surface-container transition-colors text-left group Token/Color/Surface">
+<div class="w-[64px] h-[64px] bg-surface-variant rounded-full flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]">waves</span>
+</div>
+<div class="text-center w-full flex flex-col">
+<p class="font-body-md text-body-md text-on-surface truncate Token/Text/Body">深海</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">自然</p>
+</div>
+</button>
+<!-- Recent Item 3 -->
+<button class="snap-start min-w-[140px] min-h-[44px] flex flex-col items-center gap-sm bg-surface-container-low p-md rounded-xl border border-white/5 hover:bg-surface-container transition-colors text-left group Token/Color/Surface">
+<div class="w-[64px] h-[64px] bg-surface-variant rounded-full flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]">local_fire_department</span>
+</div>
+<div class="text-center w-full flex flex-col">
+<p class="font-body-md text-body-md text-on-surface truncate Token/Text/Body">壁炉</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">舒适</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Recommended Scenes Grid -->
+<section class="space-y-md flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface px-xs Token/Text/Title">推荐</h3>
+<div class="grid grid-cols-2 gap-md">
+<!-- Scene 1 -->
+<button class="relative min-h-[120px] rounded-xl overflow-hidden border border-white/5 group text-left flex flex-col justify-end Token/Color/Surface">
+<div class="absolute inset-0 bg-surface-variant">
+<img alt="A macro shot of heavy rain falling onto a dark asphalt surface. The lighting is extremely dim, almost pitch black, with subtle silver reflections on the water droplets. The image conveys a cold, soothing, low-stimulation environment." class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity mix-blend-overlay grayscale" data-alt="A macro shot of heavy rain falling onto a dark asphalt surface. The lighting is extremely dim, almost pitch black, with subtle silver reflections on the water droplets. The image conveys a cold, soothing, low-stimulation environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA83lAZ0W7t86ggZtWHnL0hUHr-JMAKDkdYW536h0e_q8MrAvu-p2F74olpAXc__suEbe5pmaQfoMmZpltBSiRGLPn4D_icV4hrgIzqowRo97QVD2XimBVP-ZWFVYqqv8ZAEYu9k6MGpk_vvnqGG2OGqToc1RHlx5vawQ4ZG9KCUSpkanku_WkZ-8XuryjBXd_EOVTWcHPpFu4FlpHlAhd2-xfK2fjDzXN9uE0PeOVIsG0Baalww-LeoE4J_G2U9dlJ11F-c9zSPlfW"/>
+</div>
+<div class="absolute inset-0 p-md flex flex-col justify-end bg-gradient-to-t from-background/90 to-transparent">
+<p class="font-body-md text-body-md text-on-surface font-medium Token/Text/Body">大雨</p>
+</div>
+</button>
+<!-- Scene 2 -->
+<button class="relative min-h-[120px] rounded-xl overflow-hidden border border-white/5 group text-left flex flex-col justify-end Token/Color/Surface">
+<div class="absolute inset-0 bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant/20">noise_control_off</span>
+</div>
+<div class="absolute inset-0 p-md flex flex-col justify-end bg-gradient-to-t from-background/90 to-transparent">
+<p class="font-body-md text-body-md text-on-surface font-medium Token/Text/Body">棕噪音</p>
+</div>
+</button>
+<!-- Scene 3 -->
+<button class="relative min-h-[120px] rounded-xl overflow-hidden border border-white/5 group text-left flex flex-col justify-end Token/Color/Surface">
+<div class="absolute inset-0 bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant/20">air</span>
+</div>
+<div class="absolute inset-0 p-md flex flex-col justify-end bg-gradient-to-t from-background/90 to-transparent">
+<p class="font-body-md text-body-md text-on-surface font-medium Token/Text/Body">摇头风扇</p>
+</div>
+</button>
+<!-- Scene 4 -->
+<button class="relative min-h-[120px] rounded-xl overflow-hidden border border-white/5 group text-left flex flex-col justify-end Token/Color/Surface">
+<div class="absolute inset-0 bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant/20">storm</span>
+</div>
+<div class="absolute inset-0 p-md flex flex-col justify-end bg-gradient-to-t from-background/90 to-transparent">
+<p class="font-body-md text-body-md text-on-surface font-medium Token/Text/Body">远处雷声</p>
+</div>
+</button>
+</div>
+</section>
+</main>
+<!-- Persistent Mini Player -->
+<div class="Component/MiniPlayer fixed bottom-[calc(env(safe-area-inset-bottom)+72px)] md:bottom-[80px] left-0 w-full px-container_margin z-40 flex flex-col">
+<div class="bg-surface-variant/90 backdrop-blur-lg rounded-xl p-sm flex items-center justify-between border border-white/10 shadow-[0_4px_20px_rgb(0,0,0,0.5)] cursor-pointer hover:bg-surface-variant transition-colors min-h-[44px] Token/Color/Surface">
+<div class="flex items-center gap-sm overflow-hidden flex-1">
+<div class="w-[40px] h-[40px] rounded-md bg-surface-container flex items-center justify-center overflow-hidden shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]">water_drop</span>
+</div>
+<div class="truncate pr-2 flex flex-col">
+<p class="font-body-md text-body-md text-on-surface font-medium truncate Token/Text/Body">雨窗</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">剩余 45 分钟</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button aria-label="Pause" class="min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="Component/BottomNav fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md pb-[calc(env(safe-area-inset-bottom)+16px)] pt-base bg-surface-container dark:bg-surface-container border-t border-white/10 hidden md:hidden flex min-h-[44px] Token/Color/Surface">
+<button class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-sm py-xs hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">首页</span>
+</button>
+<button class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">tune</span>
+<span class="font-label-sm text-label-sm mt-1">混音</span>
+</button>
+<button class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">timer</span>
+<span class="font-label-sm text-label-sm mt-1">定时</span>
+</button>
+<button class="min-w-[44px] min-h-[44px] flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">library_music</span>
+<span class="font-label-sm text-label-sm mt-1">库</span>
+</button>
+</nav>
+<!-- Web Desktop Navigation equivalent (hidden on mobile, visible on md+) -->
+<nav class="hidden md:flex fixed top-0 right-0 h-touch_target_min min-h-[44px] items-center pr-container_margin z-50 gap-lg">
+<button class="min-w-[44px] min-h-[44px] text-primary font-label-lg text-label-lg border-b-2 border-primary py-xs">首页</button>
+<button class="min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg py-xs transition-colors">混音</button>
+<button class="min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg py-xs transition-colors">定时</button>
+<button class="min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg py-xs transition-colors">库</button>
+</nav>
+</body></html>

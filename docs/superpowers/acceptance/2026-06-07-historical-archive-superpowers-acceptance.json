@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-historical-archive-superpowers-acceptance",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-historical-archive-superpowers-acceptance/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-08-historical-archive-superpowers-acceptance.md",
+    "review": "docs/code-review-historical-archive-superpowers-acceptance-2026-06-08.md",
+    "verification": [
+      "node --test tools/*.test.mjs",
+      "node tools/verify_archive_acceptance.mjs --all-archives",
+      "./gradlew clean check lintDebug assembleDebug bundleRelease",
+      "openspec validate historical-archive-superpowers-acceptance --type change --strict"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "No Git history is available for SHA-based independent review",
+    "Physical-device and store-console release checks remain outside this governance gate"
+  ],
+  "verifiedAt": "2026-06-08"
+}

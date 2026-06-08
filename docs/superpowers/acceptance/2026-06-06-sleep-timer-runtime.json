@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-sleep-timer-runtime",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-sleep-timer-runtime/tasks.md",
+    "plan": null,
+    "review": "docs/code-review-sleep-timer-runtime-2026-06-06.md",
+    "verification": [
+      "Current coroutine timer tests and Gradle checks pass",
+      "Archived review records BUILD SUCCESSFUL"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "tdd: Original reducer and virtual-time RED output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "Long-running fade and stop behavior still requires physical-device QA",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

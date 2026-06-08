@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-google-play-product-hardening",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-google-play-product-hardening/tasks.md",
+    "plan": null,
+    "review": null,
+    "verification": [
+      "Current release-readiness specifications pass strict validation",
+      "Current Gradle release artifacts and signed AAB verification pass"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "review: No review file can be mapped exclusively to this archive",
+    "tdd: Historical product-hardening execution cannot be reconstructed",
+    "explore: No explore.md was retained"
+  ],
+  "remainingRisks": [
+    "Play Console, privacy URL, store listing and closed testing remain external release work",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

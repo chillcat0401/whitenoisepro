@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-settings-trust-hardening",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-settings-trust-hardening/tasks.md",
+    "plan": null,
+    "review": "docs/code-review-settings-trust-2026-06-06.md",
+    "verification": [
+      "Current Settings tests and Gradle checks pass",
+      "Archived review records targeted and full verification"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "tdd: Tasks require RED before implementation, but original RED output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "Public privacy and support URLs remain external release requirements",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

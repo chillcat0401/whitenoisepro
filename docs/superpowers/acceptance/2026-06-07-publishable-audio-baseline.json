@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-publishable-audio-baseline",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-publishable-audio-baseline/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-07-publishable-audio-baseline.md",
+    "review": "docs/code-review-publishable-audio-2026-06-07.md",
+    "verification": [
+      "Current catalog and resource tests pass",
+      "Current generator verifies four audio assets"
+    ]
+  },
+  "unverifiable": [
+    "plan: Retained Superpowers plan has 18 unchecked historical steps",
+    "tdd: Original catalog and resolver RED output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "Human listening and long-loop QA remain physical-device release checks",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-android-datastore-persistence",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-android-datastore-persistence/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-06-android-datastore-persistence.md",
+    "review": "docs/code-review-android-datastore-2026-06-06.md",
+    "verification": [
+      "Current Gradle unit tests and check pass",
+      "Archived review records BUILD SUCCESSFUL"
+    ]
+  },
+  "unverifiable": [
+    "plan: Retained Superpowers plan has 19 unchecked historical steps",
+    "tdd: Original codec and repository RED command output cannot be reconstructed"
+  ],
+  "remainingRisks": [
+    "Force-stop and relaunch persistence remains a physical-device smoke test",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-audio-focus-playback-gate",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-audio-focus-playback-gate/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-07-audio-focus-playback-gate.md",
+    "review": "docs/code-review-audio-focus-playback-gate-2026-06-07.md",
+    "verification": [
+      "Archived plan records RED and GREEN execution",
+      "Current Gradle, Node, audio asset, signed AAB and OpenSpec checks pass"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "Android 12, 14 and 15 physical-device focus matrix remains a release check"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-07-media-control-state-audio-focus",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-07-media-control-state-audio-focus/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-07-media-control-state-audio-focus.md",
+    "review": "docs/code-review-media-control-state-audio-focus-2026-06-07.md",
+    "verification": [
+      "Archived plan records RED and GREEN execution",
+      "Current Gradle, Node, audio asset, signed AAB and OpenSpec checks pass"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "Calls, Bluetooth and becoming-noisy behavior remain physical-device release checks"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

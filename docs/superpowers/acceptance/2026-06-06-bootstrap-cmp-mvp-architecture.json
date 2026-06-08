@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-06-bootstrap-cmp-mvp-architecture",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-06-bootstrap-cmp-mvp-architecture/tasks.md",
+    "plan": null,
+    "review": null,
+    "verification": [
+      "Current Compose Multiplatform architecture compiles and all Gradle checks pass",
+      "Current OpenSpec main specifications pass strict validation"
+    ]
+  },
+  "unverifiable": [
+    "plan: No dedicated Superpowers implementation plan was retained",
+    "review: No review file can be mapped exclusively to this archive",
+    "tdd: Historical RED and GREEN execution cannot be reconstructed",
+    "explore: No explore.md was retained"
+  ],
+  "remainingRisks": [
+    "Acceptance is based on current cumulative architecture rather than isolated historical execution",
+    "No Git history is available for SHA-based independent review"
+  ],
+  "verifiedAt": "2026-06-08"
+}
+

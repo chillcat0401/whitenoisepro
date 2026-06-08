@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Digital Somnolence - Mixer</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#d38a6e",
+                    "on-tertiary": "#53220d",
+                    "tertiary-fixed": "#ffdbce",
+                    "on-secondary-fixed-variant": "#2c4a5e",
+                    "surface-container-high": "#282a2e",
+                    "inverse-primary": "#166965",
+                    "outline-variant": "#3f4948",
+                    "surface-container": "#1e2024",
+                    "surface-container-lowest": "#0c0e12",
+                    "primary-fixed-dim": "#8ad3ce",
+                    "inverse-on-surface": "#2f3035",
+                    "on-secondary-fixed": "#001e2e",
+                    "secondary-fixed-dim": "#accae3",
+                    "on-background": "#e2e2e8",
+                    "on-tertiary-fixed-variant": "#6e3721",
+                    "tertiary-fixed-dim": "#ffb599",
+                    "on-primary-fixed-variant": "#00504c",
+                    "on-primary": "#003735",
+                    "primary": "#8ad3ce",
+                    "background": "#111317",
+                    "primary-fixed": "#a6f0ea",
+                    "on-tertiary-container": "#572510",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#003a38",
+                    "surface": "#111317",
+                    "surface-container-low": "#1a1c20",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#c8e6ff",
+                    "surface-variant": "#333539",
+                    "outline": "#889391",
+                    "on-secondary": "#133347",
+                    "surface-dim": "#111317",
+                    "on-tertiary-fixed": "#370e00",
+                    "primary-container": "#5fa8a3",
+                    "surface-bright": "#37393e",
+                    "inverse-surface": "#e2e2e8",
+                    "on-secondary-container": "#9ebcd4",
+                    "secondary-container": "#2e4c61",
+                    "on-surface": "#e2e2e8",
+                    "tertiary": "#ffb599",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#00201e",
+                    "surface-tint": "#8ad3ce",
+                    "surface-container-highest": "#333539",
+                    "on-surface-variant": "#bec9c7",
+                    "secondary": "#accae3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "touch_target_min": "48px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "container_margin": "20px",
+                    "md": "16px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-lg": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom Range Slider Styles for Digital Somnolence */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            min-height: 44px; /* Ensure touch target for slider track area */
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #333539; /* surface-variant */
+            border-radius: 8px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #8ad3ce; /* primary */
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -9px; /* (24px height - 6px track) / 2 */
+            box-shadow: 0 0 0 4px rgba(138, 211, 206, 0.1);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+        }
+        
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-lg antialiased selection:bg-primary-container selection:text-on-primary-container flex flex-col min-h-screen Token/Color/Background Token/Text/Body">
+<!-- TopAppBar -->
+<header class="Component/TopAppBar bg-background flex justify-between items-center px-container_margin h-touch_target_min w-full sticky top-0 z-40 pt-[env(safe-area-inset-top)] Token/Color/Background">
+<button aria-label="Settings" class="h-touch_target_min w-touch_target_min min-h-[44px] min-w-[44px] flex items-center justify-start text-primary transition-colors duration-300 ease-in-out hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-primary Token/Text/Title">今晚</h1>
+<button aria-label="User profile" class="h-touch_target_min w-touch_target_min min-h-[44px] min-w-[44px] flex items-center justify-end">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">person</span>
+</div>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-container_margin pt-lg pb-[calc(180px+env(safe-area-inset-bottom))] flex flex-col gap-xl">
+<!-- Editable Mix Name -->
+<div class="flex items-center gap-sm group border-b border-transparent focus-within:border-surface-variant transition-colors pb-xs">
+<input class="bg-transparent border-none font-display text-display text-on-surface w-full focus:ring-0 p-0 placeholder-on-surface-variant/50 Token/Text/Title min-h-[44px]" placeholder="命名您的混音..." type="text" value="深度睡眠圣殿"/>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50 group-focus-within:opacity-100 transition-opacity">edit</span>
+</div>
+<!-- Active Layers -->
+<div class="flex flex-col gap-md">
+<!-- Layer 1: Rain -->
+<div class="Component/SoundLayerRow bg-surface rounded-xl p-md border border-white/5 flex flex-col gap-md Token/Color/Surface">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rainy</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface Token/Text/Title">大雨</span>
+</div>
+<div class="flex items-center gap-xs">
+<button aria-label="Mute" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<button aria-label="Remove" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-error transition-colors rounded-full">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="px-xs pb-xs flex items-center">
+<input aria-label="Volume for Heavy Rain" max="100" min="0" type="range" value="80"/>
+</div>
+</div>
+<!-- Layer 2: Brown Noise -->
+<div class="Component/SoundLayerRow bg-surface rounded-xl p-md border border-white/5 flex flex-col gap-md Token/Color/Surface">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">waves</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface Token/Text/Title">棕色噪音</span>
+</div>
+<div class="flex items-center gap-xs">
+<button aria-label="Unmute" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full">
+<span class="material-symbols-outlined text-outline">volume_off</span>
+</button>
+<button aria-label="Remove" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-error transition-colors rounded-full">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="px-xs pb-xs flex items-center">
+<input aria-label="Volume for Brown Noise" class="opacity-50" max="100" min="0" type="range" value="0"/>
+</div>
+</div>
+<!-- Layer 3: Fireplace -->
+<div class="Component/SoundLayerRow bg-surface rounded-xl p-md border border-white/5 flex flex-col gap-md Token/Color/Surface">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface Token/Text/Title">营火</span>
+</div>
+<div class="flex items-center gap-xs">
+<button aria-label="Mute" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<button aria-label="Remove" class="h-10 w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-on-surface-variant hover:text-error transition-colors rounded-full">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="px-xs pb-xs flex items-center">
+<input aria-label="Volume for Campfire" max="100" min="0" type="range" value="45"/>
+</div>
+</div>
+<!-- Add Sound Button -->
+<button class="Component/Button/Outlined min-h-[44px] h-touch_target_min w-full rounded-xl border border-dashed border-outline-variant text-primary flex items-center justify-center gap-sm hover:bg-surface-variant transition-colors mt-sm Token/Color/Surface">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-lg text-label-lg tracking-wider Token/Text/Title">添加声音</span>
+</button>
+</div>
+<!-- Master Controls -->
+<div class="pt-md border-t border-white/5 flex flex-col gap-sm">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest Token/Text/Body">主音量</span>
+<span class="font-label-sm text-label-sm text-primary Token/Text/Body">62%</span>
+</div>
+<div class="px-xs flex items-center">
+<input aria-label="Master Volume" max="100" min="0" type="range" value="62"/>
+</div>
+</div>
+<!-- Save Action -->
+<button class="Component/Button/Primary min-h-[44px] h-touch_target_min w-full rounded-full bg-primary text-on-primary flex items-center justify-center gap-sm font-headline-md text-headline-md transition-transform active:scale-95 Token/Color/Primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+            保存混音
+        </button>
+</main>
+<!-- Fixed Mini Player -->
+<div class="Component/MiniPlayer fixed bottom-[calc(88px+env(safe-area-inset-bottom))] left-0 w-full px-container_margin z-40">
+<div class="bg-surface-container-highest rounded-2xl min-h-[64px] flex items-center px-md justify-between border border-white/5 backdrop-blur-md Token/Color/Surface">
+<div class="flex items-center gap-md overflow-hidden flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+</div>
+<div class="flex flex-col truncate">
+<span class="font-label-lg text-label-lg text-on-surface truncate Token/Text/Title">深度睡眠圣殿</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate Token/Text/Body">3 个声音正在运行</span>
+</div>
+</div>
+<div class="flex items-center gap-xs shrink-0 ml-md">
+<button class="h-touch_target_min w-touch_target_min min-h-[44px] min-w-[44px] flex items-center justify-center text-primary rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="Component/BottomNav fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md pb-[calc(16px+env(safe-area-inset-bottom))] pt-base bg-surface-container border-t border-white/5 Token/Color/Surface">
+<!-- Home (Inactive) -->
+<button class="min-h-[44px] min-w-[44px] flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-sm text-label-sm Token/Text/Body">首页</span>
+</button>
+<!-- Mixer (Active) -->
+<button class="min-h-[44px] min-w-[44px] flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-lg py-xs scale-95 active:scale-90 transition-transform Token/Color/Primary">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">tune</span>
+<span class="font-label-sm text-label-sm Token/Text/Title">混音</span>
+</button>
+<!-- Timer (Inactive) -->
+<button class="min-h-[44px] min-w-[44px] flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1">timer</span>
+<span class="font-label-sm text-label-sm Token/Text/Body">定时</span>
+</button>
+<!-- Library (Inactive) -->
+<button class="min-h-[44px] min-w-[44px] flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1">library_music</span>
+<span class="font-label-sm text-label-sm Token/Text/Body">库</span>
+</button>
+</nav>
+</body></html>
