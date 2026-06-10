@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.whitenoisepro.audio.NoiseSynthesizer
 import com.whitenoisepro.design.AppIcon
 import com.whitenoisepro.design.AppIconKind
 import com.whitenoisepro.data.PresetCatalog
@@ -239,6 +240,9 @@ fun LibraryScreen(
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = "搜索声音",
             )
+        }
+        item {
+            NoiseLabCard(onAddCustomNoise = onSoundSelected)
         }
         item {
             Row(
@@ -603,6 +607,52 @@ private fun SoundPill(sound: Sound, selected: Boolean, onClick: () -> Unit) {
             style = WnpTypography.Label,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+@Composable
+private fun NoiseLabCard(onAddCustomNoise: (String) -> Unit) {
+    var tilt by remember { mutableStateOf(3f) }
+    val toneLabel = when {
+        tilt < 1f -> "清亮"
+        tilt < 2.5f -> "偏亮"
+        tilt < 4f -> "均衡"
+        tilt < 5.5f -> "偏暗"
+        else -> "深沉"
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(WnpRadius.Card))
+            .background(WnpColors.Surface)
+            .padding(WnpSpacing.CardPadding),
+        verticalArrangement = Arrangement.spacedBy(WnpSpacing.Sm),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            SoundIcon(label = "噪声实验室", active = false, selected = true, iconKey = "noise_custom")
+            Column(modifier = Modifier.weight(1f).padding(horizontal = WnpSpacing.Lg)) {
+                Text("噪声实验室", color = WnpColors.OnSurface, style = WnpTypography.Body)
+                Text(
+                    "拖出你自己的噪声音色 · 当前:$toneLabel",
+                    color = WnpColors.OnSurfaceVariant,
+                    style = WnpTypography.Label,
+                )
+            }
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("明亮", color = WnpColors.OnSurfaceVariant, style = WnpTypography.Label)
+            VolumeSlider(
+                value = tilt / NoiseSynthesizer.MaxTiltDbPerOct,
+                onValueChange = { tilt = it * NoiseSynthesizer.MaxTiltDbPerOct },
+                modifier = Modifier.weight(1f).padding(horizontal = WnpSpacing.Sm),
+            )
+            Text("深沉", color = WnpColors.OnSurfaceVariant, style = WnpTypography.Label)
+        }
+        SecondaryButton(
+            text = "加入混音",
+            onClick = { onAddCustomNoise(NoiseSynthesizer.customSoundId(tilt)) },
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }

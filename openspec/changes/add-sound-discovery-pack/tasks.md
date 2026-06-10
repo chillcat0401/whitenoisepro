@@ -35,7 +35,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AndroidSoundResourceResolverTest" --tests "*SoundCatalogTest"
   - scope: composeApp/src/androidMain/kotlin/com/whitenoisepro/audio/, composeApp/src/commonMain/kotlin/com/whitenoisepro/{data,design}/, composeApp/src/commonTest/, composeApp/src/androidUnitTest/
 
-- [ ] 3.3 声音库「噪声实验室」卡(滑杆 + 加入混音)
+- [x] 3.3 声音库「噪声实验室」卡(滑杆 + 加入混音)
   - accept: 滑杆 0~-6 dB/oct;加入后混音出现自定义层并可播放
   - verify: ./gradlew :composeApp:testDebugUnitTest
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,design}/
