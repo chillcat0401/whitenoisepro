@@ -2,6 +2,8 @@ package com.whitenoisepro.audio
 
 import android.content.Context
 import android.content.Intent
+import androidx.media3.common.C
+import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
@@ -69,7 +71,9 @@ class WhiteNoiseMediaSessionService : MediaSessionService() {
         // 必须显式 addSession:本应用 UI 直接驱动播放引擎,没有 MediaController
         // 连接来触发 onGetSession 的自动注册;不注册则 Media3 不会发媒体通知、
         // 不会把服务升为前台,熄屏后进程会被系统冻结。
-        mediaSession = MediaSession.Builder(this, exoPlayer).build().also(::addSession)
+        // 会话播放器隐藏 seek/跳转能力并把时长报为未知:媒体卡片只保留
+        // 播放/暂停,不显示代理循环文件那个来回跳的 30 秒进度条。
+        mediaSession = MediaSession.Builder(this, ambientCardPlayer(exoPlayer)).build().also(::addSession)
         pendingNowPlaying?.let { updateSession(title = it.title, playing = it.playing) }
         pendingTimer?.let(timerRunner::schedule)
     }
@@ -131,6 +135,27 @@ class WhiteNoiseMediaSessionService : MediaSessionService() {
             updatingFromEngine = false
         }
     }
+
+    private fun ambientCardPlayer(delegate: Player): Player =
+        object : ForwardingPlayer(delegate) {
+            override fun getAvailableCommands(): Player.Commands =
+                super.getAvailableCommands().buildUpon()
+                    .remove(Player.COMMAND_SEEK_BACK)
+                    .remove(Player.COMMAND_SEEK_FORWARD)
+                    .remove(Player.COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)
+                    .remove(Player.COMMAND_SEEK_TO_DEFAULT_POSITION)
+                    .remove(Player.COMMAND_SEEK_TO_MEDIA_ITEM)
+                    .remove(Player.COMMAND_SEEK_TO_PREVIOUS)
+                    .remove(Player.COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM)
+                    .remove(Player.COMMAND_SEEK_TO_NEXT)
+                    .remove(Player.COMMAND_SEEK_TO_NEXT_MEDIA_ITEM)
+                    .build()
+
+            override fun isCommandAvailable(command: Int): Boolean =
+                availableCommands.contains(command)
+
+            override fun getDuration(): Long = C.TIME_UNSET
+        }
 
     private fun syncControllerState() {
         if (updatingFromEngine) return

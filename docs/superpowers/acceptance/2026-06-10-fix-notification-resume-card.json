@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-10-fix-notification-resume-card",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-10-fix-notification-resume-card/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-10-fix-notification-resume-card.md",
+    "review": "docs/code-review-fix-notification-resume-card-2026-06-10.md",
+    "verification": [
+      "./gradlew :composeApp:testDebugUnitTest --tests \"*AudioFocusPlaybackGateTest\"",
+      "模拟器:媒体键 pause→play 声层 started→paused→started 闭环;锁屏卡片无进度条/跳转钮",
+      "evidence: docs/superpowers/evidence/fix-notification-resume-card/"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": ["华为真机回归(通知恢复 + 卡片样式)待开发者确认", "蓝牙按键路径无外设未实测"],
+  "verifiedAt": "2026-06-10"
+}
