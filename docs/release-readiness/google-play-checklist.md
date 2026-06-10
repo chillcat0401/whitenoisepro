@@ -13,7 +13,7 @@
 
 WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 Google Play closed testing，除非以下 gate 完成：
 
-- 八个第一方生成声音已打包并通过机器 QA，仍需真实设备主观 QA。
+- 19 个本地声音已打包；八个为第一方生成，11 个为 Freesound CC0 处理素材，仍需真实设备主观 QA。
 - Mixer 已支持 layer 音量、静音和移除；Saved Mixes 已支持播放、重命名、收藏和删除。
 - Timer 已支持 15/30/45/60/120 分钟、自定义时长、延长、取消和淡出停止。
 - adaptive launcher、round、monochrome 和 512×512 商店图标已准备。

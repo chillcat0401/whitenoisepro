@@ -54,7 +54,7 @@ FOREGROUND_SERVICE_MEDIA_PLAYBACK
 
 ## 音频与媒体输入
 
-当前应用不收集用户音频，不请求麦克风，不上传播放记录。八个发布声音均为本地打包的第一方程序化生成音频：
+当前应用不收集用户音频，不请求麦克风，不上传播放记录。发布声音均为本地打包音频，包括八个第一方程序化生成音频和 11 个 Freesound Creative Commons 0 处理录音：
 
 - 白噪声。
 - 粉噪声。
@@ -64,8 +64,19 @@ FOREGROUND_SERVICE_MEDIA_PLAYBACK
 - 远海。
 - 夜林。
 - 暖炉。
+- 软雨。
+- 轻屋顶雨。
+- 窗雨。
+- 屋顶雨。
+- 柔和海浪。
+- 海浪。
+- 海岸。
+- 火焰噼啪。
+- 炉火。
+- 落地风扇。
+- 林间风。
 
-音频生成 manifest 位于 `docs/audio-assets/generated-audio-manifest.json`。
+音频 manifest 位于 `docs/audio-assets/generated-audio-manifest.json` 和 `docs/audio-assets/external-release-audio-manifest.json`。
 
 ## Data Safety 初始答案方向
 

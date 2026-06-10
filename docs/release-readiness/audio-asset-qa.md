@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-当前 Android build 已包含八个第一方程序化生成声音：
+当前 Android build 已包含八个第一方程序化生成声音和 11 个 Freesound CC0 外部真实录音处理素材。
 
 - 白噪声。
 - 粉噪声。
@@ -21,7 +21,11 @@
 
 `docs/audio-assets/generated-audio-manifest.json`
 
-这些资产不含第三方录音或采样，使用固定 seed 和周期 inverse FFT 生成。closed testing 前仍必须完成真实设备主观试听和长时间 loop QA。
+外部真实录音发布清单：
+
+`docs/audio-assets/external-release-audio-manifest.json`
+
+第一方生成资产不含第三方录音或采样，使用固定 seed 和周期 inverse FFT 生成。外部真实录音均来自 Freesound Creative Commons 0，已记录来源、原始 hash、处理后 hash、处理步骤、机器 QA 和用户人工听测通过记录。closed testing 前仍必须完成真实设备播放、后台、锁屏和长时间 loop QA。
 
 ## 资产证据表
 
@@ -35,6 +39,32 @@
 | 远海 | `ocean_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
 | 夜林 | `forest_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
 | 暖炉 | `fireplace_loop.wav` | 第一方程序化生成 | 可用于 Google Play；中国大陆分发需发布前复核 | ready | needs-human-evidence |
+| 软雨 | `rain_soft_loop.ogg` | Freesound CC0 `640655` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 轻屋顶雨 | `rain_light_roof_loop.ogg` | Freesound CC0 `669484` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 窗雨 | `rain_window_loop.ogg` | Freesound CC0 `669486` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 屋顶雨 | `rain_roof_loop.ogg` | Freesound CC0 `650428` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 柔和海浪 | `ocean_gentle_loop.ogg` | Freesound CC0 `417797` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 海浪 | `ocean_waves_loop.ogg` | Freesound CC0 `431853` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 海岸 | `ocean_shore_loop.ogg` | Freesound CC0 `278982` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 火焰噼啪 | `fire_crackle_loop.ogg` | Freesound CC0 `813328` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 炉火 | `fire_hearth_loop.ogg` | Freesound CC0 `836535` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 落地风扇 | `fan_floor_loop.ogg` | Freesound CC0 `843484` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+| 林间风 | `wind_forest_loop.ogg` | Freesound CC0 `530908` | 可用于 Google Play；中国大陆分发需发布前复核 | ready | human-pass |
+
+## 外部素材处理摘要
+
+| 指标 | 当前值 |
+| --- | --- |
+| 外部发布素材数量 | 11 |
+| 输出格式 | Ogg/Vorbis |
+| Bitrate | 96k |
+| Target loudness | 约 `-23 LUFS` |
+| True peak target | `-4 dBFS` 处理目标，处理后均低于 `-2.6 dBFS` |
+| 外部 processed 总大小 | 约 8.9 MB |
+| Android raw 目录总大小 | 约 17 MB |
+| 处理脚本 | `tools/promote_external_audio.mjs` |
+| 原始 intake manifest | `work/audio-intake/intake-manifest.json` |
+| 发布 manifest | `docs/audio-assets/external-release-audio-manifest.json` |
 
 ## 单个声音资产验收标准
 
@@ -77,9 +107,9 @@
 ```text
 深夜雨林
 - 棕噪声
-- 细雨
-- 夜林
-- 柔和风扇
+- 软雨
+- 林间风
+- 落地风扇
 推荐 timer: 30 或 45 分钟
 ```
 
@@ -103,8 +133,8 @@
 
 - 至少一台真实 Android 设备完成 QA 矩阵。
 - 至少一个默认混音通过。
-- 程序化资产清单、哈希和生成脚本与 APK 一致。
-- 所有后续第三方候选声音有授权记录。
+- 程序化资产清单、外部发布素材清单、哈希和处理脚本与 APK 一致。
+- 所有外部候选声音有授权记录、原始 hash、处理后 hash 和人工听测记录。
 - 应用中不存在 `silence_loop.wav`。
 
 ## 人工 QA 记录模板

@@ -13,7 +13,7 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 - 隐私联系邮箱：[待补充：privacy/support email]
 - 支持邮箱：[待补充：support email，可与隐私联系邮箱相同]
 - 开发者所在地 / 地址：[待补充：按 Play Console 和公开政策要求填写]
-- 隐私政策公开 URL：[待补充：https URL，非 PDF，公开可访问]
+- 隐私政策公开 URL：[待补充：GitHub Pages URL，例如 `https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`]
 - 生效日期：[待补充：YYYY-MM-DD]
 - 最近更新日期：[待补充：YYYY-MM-DD]
 
@@ -41,7 +41,7 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 
 ## 音频素材来源
 
-当前 MVP 使用随应用打包的第一方程序化生成声音，包括白噪声、粉噪声、棕噪声、柔和风扇、细雨、远海、夜林和暖炉。这些声音不包含第三方录音或采样，不通过网络下载，也不需要用户提供音频、麦克风或录音权限。
+当前 MVP 使用随应用打包的本地声音，包括第一方程序化生成噪声音频，以及经过处理的 Freesound Creative Commons 0 外部录音素材。这些声音不通过网络下载，也不需要用户提供音频、麦克风或录音权限。
 
 ## 权限用途
 

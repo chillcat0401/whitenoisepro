@@ -10,7 +10,7 @@
 
 ## 总结
 
-WhiteNoisePro 当前代码基础可继续准备 internal testing，但不应直接进入 closed testing。主要阻断项是隐私政策公开 URL、开发者主体和邮箱、真实设备音频 / 后台播放 QA、Play Console closed testing 组织证据。代码侧 targetSdk、最小权限、签名 AAB 基础设施和本地 8 声音目录处于较好状态。
+WhiteNoisePro 当前代码基础可继续准备 internal testing，但不应直接进入 closed testing。主要阻断项是隐私政策公开 URL、开发者主体和邮箱、真实设备音频 / 后台播放 QA、Play Console closed testing 组织证据。代码侧 targetSdk、最小权限、签名 AAB 基础设施和本地声音目录处于较好状态。
 
 ## 巡查表
 
@@ -25,7 +25,7 @@ WhiteNoisePro 当前代码基础可继续准备 internal testing，但不应直�
 | Data safety | ready | 当前无账号、无广告、无 analytics、无 crash SDK、无 billing、无联网上传 |
 | 隐私政策 URL | blocked | 需要公开 https URL，非 PDF，非登录页，非地理封锁 |
 | 开发者信息 | blocked | 需要主体/展示名、支持邮箱、隐私邮箱、所在地/地址占位确认 |
-| 音频资产来源 | ready | 8 个第一方程序化生成声音，有生成脚本和 manifest |
+| 音频资产来源 | ready | 8 个第一方程序化生成声音和 11 个 Freesound CC0 处理素材，有生成/处理脚本和 manifest |
 | 音频真实设备 QA | needs-human-evidence | 需要至少一台 Android 真机完成听感、loop、后台、锁屏、蓝牙和打断测试 |
 | closed testing tester | blocked | 若账号适用，需要至少 12 名 tester 连续 opt-in 14 天；建议招募 15-20 人 |
 | store listing 文案 | blocked | 需要开发者确认品牌描述、截图、短描述、完整描述和国家/地区 |

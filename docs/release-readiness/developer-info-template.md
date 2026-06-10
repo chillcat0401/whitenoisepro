@@ -13,7 +13,7 @@
 | 支持邮箱 | [待补充：support email] | blocked |
 | 隐私联系邮箱 | [待补充：privacy email，可与支持邮箱相同] | blocked |
 | 开发者网站 / 支持 URL | [待补充：https URL，如无网站则准备支持页] | blocked |
-| 隐私政策 URL | [待补充：https URL，非 PDF，公开可访问] | blocked |
+| 隐私政策 URL | [待补充：GitHub Pages URL，例如 `https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`] | blocked |
 | 隐私政策生效日期 | [待补充：YYYY-MM-DD] | blocked |
 | 隐私政策最近更新日期 | [待补充：YYYY-MM-DD] | blocked |
 
