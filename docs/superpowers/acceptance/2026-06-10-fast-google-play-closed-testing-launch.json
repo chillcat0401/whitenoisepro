@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-10-fast-google-play-closed-testing-launch",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-10-fast-google-play-closed-testing-launch/tasks.md",
+    "verification": [
+      "发布就绪包全部产出并随迭代更新:launch checklist / Play Console worksheet / store listing / tester roster / feedback tracker / production access 答案草稿(docs/release-readiness/)",
+      "签名 AAB v0.2.0 验签通过,sha256 记录于 release-candidate-2026-06-10.md",
+      "./gradlew :composeApp:check 全量通过(2026-06-10,含 lint 与归档门禁)",
+      "模拟器 smoke + 真机音频 QA 四要素完成,evidence: docs/superpowers/evidence/fast-google-play-closed-testing-launch/2.4.md(含开发者听审与通知回归确认)"
+    ]
+  },
+  "unverifiable": [
+    "plan: 该变更实施时未保留专属 Superpowers 计划文件(任务直接按 tasks.md 推进)",
+    "review: 无可唯一对应到本变更的整体评审记录(相关代码改动各自经独立变更评审)",
+    "tdd: 文档类任务无 RED→GREEN 适用性,代码相关验证以当前证据为准"
+  ],
+  "remainingRisks": [
+    "实际上传 closed testing 待 Google Play 开发者账号过审",
+    "隐私政策页/listing 的开发者主体、邮箱、生效日期占位待补",
+    "蓝牙/有线外设音频路径无设备未实测"
+  ],
+  "verifiedAt": "2026-06-10"
+}

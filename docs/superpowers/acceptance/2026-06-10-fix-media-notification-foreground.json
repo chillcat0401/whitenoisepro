@@ -10,10 +10,11 @@
     "verification": [
       "./gradlew :composeApp:check",
       "模拟器 API 36 实测:NotificationRecord id=1001、isForeground=true、熄屏 40s 无 freezing、锁屏媒体卡片暂停/恢复",
-      "evidence: docs/superpowers/evidence/fix-media-notification-foreground/"
+      "evidence: docs/superpowers/evidence/fix-media-notification-foreground/",
+      "华为真机(LYA-AL00)开发者回归通过(2026-06-10):通知恢复播放/卡片样式/通知出现"
     ]
   },
   "unverifiable": [],
-  "remainingRisks": ["华为 Android 10 真机通知出现与锁屏控制待开发者回归确认"],
+  "remainingRisks": [],
   "verifiedAt": "2026-06-10"
 }

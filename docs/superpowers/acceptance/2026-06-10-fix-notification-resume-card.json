@@ -10,10 +10,13 @@
     "verification": [
       "./gradlew :composeApp:testDebugUnitTest --tests \"*AudioFocusPlaybackGateTest\"",
       "模拟器:媒体键 pause→play 声层 started→paused→started 闭环;锁屏卡片无进度条/跳转钮",
-      "evidence: docs/superpowers/evidence/fix-notification-resume-card/"
+      "evidence: docs/superpowers/evidence/fix-notification-resume-card/",
+      "华为真机(LYA-AL00)开发者回归通过(2026-06-10):通知恢复播放/卡片样式/通知出现"
     ]
   },
   "unverifiable": [],
-  "remainingRisks": ["华为真机回归(通知恢复 + 卡片样式)待开发者确认", "蓝牙按键路径无外设未实测"],
+  "remainingRisks": [
+    "蓝牙按键路径无外设未实测"
+  ],
   "verifiedAt": "2026-06-10"
 }
