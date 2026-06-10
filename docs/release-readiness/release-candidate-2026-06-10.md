@@ -23,8 +23,8 @@
 
 - 模拟器(Pixel 9 Pro / API 36):release APK 安装、启动、五页导航、
   合成 + 真实素材混合播放、状态恢复全部正常
-- 真机(华为 LYA-AL00 / Android 10):release APK 安装成功、Activity 正常 resume、
-  无崩溃日志;**交互冒烟与听测被锁屏阻塞,待开发者解锁后完成**
+- 真机(华为 LYA-AL00 / Android 10):卸载旧 debug 签名包后 release 安装成功;
+  启动渲染、播放(音频焦点获取)、按 HOME 后台续播全部通过;主观听测进行中
 - 7 个新素材机器接缝 QA 全 PASS(见 audio-asset-qa.md 2026-06-10 节)
 - 商店截图:docs/store-assets/screenshots/phone/ 五张 1080×2160(2:1,符合 Play 规格),
   基于新 UI 与播放态拍摄
