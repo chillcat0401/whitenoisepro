@@ -1,0 +1,18 @@
+# OpenSpec 上下文路由器:声明本项目使用的桥接 Schema 与全局工程上下文。
+# Agent 进入任何 OpenSpec 阶段前必须先加载本文件与所声明 schema 目录下的全部文件。
+schema: superpowers-bridge
+
+# 全局上下文:保持极简(只放影响每一次决策的事实),避免上下文污染。
+context: |
+  Project: WhiteNoisePro — 白噪音助眠 App
+  Stack: Kotlin Multiplatform + Compose Multiplatform (Android 主目标, 后续 HarmonyOS ArkTS 重写)
+  Module: :composeApp (commonMain / androidMain)
+  Gate: ./gradlew :composeApp:check (含归档验收校验 verifyArchiveAcceptance)
+  Docs language: 中文(技术标识符可用英文)
+
+# 执行铁律(摘要,完整定义见 schemas/superpowers-bridge/PROTOCOL.md):
+rules:
+  - 任务必须严格按 tasks.md 顺序逐条执行,禁止跨任务批量实现
+  - 每个任务:验证命令 exit 0 → 勾选 checkbox → 同一 commit 提交(代码+勾选+证据)
+  - 任一任务验证失败立即停止队列,等待人工介入或更新 spec
+  - 变更范围以任务声明的 scope 为准,提交前用 git diff --name-only 对账

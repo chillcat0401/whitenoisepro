@@ -1,463 +1,80 @@
 # WhiteNoisePro Project Protocol
 
-This project uses OpenSpec for product planning, scope control, acceptance criteria, and spec archival. It uses Superpowers for implementation discipline, TDD execution, verification, and code review.
+本项目流程遵循通用流程包 **superpowers-bridge**,会话开始或进入任何 OpenSpec 阶段时按以下顺序加载:
 
-The product goal is to build a modern white noise and sleep sounds app with low-distraction UX, night-friendly UI, stable audio playback, and a path toward Android plus Huawei / HarmonyOS distribution.
-
-## Core Rule
-
-Never implement before an OpenSpec proposal is created and accepted.
-
-## Project-Level Constraints
-
-- New project documents must be written in Chinese by default, including docs, OpenSpec artifacts, review notes, verification reports, and planning documents.
-- Existing documents do not need to be rewritten or translated retroactively unless the user explicitly asks for that work.
-- Technical identifiers, code symbols, commands, file paths, official product names, API names, and external source titles may remain in English when that is clearer or more accurate.
-
-OpenSpec owns:
-
-- Scope
-- Acceptance criteria
-- Design decisions
-- Task list
-- Spec archive
-
-Superpowers owns:
-
-- TDD execution
-- Task-by-task implementation
-- Verification
-- Code review
-
-During explore and propose:
-
-- Do not write production code.
-- Do not implement UI.
-- Do not perform hidden refactors.
-
-During execute:
-
-- Read `proposal.md`, `design.md`, and `tasks.md` first.
-- Implement only what is in `tasks.md`.
-- Every task requires a failing test first where applicable.
-- Every task requires verification.
-- Update task status as work progresses.
-- If implementation needs to change scope, stop and update OpenSpec first.
-
-Done means:
-
-- All tasks are checked.
-- Tests pass.
-- Verification is complete.
-- Review is complete.
-- Archive acceptance record passes the required gate.
-- OpenSpec is archived or applied.
-
-## Archive Acceptance Gate
-
-Every governed archive must have:
-
-```text
-docs/superpowers/acceptance/<change-id>.json
+```
+openspec/config.yaml
+openspec/schemas/superpowers-bridge/schema.yaml
+openspec/schemas/superpowers-bridge/PROTOCOL.md
+PROJECT_PROTOCOL.md(本文件,仅项目特有约束)
 ```
 
-Modes:
+核心规则、变更分级(L0/L1/L2)、apply 七步循环(SPAWN→TDD→VERIFY→AUDIT→RECORD→COMMIT→NEXT)、证据目录、归档门禁、红线,均以流程包为准,本文件不重复流程性内容。
 
-- `strict`: required for new changes. OpenSpec tasks and Superpowers plan must be complete, review and
-  verification evidence must exist, and `unverifiable` must be empty.
-- `retrospective`: only for historical archives created before this gate. Missing or unsynchronized
-  historical evidence must be listed explicitly and must not be represented as strict TDD proof.
+## 项目铁律
 
-Commands:
+- L2 级变更在 OpenSpec 提案被创建并确认之前不得实现;L0/L1 按流程包分级执行。
+- 新文档默认中文;技术标识符、代码符号、命令、官方产品名可保留英文。存量英文文档不回溯翻译,除非用户明确要求。
+- 不引入 Google Play Services 强依赖,除非 spec 显式允许(HarmonyOS 与国内分发前提)。
+- 在合规路径确认前,不引入对海外服务的强依赖(广告、支付、统计、崩溃上报)。
 
-```bash
-node tools/verify_archive_acceptance.mjs --all-archives
-node tools/verify_archive_acceptance.mjs --change <change-id>
-```
+## 技能映射
 
-The Gradle `check` lifecycle validates all already archived records. For an active change:
+- Explore:优先 `/opsx:explore`,缺省时 `superpowers:brainstorm`。
+- Propose / Archive:`/opsx:propose`、`/opsx:archive`、`/opsx:apply`。
+- Apply:优先 `superpowers:subagent-driven-development`,单人小变更可降级 `superpowers:executing-plans`;TDD 用 `superpowers:test-driven-development`。
 
-1. Complete implementation, verification and code review.
-2. Check every OpenSpec task and Superpowers plan step.
-3. Create the strict acceptance record.
-4. Run the single-change gate.
-5. Archive only after the gate passes.
+## 项目验证矩阵(任务 verify 命令的取材来源)
 
-Current passing tests do not prove that historical RED/GREEN execution occurred. Never backfill an
-unchecked plan or remove an `unverifiable` item unless repository evidence supports the claim.
+全量门禁:`./gradlew :composeApp:check :composeApp:assembleDebug`(check 含 verifyArchiveAcceptance)。
 
-## Workflow
+UI 验证:
+- 模拟器/真机运行,截图核对 360x800、390x844、430x932 三档。
+- 无文本溢出;底部导航与 Mini Player 不重叠;触控目标 ≥44px;与 design.md / 设计稿一致。
+- 深色低亮度主题(暖色基调),主播放动作一眼可见,单手可操作。
 
-When the user requests a feature, page, architecture change, market-readiness task, or implementation change, follow these stages in order.
+音频验证:
+- 播放/暂停、多层混音、单层音量、主音量、静音层不发声。
+- 后台播放、睡眠定时、淡出、锁屏/通知控制。
+- 新增素材:loop 接缝听测(手机扬声器 + 耳机 + 低音量三档);响度对齐 RMS ≈ -29~-32 dB、峰值 ≤ -2 dB;登记 `docs/audio-assets/external-release-audio-manifest.json`;许可证链完整(CC0 快照,流程见 `docs/audio-assets/external-audio-source-intake.md`,工具 `tools/fetch_freesound_audio.mjs`)。
 
-### 1. Explore
+状态验证:
+- 保存/删除/收藏混音、恢复上次播放、空状态、错误状态。
+- 旧 soundId 迁移(`SoundCatalog.canonicalId`)不丢用户数据。
 
-Prefer:
+平台与合规验证:
+- Android 权限最小化(不声明不必要的 `POST_NOTIFICATIONS`)。
+- 隐私政策、Data safety 与代码行为一致(`docs/release-readiness/`)。
+- 涉及大陆/鸿蒙分发的任务:备案、商店审核材料、最小权限、AppGallery 兼容、HarmonyOS NEXT 原生实现评估。
 
-```text
-/opsx:explore
-```
+## 归档验收(项目实现细节)
 
-If unavailable, use:
+- 记录:`docs/superpowers/acceptance/<change-id>.json`;strict / retrospective 语义见流程包 PROTOCOL.md。
+- 门禁命令:
+  ```bash
+  node tools/verify_archive_acceptance.mjs --change <change-id>   # 单变更
+  node tools/verify_archive_acceptance.mjs --all-archives         # 全量(Gradle check 自动执行)
+  ```
+- 当前测试通过不证明历史 RED→GREEN 发生过;禁止在无仓库证据时补勾历史计划或清空 `unverifiable`。
 
-```text
-superpowers:brainstorm
-```
+## 产品与技术约束
 
-Explore must:
+产品定位:夜间低干扰白噪音助眠工具,不是营销站、不是声音商城。MVP 七屏:Home/Mixer/Library/Timer/Saved/Settings/MiniPlayer。体验优先级:夜间柔和、半睡半醒可操作、播放稳定、变现不打扰。避免:营销首屏、长引导、全屏广告式 UI、刺眼亮色。
 
-- Clarify user goals, scope, non-goals, and success criteria.
-- Research the existing codebase, technical stack, Figma design, and project constraints.
-- Identify risks around audio playback, background mode, platform permissions, UI responsiveness, privacy, and app store requirements.
-- Compare at least two viable approaches.
-- Recommend one approach with tradeoffs.
+技术:
+- 遵循既有目录结构、状态管理与 WnpTheme 设计令牌体系;新依赖(UI kit、状态库、音频库)必须有任务与理由。
+- 平台能力封装在 androidMain,业务逻辑留在 commonMain(为 HarmonyOS ArkTS 翻译保留同构性)。
+- 持久化数据保持可迁移;关注包体(音频策略:噪声运行时合成、自然声 Opus、扩展包后续走下载)。
 
-Explore must not:
+商业路线参考 `docs/launch-and-monetization-roadmap.md`(免费 + 买断,后续订阅内容包)。
 
-- Create or modify production code.
-- Implement UI.
-- Bypass requirement clarification.
-- Treat uncertain assumptions as final decisions.
+## 偏差与交付格式
 
-Explore may:
-
-- Read code.
-- Read Figma context.
-- Read documentation.
-- Write temporary analysis notes.
-- Output option comparisons and risk lists.
-
-### 2. Propose
-
-After Explore, immediately run:
-
-```text
-/opsx:propose
-```
-
-Create the OpenSpec change files:
-
-```text
-openspec/changes/<change-id>/proposal.md
-openspec/changes/<change-id>/design.md
-openspec/changes/<change-id>/tasks.md
-openspec/changes/<change-id>/specs/
-```
-
-The proposal must include:
-
-- User stories
-- Functional scope
-- Non-goals
-- UI/UX acceptance criteria
-- Technical approach
-- Data model or state model
-- Platform differences, including Android, HarmonyOS, or web preview where relevant
-- Test strategy
-- Task breakdown
-- Acceptance criteria for every task
-
-Do not write production code in Propose.
-
-Each task in `tasks.md` must be:
-
-- Independently executable
-- Clear about input and output
-- Clear about acceptance criteria
-- Clear about verification method
-- Suitable for TDD
-
-### 3. Apply / Execute
-
-Only begin implementation after the user confirms the proposal or explicitly asks to enter apply / execute.
-
-Prefer loading OpenSpec PlanExecution. If unavailable, manually read:
-
-```text
-openspec/changes/<change-id>/proposal.md
-openspec/changes/<change-id>/design.md
-openspec/changes/<change-id>/tasks.md
-```
-
-Then run:
-
-```text
-superpowers:executing-plans
-```
-
-or:
-
-```text
-superpowers:subagent-driven-development
-```
-
-Execution rules:
-
-- Strictly follow `tasks.md`.
-- Do not implement features outside `tasks.md`.
-- If `tasks.md` is incomplete, stop and update OpenSpec before continuing.
-- Follow TDD for every applicable task:
-  1. Write the failing test.
-  2. Implement the smallest code change.
-  3. Run tests.
-  4. Refactor.
-  5. Verify again.
-- Update task status after each task.
-- Run verification after each task.
-- Run code review after meaningful implementation work.
-
-Alignment rules:
-
-```text
-Code implementation must align with tasks.md.
-Tests must align with acceptance criteria.
-UI must align with Figma and design.md.
-```
-
-Execution must not:
-
-- Skip tests.
-- Treat mocks as final implementation unless the spec allows it.
-- Add unnecessary dependencies.
-- Change architecture without explanation and spec update.
-- Modify unrelated files.
-- Overwrite user changes.
-- Expand scope through incidental improvements.
-
-### 4. Verification
-
-Every task requires verification.
-
-UI verification:
-
-- Run the local app.
-- Use browser, emulator, or screenshot inspection when available.
-- Check mobile sizes: 360x800, 390x844, and 430x932.
-- Check text overflow.
-- Check bottom navigation and Mini Player overlap.
-- Compare against Figma and `design.md`.
-
-Audio verification:
-
-- Play and pause.
-- Multi-track mix.
-- Per-track volume.
-- Master volume.
-- Background playback.
-- Sleep timer.
-- Fade-out.
-- Lock screen or notification controls when supported.
-
-State verification:
-
-- Save mix.
-- Restore last playback.
-- Favorite mix.
-- Delete mix.
-- Empty states.
-- Error states.
-
-Platform verification:
-
-- Android permission behavior.
-- Huawei / HarmonyOS compatibility.
-- Privacy policy and required compliance fields.
-- No Google Play Services dependency unless explicitly allowed.
-
-Each verification output must include:
-
-```text
-Task:
-Verification:
-Result:
-Remaining risk:
-```
-
-### 5. Review
-
-Run code review after each completed feature.
-
-Review priorities:
-
-1. Behavior bugs
-2. Missing tests
-3. UI/UX mismatch with spec
-4. Platform compatibility risks
-5. Performance issues
-6. Maintainability issues
-
-Review output must include:
-
-```text
-Findings:
-Tests:
-Spec alignment:
-Remaining risks:
-```
-
-If review finds issues, fix them before moving to the next task.
-
-### 6. Archive / Apply
-
-After all tasks are complete, tests pass, and review is complete, run:
-
-```text
-/opsx:archive
-```
-
-or:
-
-```text
-/opsx:apply
-```
-
-The goal is to:
-
-- Merge the Delta Spec.
-- Archive the change.
-- Output the final change summary.
-- Remind the user to review.
-- Mark optional follow-up improvements.
-
-Final delivery must include:
-
-- What was completed
-- OpenSpec change id
-- Tests passed
-- Remaining risks needing manual review
-- Recommended next step
-
-## Product Constraints
-
-This product is a sleep utility, not a marketing site and not primarily a sound marketplace.
-
-MVP screens:
-
-- Home / Now Playing
-- Mixer
-- Library
-- Timer
-- Saved Mixes
-- Settings
-- Mini Player / Full Player
-
-Core capabilities:
-
-- One-tap playback
-- Multi-track sound mixing
-- Per-track volume
-- Master volume
-- Timer
-- Fade-out stop
-- Save mix
-- Favorite mix
-- Recently used mixes
-- Low-brightness dark UI
-- Background playback
-- Offline sound assets
-
-Priority experience:
-
-- Gentle at night
-- Low-friction when opened half-asleep
-- One-handed operation
-- Stable playback
-- Non-disruptive monetization
-- Simple settings
-- Modern but restrained UI
-
-Avoid:
-
-- Marketing-first home screens
-- Long instructional copy
-- Complex first-launch onboarding
-- Full-screen ad-like UI
-- Harsh bright colors
-- Visual flourish that harms playback reliability
-
-## UI/UX Constraints
-
-UI implementation must follow:
-
-- Default low-brightness dark theme
-- Responsive support for 360x800, 390x844, and 430x932
-- Fixed bottom navigation
-- Mini Player above bottom navigation
-- Minimum 44px touch targets
-- No text overflow
-- No button compression
-- Easy-to-drag sliders
-- Clearly visible primary playback action
-- Home supports one-tap playback resume
-- Mixer clearly shows each sound layer
-- Timer supports presets and custom duration
-- Settings remains restrained and utility-focused
-
-Figma alignment rules:
-
-- Prefer matching Figma screen frames.
-- Map Figma component names to code components.
-- Do not copy meaningless temporary layer names into code.
-- If Figma layer structure is messy, propose cleanup before implementation.
-- Code component names should be more semantic than temporary Figma layers.
-
-## Technical Constraints
-
-Do not assume the framework before the project stack is chosen.
-
-After the stack is chosen:
-
-- Follow the existing directory structure.
-- Follow the existing state management pattern.
-- Follow the existing styling system.
-- Do not add Tailwind, Redux, MobX, audio libraries, or UI kits without a task and rationale.
-- Use mature audio playback libraries when appropriate.
-- Encapsulate platform capabilities away from business logic.
-- Make persisted data migration-friendly.
-- Consider app package size and offline sound strategy.
-
-## China Mainland / HarmonyOS Constraints
-
-If a task involves China Mainland or HarmonyOS distribution, consider:
-
-- Privacy policy
-- User agreement
-- App filing /备案
-- App market review materials
-- Minimum permissions
-- No Google Play Services dependency
-- Huawei AppGallery compatibility
-- Whether HarmonyOS NEXT requires native implementation
-- Compliance for domestic ads, payment, analytics, and crash SDKs
-
-Do not introduce strong dependencies on overseas services before the compliance path is confirmed.
-
-## Scope Deviation
-
-If implementation needs to deviate from OpenSpec, stop and output:
+Spec 偏差(流程包 AUDIT/HALT 触发)时输出:
 
 ```text
 Spec deviation detected:
-Reason:
-Impact:
-Recommended update:
-Need user confirmation:
+Reason: / Impact: / Recommended update: / Need user confirmation:
 ```
 
-Do not continue with deviating implementation without user confirmation.
-
-## Final Response Format
-
-Every full feature delivery must include:
-
-```text
-Summary
-Spec / change-id
-Tasks completed
-Tests / verification
-Files changed
-Risks / manual review needed
-Recommended next step
-```
-
-Keep final responses concise, but do not omit verification results.
+完整功能交付的收尾输出包含:Summary、change-id、Tasks completed、Tests/verification、Files changed、Risks、Recommended next step。

@@ -1,0 +1,87 @@
+# superpowers-bridge:OpenSpec 静态工件链 ←→ Superpowers 执行技能 的桥接定义。
+# 本文件是声明式约定:Agent 在进入对应阶段时必须加载并逐字遵循 instruction。
+# 完整流程协议与分级规则见同目录 PROTOCOL.md;移植方法见 README.md。
+
+name: superpowers-bridge
+version: 1.0.0
+
+# ── 1. 静态工件依赖链 ───────────────────────────────────────────────
+artifacts:
+  - id: proposal
+    generates: openspec/changes/<change-id>/proposal.md
+    requires: []
+    skill: "/opsx:explore(缺省时 superpowers:brainstorm)"
+    instruction: |
+      产出背景、目标、用户故事、功能范围、明确的 Out of Scope、≥2 个候选方案对比与推荐。
+      禁止写任何生产代码。结束时必须获得用户对 scope/non-goals 的确认才能进入 design。
+
+  - id: design
+    generates: openspec/changes/<change-id>/design.md
+    requires: [proposal]
+    instruction: |
+      技术架构、接口契约、数据/状态模型、平台差异、测试策略。
+      必须包含「模块作用域表」:本变更允许触碰的目录/文件清单,apply 阶段据此对账。
+
+  - id: tasks
+    generates: openspec/changes/<change-id>/tasks.md
+    requires: [design]
+    instruction: |
+      将 design 拆解为有序 checkbox 任务。每个任务必须是可机器消费的三元组,格式:
+
+        - [ ] 2.1 <一句话描述>
+          - accept: <验收标准,一句话>
+          - verify: <可执行命令,exit 0 即通过>
+          - scope: <允许修改的路径前缀,逗号分隔>
+
+      没有 verify 命令的任务不允许进入 apply;确实无法命令化的(如人工听测)
+      必须显式写 `verify: manual — <人工步骤>` 并在证据中留下人工结论。
+
+  - id: plan
+    generates: docs/superpowers/plans/<change-id>.md
+    requires: [tasks]
+    skill: superpowers:writing-plans
+    instruction: |
+      基于 tasks.md 生成带验证脚本的逐步实施计划。plan 与 tasks 冲突时以 tasks 为准,
+      且必须先回改 tasks.md 再继续。
+
+# ── 2. 动态执行桥接器 ───────────────────────────────────────────────
+apply:
+  requires: [plan]
+  tracks: openspec/changes/<change-id>/tasks.md   # 实时任务队列,checkbox 即状态机
+  skill: "superpowers:subagent-driven-development(单人小变更可降级 superpowers:executing-plans)"
+  instruction: |
+    将 tasks.md 中所有 `- [ ]` 解析为严格顺序队列,逐条执行以下循环:
+
+    1. SPAWN  为当前任务派生 subagent,prompt 中注入:该任务行的 accept/verify/scope、
+              design.md 的相关片段、以及「禁止实现后续任务」的指令。
+    2. TDD    先写失败测试(superpowers:test-driven-development),再最小实现,再重构。
+    3. VERIFY 运行该任务的 verify 命令,捕获 exit code 与输出。非 0 → 进入 HALT。
+    4. AUDIT  `git diff --name-only` 与任务 scope 对账;超界文件要么回滚,
+              要么停下来先更新 design.md 作用域表与 tasks.md,绝不静默放行。
+    5. RECORD 证据写入 docs/superpowers/evidence/<change-id>/<task-id>.md
+              (命令、exit code、关键输出摘要、日期)。
+    6. COMMIT 单任务微提交,代码 + tasks.md 勾选([ ]→[x])+ 证据文件必须在同一个
+              commit:`<type>(<change-id>): <task-id> <summary>`。
+    7. NEXT   队列下一条;全部完成进入 archive。
+
+    HALT:验证失败立即停止队列,不得跳过、不得先做后面的任务掩盖问题;
+    输出失败现场(命令、输出、猜测原因),等待人工决策:修复 / 回滚 / 更新 spec。
+
+  forbidden:
+    - 一次性实现多个任务后补勾选
+    - 未跑 verify 就勾选 checkbox
+    - 实现 tasks.md 之外的功能(包括"顺手优化")
+    - 修改 scope 之外的文件而不回写 spec
+    - 测试失败时通过删除/弱化测试让其通过
+
+# ── 3. 归档门禁 ─────────────────────────────────────────────────────
+archive:
+  requires:
+    - tasks.md 全部勾选,且每个勾选都有对应 evidence 文件
+    - 代码评审完成(发现的问题已修复或显式记录不修)
+    - 验收记录 docs/superpowers/acceptance/<change-id>.json(mode=strict,
+      unverifiable 必须为空;历史补录才允许 retrospective)
+  gate: node tools/verify_archive_acceptance.mjs --change <change-id>
+  instruction: |
+    门禁通过后执行 /opsx:archive(或 /opsx:apply)合并 Delta Spec 并归档。
+    验收 JSON 的 verification 字段引用 evidence 目录,禁止凭记忆事后编写。

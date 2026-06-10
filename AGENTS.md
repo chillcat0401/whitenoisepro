@@ -13,7 +13,16 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 
 ## Project Workflow
 
-Follow `PROJECT_PROTOCOL.md` for this project. OpenSpec owns explore, propose, task tracking, and archive/apply flow; Superpowers owns execution-time TDD, subagent-driven development, verification, and code review.
+本项目使用 superpowers-bridge 流程包(OpenSpec 工件链 × Superpowers 执行技能的桥接)。会话开始或进入任何 OpenSpec 阶段时,按以下顺序加载并遵循:
+
+```
+openspec/config.yaml                                  # 上下文路由 + 执行铁律摘要
+openspec/schemas/superpowers-bridge/schema.yaml       # 工件链 + apply 执行循环定义
+openspec/schemas/superpowers-bridge/PROTOCOL.md       # 通用协议(分级/证据/红线)
+PROJECT_PROTOCOL.md                                   # 本项目特有约束(验证矩阵/合规)
+```
+
+要点:tasks.md 是 apply 阶段的运行时队列(每任务 verify→勾选→微提交,失败即停);变更按 L0/L1/L2 分级决定工件要求;归档走 acceptance JSON 严格门禁。
 
 When Context7 MCP is unavailable and the CLI fallback is needed on this machine, run ctx7 commands with the system CA bundle:
 
