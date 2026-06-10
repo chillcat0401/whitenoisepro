@@ -165,6 +165,19 @@ kuikly2hmos/
 - 主仓联动:共享层源码以主仓为单一事实源,移植采用「拷贝 + 版本注记」,
   暂不做 gradle 级共享(两边 Kotlin 版本不同,R1)。
 
-## 附录 A:License 审查结论
+## 附录 A:License 审查结论(2026-06-10,M0.3)
 
-(M0.3 填写)
+**结论:可商用,放心用。** KuiklyUI License 为 MIT 式宽松授权
+(use/copy/modify/merge/publish/distribute/sublicense/sell 全部授予),
+仅一条额外限制:
+
+> 未经腾讯事先书面同意,不得为本软件修改/扩展/衍生以**添加或启用
+> 动态代码加载 / 热更新能力**。
+
+对本项目的影响:零——我们采用纯 AOT 静态编译进 hap,不使用也不开发
+动态化能力。若未来想用 Kuikly 的动态下发(如订阅声景包的 UI 动态化),
+须先取得腾讯书面授权,届时单独评估。
+
+随附义务:保留版权声明与许可文本;第三方组件(yoga/cJSON/SDWebImage/
+glide-gifdecoder 等,MIT/Apache-2.0)按其原许可履行声明义务——上架时在
+应用「开源许可」处随 Lora/文楷一并列出。
