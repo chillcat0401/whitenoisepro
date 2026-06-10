@@ -4,7 +4,7 @@
 
 - versionCode 1 / versionName 0.2.0(targetSdk 36 / minSdk 26)
 - AAB:`composeApp/build/outputs/bundle/release/composeApp-release.aab`
-  - 24.1MB,SHA-256 `a40d8a9b7aa5f1a9c183cff780e9cf746515b95a9fddbe38c1cdac9390345f0b`
+  - 24.1MB,SHA-256 `1295c6907f927a3ddc2366a1a0e2622e05af9cbae659108b9ad771017acde761`
   - `jarsigner -verify` 通过;upload key CN=WhiteNoisePro Upload,证书有效期至 2053,
     SHA-256 指纹 `6278bb97…c06385`
 - `:composeApp:check`(含归档验收门禁)全绿
@@ -15,6 +15,8 @@
 - 声音目录 8 → 21:18 个 CC0 真实素材(全许可证快照取证)+ 3 个运行时合成噪声;
   新增「环境」分类与 6 个新品类图标
 - 一方合成 WAV 移除,旧 soundId 解码迁移;AAB 较改造前缩小约 7MB
+- 声音发现包(add-sound-discovery-pack):场景预设一键播放 ×6、混音骰子、
+  噪声实验室(0~-6 dB/oct 自定义音色,设备端合成)
 - 隐私政策已发布:https://chillcat0401.github.io/whitenoisepro/privacy-policy.html(HTTP 200)
 
 ## 验证记录

@@ -40,7 +40,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,design}/
 
-- [ ] 4.1 全量门禁 + 模拟器验证(三功能实操 + 截图)
+- [x] 4.1 全量门禁 + 模拟器验证(三功能实操 + 截图)
   - accept: check 全绿;模拟器上预设/骰子/实验室全部出声
   - verify: ./gradlew :composeApp:check :composeApp:assembleDebug
   - scope: 全仓(只读验证)
