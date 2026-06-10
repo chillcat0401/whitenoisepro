@@ -288,6 +288,33 @@ class AppStoreTest {
     }
 
     @Test
+    fun toggleSoundAutoStartsPlaybackWhenIdleButNotOnRemove() = runTest {
+        val playback = RecordingPlaybackEngine()
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = playback,
+            scope = this,
+            playbackObservationScope = backgroundScope,
+        )
+        advanceUntilIdle()
+        assertEquals(0, playback.playedMixIds.size)
+
+        // 空闲时加入 → 自动开始播放,且播放的混音已包含新层
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        runCurrent()
+        assertEquals(1, playback.playedMixIds.size)
+        assertTrue(playback.playedMixes.last().layers.any { it.soundId == "ocean_gentle" })
+
+        // 暂停后移除 → 不应拉起播放
+        store.dispatch(AppIntent.TogglePlayback)
+        runCurrent()
+        val playsBeforeRemove = playback.playedMixIds.size
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        runCurrent()
+        assertEquals(playsBeforeRemove, playback.playedMixIds.size)
+    }
+
+    @Test
     fun feedbackEmittedOnToggleAndSaveAndClearable() = runTest {
         val store = AppStore(
             repository = RecordingRepository(),

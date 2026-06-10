@@ -162,6 +162,10 @@ class AppStore(
                         ),
                         syncPlaybackWhenPlaying = true,
                     )
+                    // 点击即试听:空闲时自动开始播放,让新加入的声音立刻可听
+                    if (!state.hasActivePlayRequest) {
+                        playbackEngine.play(state.mixState.currentMix)
+                    }
                     showFeedback("已加入「${SoundCatalog.nameOf(intent.soundId)}」")
                 } else {
                     existingLayers.forEach { layer ->
