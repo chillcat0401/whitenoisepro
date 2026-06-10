@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-10-add-sound-discovery-pack",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-10-add-sound-discovery-pack/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-10-add-sound-discovery-pack.md",
+    "review": "docs/code-review-add-sound-discovery-pack-2026-06-10.md",
+    "verification": [
+      "./gradlew :composeApp:check :composeApp:assembleDebug",
+      "逐任务 verify 命令与输出见 docs/superpowers/evidence/add-sound-discovery-pack/(1.1-6.3 共 14 份)",
+      "模拟器实操:预设一键播放/骰子生成命名播放/噪声实验室 -5.6dB 入混音发声/切换语义/反馈浮层/混音页试听",
+      "真机(华为 LYA-AL00):v0.2.0 渲染、播放、后台续播通过;用户听审反馈两轮已修复(5.x/6.x)",
+      "字体:文楷子集中文标题 + Lora 衬线数字回退链截图核对"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "NoiseLabCard 滑杆状态随 LazyColumn 回收重置(低频,记录于评审,待用户反馈)",
+    "噪声实验室同音色二次点击为移除语义,已向用户披露待定",
+    "鸿蒙 ArkTS 重写时需另行确认字体逐字形回退机制"
+  ],
+  "verifiedAt": "2026-06-10"
+}
