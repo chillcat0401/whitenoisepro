@@ -25,6 +25,7 @@ sealed interface MixIntent {
     data class SaveCurrentMix(val savedMixId: String, val nowEpochMillis: Long) : MixIntent
     data class DeleteSavedMix(val mixId: String) : MixIntent
     data class PlaySavedMix(val mixId: String, val nowEpochMillis: Long) : MixIntent
+    data class ReplaceCurrentMix(val mix: SoundMix, val nowEpochMillis: Long) : MixIntent
     data class RenameSavedMix(val mixId: String, val title: String) : MixIntent
     data class ToggleFavoriteSavedMix(val mixId: String) : MixIntent
 }
@@ -89,6 +90,14 @@ object MixReducer {
             state.copy(
                 currentMix = recent,
                 recentMixes = listOf(recent) + state.recentMixes.filterNot { it.id == recent.id },
+            )
+        }
+
+        is MixIntent.ReplaceCurrentMix -> {
+            val next = intent.mix.copy(updatedAtEpochMillis = intent.nowEpochMillis)
+            state.copy(
+                currentMix = next,
+                recentMixes = listOf(next) + state.recentMixes.filterNot { it.id == next.id },
             )
         }
 

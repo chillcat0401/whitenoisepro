@@ -5,7 +5,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*PresetCatalogTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/data/, composeApp/src/commonTest/kotlin/com/whitenoisepro/data/
 
-- [ ] 1.2 MixIntent.ReplaceCurrentMix 归约 + 测试
+- [x] 1.2 MixIntent.ReplaceCurrentMix 归约 + 测试
   - accept: currentMix 替换、recentMixes 头部去重插入,与 PlaySavedMix 语义一致
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*MixReducerTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/domain/, composeApp/src/commonTest/kotlin/com/whitenoisepro/domain/

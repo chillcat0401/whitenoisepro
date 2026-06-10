@@ -146,6 +146,30 @@ class MixReducerTest {
     }
 
     @Test
+    fun replaceCurrentMixSwapsCurrentAndTracksRecent() {
+        val preset = SoundMix(
+            id = "preset-rain-train",
+            title = "雨夜列车",
+            layers = listOf(SoundLayer.create("p-1", "train_ride", 0.45f)),
+            masterVolume = 0.66f,
+        )
+        val state = MixState(
+            currentMix = baseMix,
+            recentMixes = listOf(
+                SoundMix(id = "preset-rain-train", title = "雨夜列车"),
+                SoundMix(id = "other", title = "其他"),
+            ),
+        )
+
+        val next = MixReducer.reduce(state, MixIntent.ReplaceCurrentMix(preset, nowEpochMillis = 99L))
+
+        assertEquals("preset-rain-train", next.currentMix.id)
+        assertEquals(99L, next.currentMix.updatedAtEpochMillis)
+        assertEquals(listOf("preset-rain-train", "other"), next.recentMixes.map { it.id })
+        assertEquals(99L, next.recentMixes.first().updatedAtEpochMillis)
+    }
+
+    @Test
     fun renamingSavedMixDoesNotOverwriteCurrentMixEdits() {
         val saved = SoundMix(id = "saved-1", title = "旧标题", masterVolume = 0.4f)
         val editedCurrent = saved.copy(masterVolume = 0.9f)
