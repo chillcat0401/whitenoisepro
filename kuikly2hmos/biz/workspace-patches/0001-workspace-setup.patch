@@ -1,0 +1,47 @@
+diff --git a/compose/build.2.1.21.gradle.kts b/compose/build.2.1.21.gradle.kts
+index 21e00c1..7a542fd 100644
+--- a/compose/build.2.1.21.gradle.kts
++++ b/compose/build.2.1.21.gradle.kts
+@@ -15,7 +15,7 @@ kotlin {
+     androidTarget {
+         compilations.all {
+             kotlinOptions {
+-                jvmTarget = "1.8"
++                jvmTarget = "17"
+                 freeCompilerArgs += "-Xjvm-default=all"
+                 moduleName = "${project.group}.${project.name}"
+             }
+@@ -129,7 +129,7 @@ android {
+         minSdk = 21
+     }
+     compileOptions {
+-        sourceCompatibility = JavaVersion.VERSION_1_8
+-        targetCompatibility = JavaVersion.VERSION_1_8
++        sourceCompatibility = JavaVersion.VERSION_17
++        targetCompatibility = JavaVersion.VERSION_17
+     }
+ }
+\ No newline at end of file
+diff --git a/settings.2.0.ohos.gradle.kts b/settings.2.0.ohos.gradle.kts
+index 23ba02b..196f4a0 100644
+--- a/settings.2.0.ohos.gradle.kts
++++ b/settings.2.0.ohos.gradle.kts
+@@ -51,3 +51,6 @@ project(":demo").buildFileName = buildFileName
+ 
+ // include(":androidApp")
+ 
++
++include(":whitenoise")
++project(":whitenoise").buildFileName = buildFileName
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index bb10e9b..fb1ff75 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -45,4 +45,5 @@ project(":miniApp").buildFileName = buildFileName
+ include(":compose")
+ project(":compose").buildFileName = buildFileName
+ 
+-rootProject.buildFileName = buildFileName
+\ No newline at end of file
++rootProject.buildFileName = buildFileName
++include(":whitenoise")

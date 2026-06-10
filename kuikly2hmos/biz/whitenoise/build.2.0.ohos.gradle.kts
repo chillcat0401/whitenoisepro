@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.compose")
-    kotlin("plugin.serialization")
+    kotlin("plugin.serialization") version "2.0.21-KBA-010"
     id("com.google.devtools.ksp")
     id("org.jetbrains.compose")
     id("maven-publish")
