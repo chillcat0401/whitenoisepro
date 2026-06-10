@@ -3,11 +3,10 @@
 ## Purpose
 
 定义 Settings 中面向用户的隐私、后台媒体控制和未开放能力说明，避免展示不可用的伪功能。文案必须准确反映本地存储、无账号和媒体通知行为，并为 closed testing 提供可理解的信任信息。
-
 ## Requirements
 ### Requirement: Release-ready Settings trust copy
 
-The Settings screen SHALL display privacy, local-data, generated-audio, and background media-control rationale suitable for closed testing.
+The Settings screen SHALL display privacy, local-data, audio-source, and background media-control rationale suitable for closed testing.
 
 #### Scenario: User reviews privacy posture
 
@@ -18,7 +17,7 @@ The Settings screen SHALL display privacy, local-data, generated-audio, and back
 #### Scenario: User reviews audio source posture
 
 - **WHEN** the user opens Settings in a release candidate
-- **THEN** Settings communicates that current sounds are bundled first-party generated audio
+- **THEN** Settings communicates that current sounds are locally bundled audio, including first-party generated noise and processed Creative Commons 0 natural recordings
 - **AND** it does not claim medical, therapeutic, or guaranteed sleep outcomes
 
 #### Scenario: User reviews background controls
@@ -40,3 +39,4 @@ The Settings screen SHALL hide or disable features that are not implemented for 
 
 - **WHEN** offline downloads are not implemented
 - **THEN** Offline Downloads is shown as unavailable or hidden, not as an enabled toggle
+

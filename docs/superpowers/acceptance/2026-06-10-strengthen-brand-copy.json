@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-10-strengthen-brand-copy",
+  "mode": "retrospective",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-10-strengthen-brand-copy/tasks.md",
+    "verification": [
+      "./gradlew :composeApp:testDebugUnitTest --tests \"*BrandCopyTest\" --tests \"*SettingsContentTest\"(当前通过)",
+      "./gradlew :composeApp:check 全量通过(2026-06-10)",
+      "品牌文案在 v0.2.0 真机/模拟器界面与商店 listing 草稿中实际生效"
+    ]
+  },
+  "unverifiable": [
+    "plan: 该变更实施时未保留专属 Superpowers 计划文件",
+    "review: 无可唯一对应到本变更的评审记录",
+    "tdd: 历史 RED→GREEN 执行过程无法回溯证明"
+  ],
+  "remainingRisks": [
+    "设置页隐私文案中「开发者信息待补充」需在主体信息确认后更新"
+  ],
+  "verifiedAt": "2026-06-10"
+}
