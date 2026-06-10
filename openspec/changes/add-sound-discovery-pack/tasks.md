@@ -1,6 +1,6 @@
 # Tasks
 
-- [ ] 1.1 场景预设目录 PresetCatalog(6 预设)+ 引用合法性测试
+- [x] 1.1 场景预设目录 PresetCatalog(6 预设)+ 引用合法性测试
   - accept: 6 个 preset-* 混音,全部 soundId 在 SoundCatalog 中,音量∈(0,1]
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*PresetCatalogTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/data/, composeApp/src/commonTest/kotlin/com/whitenoisepro/data/
