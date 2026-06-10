@@ -4,6 +4,7 @@ enum class SoundCategory(val displayName: String) {
     Nature("自然"),
     Noise("噪声"),
     Home("居家"),
+    Ambience("环境"),
     Music("旋律"),
     Meditation("冥想"),
 }

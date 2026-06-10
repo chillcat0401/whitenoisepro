@@ -22,6 +22,12 @@ class SoundCatalogTest {
         "fire_hearth",
         "fan_floor",
         "wind_forest",
+        "wind_trees",
+        "stream_gentle",
+        "crickets_night",
+        "cafe_chatter",
+        "train_ride",
+        "airplane_cabin",
     )
 
     @Test
@@ -31,7 +37,7 @@ class SoundCatalogTest {
             SoundCatalog.all.map { it.id }.toSet(),
         )
         assertEquals(
-            listOf(SoundCategory.Noise, SoundCategory.Nature, SoundCategory.Home),
+            listOf(SoundCategory.Noise, SoundCategory.Nature, SoundCategory.Home, SoundCategory.Ambience),
             SoundCatalog.availableCategories,
         )
     }
@@ -71,7 +77,11 @@ class SoundCatalogTest {
 
     @Test
     fun publishedSoundsExposeStableAssetKeysAndDefaultVolumes() {
-        assertEquals(15, SoundCatalog.all.size)
+        assertEquals(21, SoundCatalog.all.size)
+        assertEquals(
+            setOf("cafe_chatter", "train_ride", "airplane_cabin"),
+            SoundCatalog.filter(category = SoundCategory.Ambience, query = "").map { it.id }.toSet(),
+        )
         SoundCatalog.all.forEach { sound ->
             assertEquals(sound.id, sound.loopAssetKey)
             assertTrue(sound.defaultVolume in 0f..1f)

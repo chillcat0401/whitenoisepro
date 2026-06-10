@@ -30,6 +30,12 @@ object AndroidSoundResourceResolver {
             "fire_hearth" -> R.raw.fire_hearth_loop
             "fan_floor" -> R.raw.fan_floor_loop
             "wind_forest" -> R.raw.wind_forest_loop
+            "wind_trees" -> R.raw.wind_trees_loop
+            "stream_gentle" -> R.raw.stream_gentle_loop
+            "crickets_night" -> R.raw.crickets_night_loop
+            "cafe_chatter" -> R.raw.cafe_chatter_loop
+            "train_ride" -> R.raw.train_ride_loop
+            "airplane_cabin" -> R.raw.airplane_cabin_loop
             else -> return SoundSource.Synthesized(NoiseProfile.Brown)
         }
         return SoundSource.Resource(resId)

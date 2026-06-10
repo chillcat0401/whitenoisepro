@@ -20,6 +20,12 @@ object SoundCatalog {
         Sound("fire_hearth", "炉火", SoundCategory.Home, "温暖炉火底噪和轻微 crackle", iconKey = "fireplace", defaultVolume = 0.26f),
         Sound("fan_floor", "落地风扇", SoundCategory.Home, "真实落地风扇深层稳定嗡鸣", iconKey = "fan", defaultVolume = 0.42f),
         Sound("wind_forest", "林间风", SoundCategory.Nature, "林间轻风和自然空气感", iconKey = "forest", defaultVolume = 0.3f),
+        Sound("wind_trees", "树梢风", SoundCategory.Nature, "穿过树梢的稳定风声", iconKey = "wind", defaultVolume = 0.32f),
+        Sound("stream_gentle", "溪流", SoundCategory.Nature, "林间小溪潺潺流水", iconKey = "stream", defaultVolume = 0.4f),
+        Sound("crickets_night", "夏夜虫鸣", SoundCategory.Nature, "夏夜虫鸣与安静的夜晚空气", iconKey = "crickets", defaultVolume = 0.3f),
+        Sound("cafe_chatter", "咖啡馆", SoundCategory.Ambience, "咖啡馆轻语与器皿环境声", iconKey = "cafe", defaultVolume = 0.34f),
+        Sound("train_ride", "列车", SoundCategory.Ambience, "车厢内稳定的行驶律动", iconKey = "train", defaultVolume = 0.4f),
+        Sound("airplane_cabin", "机舱", SoundCategory.Ambience, "巡航中机舱的稳定低鸣", iconKey = "airplane", defaultVolume = 0.42f),
     )
 
     val availableCategories: List<SoundCategory> =

@@ -11,7 +11,7 @@
     "codec": "libvorbis",
     "bitrate": "96k"
   },
-  "totalProcessedBytes": 10266317,
+  "totalProcessedBytes": 13802051,
   "assets": [
     {
       "sourceId": "640655",
@@ -507,6 +507,144 @@
         "durationSeconds": 140.0
       },
       "humanListeningQa": "pending",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "531016",
+      "soundId": "wind_trees",
+      "outputFile": "wind_trees_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/Noted451/sounds/531016/",
+      "sourceTitle": "Wind Through Trees ambience.wav",
+      "author": "Noted451",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/531016__Noted451__Wind-Through-Trees-ambience.wav.wav",
+      "originalSha256": "66de815dd167a103b3eca4e3e135f05814b16822f121699135e97b3931e71581",
+      "processedSha256": "f76c1d15aa260021c0bf9fd32a5692da27cd32fe8972fbe03c3d6e0e6ee895e6",
+      "processedBytes": 533599,
+      "defaultVolume": 0.32,
+      "processing": "tools/make_loop_audio.mjs: atrim 2-76s, +3.35dB, 74s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:11.033Z",
+      "qa": {
+        "peakDbfs": -7.31,
+        "rmsDbfs": -30.81,
+        "durationSeconds": 74.0
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "446019",
+      "soundId": "stream_gentle",
+      "outputFile": "stream_gentle_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/BurghRecords/sounds/446019/",
+      "sourceTitle": "Gentle Stream Natural Stream Sound",
+      "author": "BurghRecords",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/446019__BurghRecords__Gentle-Stream-Natural-Stream-Sound.wav",
+      "originalSha256": "6496b91550ca4df12ab7e1610265e6ef989eec5f2b090b1688fe2f6894444463",
+      "processedSha256": "5c744599844e32a702a5211fd1e06446d6b5c2e06fedc9bf81fa2282f16200d4",
+      "processedBytes": 472421,
+      "defaultVolume": 0.4,
+      "processing": "tools/make_loop_audio.mjs: atrim 2-60s, +2.14dB, 58s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:33.213Z",
+      "qa": {
+        "peakDbfs": -8.91,
+        "rmsDbfs": -30.41,
+        "durationSeconds": 58.0
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "404478",
+      "soundId": "cafe_chatter",
+      "outputFile": "cafe_chatter_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/Trainscough5407/sounds/404478/",
+      "sourceTitle": "Coffee Shop.wav",
+      "author": "Trainscough5407",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/404478__Trainscough5407__Coffee-Shop.wav.wav",
+      "originalSha256": "d1626c76a75583dddf7bdf6a86b5e402279d57e01d088d9a1d7aa61bf8f28412",
+      "processedSha256": "18078904cd23eeb887d0521dadb919c38c45e3b7607928c05c7eb6868a148e19",
+      "processedBytes": 297947,
+      "defaultVolume": 0.34,
+      "processing": "tools/make_loop_audio.mjs: atrim 2.5-53s, -2.49dB, 50.5s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:44.105Z",
+      "qa": {
+        "peakDbfs": -12.09,
+        "rmsDbfs": -30.46,
+        "durationSeconds": 50.5
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "333221",
+      "soundId": "crickets_night",
+      "outputFile": "crickets_night_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/hdfreema/sounds/333221/",
+      "sourceTitle": "Night Crickets Back Porch.aiff",
+      "author": "hdfreema",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/333221__hdfreema__Night-Crickets-Back-Porch.aiff.aiff",
+      "originalSha256": "db0a9c7316a19861b8a80f7f026a9dcb07f5e4a80439277677dbf1692167dd21",
+      "processedSha256": "d6de63b6c5e2a4f81d8a92141ef189cf3055aaec5bbf189281e1c99e36eee5b2",
+      "processedBytes": 910568,
+      "defaultVolume": 0.3,
+      "processing": "tools/make_loop_audio.mjs: atrim 2-122s, +20.77dB, 120s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:56.965Z",
+      "qa": {
+        "peakDbfs": -14.98,
+        "rmsDbfs": -30.48,
+        "durationSeconds": 120.0
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "341591",
+      "soundId": "airplane_cabin",
+      "outputFile": "airplane_cabin_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/Vurca/sounds/341591/",
+      "sourceTitle": "Plane Interior",
+      "author": "Vurca",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/341591__Vurca__Plane-Interior.flac",
+      "originalSha256": "b0af4d0e04da74f503b76aa7523663b6ae2652321ea83567317b8a52e061684d",
+      "processedSha256": "c157944c474398ccb1089e1f971e0961253f1e340b4082ec31ebabf0448bf561",
+      "processedBytes": 843851,
+      "defaultVolume": 0.42,
+      "processing": "tools/make_loop_audio.mjs: atrim 2-122s, -2.75dB, 120s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:19:04.430Z",
+      "qa": {
+        "peakDbfs": -15.56,
+        "rmsDbfs": -30.54,
+        "durationSeconds": 120.0
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
+      "releaseDecision": "pending-device-listening-qa"
+    },
+    {
+      "sourceId": "333944",
+      "soundId": "train_ride",
+      "outputFile": "train_ride_loop.ogg",
+      "sourceUrl": "https://freesound.org/people/gladkiy/sounds/333944/",
+      "sourceTitle": "Moscow subway train ride - interior ambience - Kaluzhsko-Rizhskaya subway line OMNI mics.flac",
+      "author": "gladkiy",
+      "licenseName": "Creative Commons 0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "originalFile": "work/audio-intake/originals/333944__gladkiy__Moscow-subway-train-ride---interior-ambience---Kaluzhsko-Rizhskaya-subway-line-O.flac",
+      "originalSha256": "d48041bff8d1fcfd77ed6c71e1a86801386f6eb98fd6f6ae4726079a8eea72fd",
+      "processedSha256": "24e559f1bede7f14d0f5f52489841176faa503a823400dbf7cd4e9c83632da5a",
+      "processedBytes": 477348,
+      "defaultVolume": 0.4,
+      "processing": "tools/make_loop_audio.mjs: atrim 230-298s(避开停站,手动切点), -15.46dB, 68s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:20:04.440Z",
+      "qa": {
+        "peakDbfs": -16.31,
+        "rmsDbfs": -30.62,
+        "durationSeconds": 68.0
+      },
+      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
       "releaseDecision": "pending-device-listening-qa"
     }
   ]

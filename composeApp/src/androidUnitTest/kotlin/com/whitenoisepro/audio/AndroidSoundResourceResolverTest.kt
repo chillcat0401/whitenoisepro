@@ -19,6 +19,12 @@ class AndroidSoundResourceResolverTest {
         "fire_hearth",
         "fan_floor",
         "wind_forest",
+        "wind_trees",
+        "stream_gentle",
+        "crickets_night",
+        "cafe_chatter",
+        "train_ride",
+        "airplane_cabin",
     )
 
     @Test
