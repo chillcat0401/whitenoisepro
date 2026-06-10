@@ -30,7 +30,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*NoiseSynthesizerTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/audio/, composeApp/src/commonTest/kotlin/com/whitenoisepro/audio/
 
-- [ ] 3.2 SoundSource/缓存/解析器支持自定义噪声 + 名称与图标回退
+- [x] 3.2 SoundSource/缓存/解析器支持自定义噪声 + 名称与图标回退
   - accept: noise_custom_t* 路由到合成缓存;nameOf 回退「自定义噪声」;Noise 图标
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AndroidSoundResourceResolverTest" --tests "*SoundCatalogTest"
   - scope: composeApp/src/androidMain/kotlin/com/whitenoisepro/audio/, composeApp/src/commonMain/kotlin/com/whitenoisepro/{data,design}/, composeApp/src/commonTest/, composeApp/src/androidUnitTest/

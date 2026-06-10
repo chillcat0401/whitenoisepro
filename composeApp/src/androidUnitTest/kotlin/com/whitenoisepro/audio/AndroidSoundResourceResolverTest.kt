@@ -41,16 +41,29 @@ class AndroidSoundResourceResolverTest {
     @Test
     fun noiseSoundIdsResolveToRuntimeSynthesis() {
         assertEquals(
-            SoundSource.Synthesized(NoiseProfile.White),
+            SoundSource.Synthesized("white_noise"),
             AndroidSoundResourceResolver.source("white_noise"),
         )
         assertEquals(
-            SoundSource.Synthesized(NoiseProfile.Pink),
+            SoundSource.Synthesized("pink_noise"),
             AndroidSoundResourceResolver.source("pink_noise"),
         )
         assertEquals(
-            SoundSource.Synthesized(NoiseProfile.Brown),
+            SoundSource.Synthesized("brown_noise"),
             AndroidSoundResourceResolver.source("brown_noise"),
+        )
+    }
+
+    @Test
+    fun customNoiseIdsResolveToParameterizedSynthesis() {
+        assertEquals(
+            SoundSource.Synthesized("noise_custom_t25"),
+            AndroidSoundResourceResolver.source("noise_custom_t25"),
+        )
+        // 越界自定义 id 不合法 → 兜底棕噪
+        assertEquals(
+            SoundSource.Synthesized("brown_noise"),
+            AndroidSoundResourceResolver.source("noise_custom_t99"),
         )
     }
 
@@ -83,6 +96,6 @@ class AndroidSoundResourceResolverTest {
         val source = AndroidSoundResourceResolver.source("legacy_mystery")
 
         assertIs<SoundSource.Synthesized>(source)
-        assertTrue(source.profile == NoiseProfile.Brown)
+        assertTrue(source.soundId == "brown_noise")
     }
 }

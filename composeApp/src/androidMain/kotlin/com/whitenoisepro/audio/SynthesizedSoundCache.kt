@@ -15,13 +15,18 @@ object SynthesizedSoundCache {
     private const val Version = 1
 
     @Synchronized
-    fun ensureFile(context: Context, profile: NoiseProfile): File {
+    fun ensureFile(context: Context, soundId: String): File {
         val dir = File(context.filesDir, DirName)
         dir.mkdirs()
-        val file = File(dir, "${profile.soundId}_loop_v$Version.wav")
+        val file = File(dir, "${soundId}_loop_v$Version.wav")
         if (!file.exists() || file.length() == 0L) {
+            val bytes = NoiseProfile.forSoundId(soundId)?.let { profile ->
+                NoiseSynthesizer.loopWavBytes(profile)
+            } ?: NoiseSynthesizer.parseCustomSoundId(soundId)?.let { tilt ->
+                NoiseSynthesizer.tiltedLoopWavBytes(tilt)
+            } ?: NoiseSynthesizer.loopWavBytes(NoiseProfile.Brown)
             val tmp = File(dir, "${file.name}.tmp")
-            tmp.writeBytes(NoiseSynthesizer.loopWavBytes(profile))
+            tmp.writeBytes(bytes)
             if (!tmp.renameTo(file)) {
                 tmp.copyTo(file, overwrite = true)
                 tmp.delete()
@@ -34,7 +39,7 @@ object SynthesizedSoundCache {
         val appContext = context.applicationContext
         thread(name = "synth-audio-prewarm", isDaemon = true) {
             NoiseProfile.entries.forEach { profile ->
-                runCatching { ensureFile(appContext, profile) }
+                runCatching { ensureFile(appContext, profile.soundId) }
             }
         }
     }

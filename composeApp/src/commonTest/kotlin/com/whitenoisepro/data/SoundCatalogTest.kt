@@ -109,6 +109,13 @@ class SoundCatalogTest {
     }
 
     @Test
+    fun customNoiseIdsGetFriendlyNameAndStableCanonicalId() {
+        assertEquals("自定义噪声", SoundCatalog.nameOf("noise_custom_t25"))
+        assertEquals("noise_custom_t25", SoundCatalog.canonicalId("noise_custom_t25"))
+        assertEquals("mystery", SoundCatalog.nameOf("mystery"))
+    }
+
+    @Test
     fun canonicalIdKeepsPublishedAndUnknownIdsStable() {
         publishedIds.forEach { id ->
             assertEquals(id, SoundCatalog.canonicalId(id))

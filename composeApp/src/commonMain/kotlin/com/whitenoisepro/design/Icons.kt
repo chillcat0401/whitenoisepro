@@ -41,7 +41,9 @@ enum class AppIconKind {
     Wind,
 }
 
-fun soundIconKind(iconKey: String): AppIconKind = when (iconKey) {
+fun soundIconKind(iconKey: String): AppIconKind = if (iconKey.startsWith("noise_custom")) {
+    AppIconKind.Noise
+} else when (iconKey) {
     "fan", "fan_floor" -> AppIconKind.Fan
     "rain", "rain_soft", "rain_light_roof", "rain_window", "rain_roof", "rain_thunder" -> AppIconKind.Rain
     "ocean", "ocean_gentle", "ocean_waves", "ocean_shore" -> AppIconKind.Ocean

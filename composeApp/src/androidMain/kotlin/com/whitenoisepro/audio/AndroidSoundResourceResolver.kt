@@ -8,14 +8,16 @@ import com.whitenoisepro.data.SoundCatalog
 
 sealed interface SoundSource {
     data class Resource(@RawRes val resId: Int) : SoundSource
-    data class Synthesized(val profile: NoiseProfile) : SoundSource
+    data class Synthesized(val soundId: String) : SoundSource
 }
 
 object AndroidSoundResourceResolver {
     fun source(soundId: String): SoundSource {
         val canonicalId = SoundCatalog.canonicalId(soundId)
-        NoiseProfile.forSoundId(canonicalId)?.let { profile ->
-            return SoundSource.Synthesized(profile)
+        if (NoiseProfile.forSoundId(canonicalId) != null ||
+            NoiseSynthesizer.parseCustomSoundId(canonicalId) != null
+        ) {
+            return SoundSource.Synthesized(canonicalId)
         }
         val resId = when (canonicalId) {
             "rain_soft" -> R.raw.rain_soft_loop
@@ -36,7 +38,7 @@ object AndroidSoundResourceResolver {
             "cafe_chatter" -> R.raw.cafe_chatter_loop
             "train_ride" -> R.raw.train_ride_loop
             "airplane_cabin" -> R.raw.airplane_cabin_loop
-            else -> return SoundSource.Synthesized(NoiseProfile.Brown)
+            else -> return SoundSource.Synthesized(NoiseProfile.Brown.soundId)
         }
         return SoundSource.Resource(resId)
     }
@@ -46,6 +48,6 @@ object AndroidSoundResourceResolver {
             is SoundSource.Resource ->
                 Uri.parse("android.resource://${context.packageName}/${source.resId}")
             is SoundSource.Synthesized ->
-                Uri.fromFile(SynthesizedSoundCache.ensureFile(context, source.profile))
+                Uri.fromFile(SynthesizedSoundCache.ensureFile(context, source.soundId))
         }
 }

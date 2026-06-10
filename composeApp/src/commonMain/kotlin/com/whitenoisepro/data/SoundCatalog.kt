@@ -57,5 +57,10 @@ object SoundCatalog {
     }
 
     fun nameOf(soundId: String): String =
-        all.firstOrNull { it.id == soundId }?.name ?: soundId
+        all.firstOrNull { it.id == soundId }?.name
+            ?: if (com.whitenoisepro.audio.NoiseSynthesizer.parseCustomSoundId(soundId) != null) {
+                "自定义噪声"
+            } else {
+                soundId
+            }
 }

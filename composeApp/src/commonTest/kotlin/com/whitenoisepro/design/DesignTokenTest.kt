@@ -85,5 +85,6 @@ class DesignTokenTest {
         assertEquals(AppIconKind.Fireplace, soundIconKind("fire_crackle"))
         assertEquals(AppIconKind.Fan, soundIconKind("fan_floor"))
         assertEquals(AppIconKind.Forest, soundIconKind("wind_forest"))
+        assertEquals(AppIconKind.Noise, soundIconKind("noise_custom_t30"))
     }
 }
