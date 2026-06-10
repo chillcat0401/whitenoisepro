@@ -83,6 +83,49 @@ class NoiseSynthesizerTest {
     }
 
     @Test
+    fun customSoundIdRoundTripsAndValidates() {
+        assertEquals("noise_custom_t0", NoiseSynthesizer.customSoundId(0f))
+        assertEquals("noise_custom_t15", NoiseSynthesizer.customSoundId(1.5f))
+        assertEquals("noise_custom_t60", NoiseSynthesizer.customSoundId(6f))
+        assertEquals("noise_custom_t60", NoiseSynthesizer.customSoundId(9f)) // clamp
+
+        assertEquals(0f, NoiseSynthesizer.parseCustomSoundId("noise_custom_t0"))
+        assertEquals(1.5f, NoiseSynthesizer.parseCustomSoundId("noise_custom_t15"))
+        assertEquals(6f, NoiseSynthesizer.parseCustomSoundId("noise_custom_t60"))
+        assertEquals(null, NoiseSynthesizer.parseCustomSoundId("noise_custom_t99"))
+        assertEquals(null, NoiseSynthesizer.parseCustomSoundId("noise_custom_tx"))
+        assertEquals(null, NoiseSynthesizer.parseCustomSoundId("rain_soft"))
+    }
+
+    @Test
+    fun tiltedSpectrumDarkensMonotonically() {
+        // 高频占比代理:一阶差分 RMS / 信号 RMS,白噪高、棕噪低。
+        fun hfRatio(pcm: ShortArray): Double {
+            var diffSq = 0.0
+            var sq = 0.0
+            for (i in 1 until pcm.size) {
+                val x = pcm[i].toDouble()
+                val d = x - pcm[i - 1]
+                diffSq += d * d
+                sq += x * x
+            }
+            return sqrt(diffSq / sq)
+        }
+
+        val ratios = listOf(0f, 1.5f, 3f, 4.5f, 6f).map { tilt ->
+            hfRatio(NoiseSynthesizer.generateTiltedPcm(tilt, durationSeconds = 2))
+        }
+        for (i in 1 until ratios.size) {
+            assertTrue(ratios[i] < ratios[i - 1], "倾斜增大时高频占比应单调下降: $ratios")
+        }
+
+        val white = hfRatio(NoiseSynthesizer.generatePcm(NoiseProfile.White, durationSeconds = 2))
+        val brown = hfRatio(NoiseSynthesizer.generatePcm(NoiseProfile.Brown, durationSeconds = 2))
+        assertTrue(abs(ratios.first() - white) / white < 0.05, "t0 应接近白噪: ${ratios.first()} vs $white")
+        assertTrue(abs(ratios.last() - brown) / brown < 0.25, "t60 应接近棕噪: ${ratios.last()} vs $brown")
+    }
+
+    @Test
     fun noiseProfileMapsCatalogSoundIds() {
         assertEquals(NoiseProfile.White, NoiseProfile.forSoundId("white_noise"))
         assertEquals(NoiseProfile.Pink, NoiseProfile.forSoundId("pink_noise"))

@@ -25,7 +25,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app,design}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/
 
-- [ ] 3.1 NoiseSynthesizer 倾斜合成 + 自定义 soundId 编解码 + 测试
+- [x] 3.1 NoiseSynthesizer 倾斜合成 + 自定义 soundId 编解码 + 测试
   - accept: parse/customSoundId 往返;tilt 增大时高频/低频能量比单调下降
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*NoiseSynthesizerTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/audio/, composeApp/src/commonTest/kotlin/com/whitenoisepro/audio/
