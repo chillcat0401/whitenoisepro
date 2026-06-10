@@ -57,7 +57,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/
 
-- [ ] 5.3 混音页试听/暂停控件
+- [x] 5.3 混音页试听/暂停控件
   - accept: 混音页标题栏可直接播放/暂停当前混音
   - verify: ./gradlew :composeApp:testDebugUnitTest && 模拟器实操
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,App.kt}

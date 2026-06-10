@@ -77,6 +77,7 @@ fun WhiteNoiseProApp(
                     padding = it,
                     onAddSound = { store.dispatch(AppIntent.SelectTab(AppTab.Library)) },
                     onSaveMix = { store.dispatch(AppIntent.SaveCurrentMix) },
+                    onTogglePlay = { store.dispatch(AppIntent.TogglePlayback) },
                     onMasterVolumeChange = { volume -> store.dispatch(AppIntent.SetMasterVolume(volume)) },
                     onLayerVolumeChange = { layerId, volume -> store.dispatch(AppIntent.SetLayerVolume(layerId, volume)) },
                     onLayerMutedChange = { layerId, muted -> store.dispatch(AppIntent.SetLayerMuted(layerId, muted)) },

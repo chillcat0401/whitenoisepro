@@ -171,6 +171,7 @@ fun MixerScreen(
     padding: PaddingValues,
     onAddSound: () -> Unit,
     onSaveMix: () -> Unit,
+    onTogglePlay: () -> Unit,
     onMasterVolumeChange: (Float) -> Unit,
     onLayerVolumeChange: (String, Float) -> Unit,
     onLayerMutedChange: (String, Boolean) -> Unit,
@@ -180,7 +181,20 @@ fun MixerScreen(
         contentPadding = padding,
         verticalArrangement = Arrangement.spacedBy(WnpSpacing.SectionGap),
     ) {
-        item { TopBar(title = "混音") }
+        item {
+            TopBar(
+                title = "混音",
+                action = {
+                    IconButton(onClick = onTogglePlay) {
+                        AppIcon(
+                            kind = if (state.isPlaying) AppIconKind.Pause else AppIconKind.Play,
+                            tint = WnpColors.Primary,
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
+                },
+            )
+        }
         item {
             Text(state.mixState.currentMix.title, color = WnpColors.OnSurface, style = WnpTypography.Display)
             Text("${state.mixState.currentMix.layers.size} 个声音层", color = WnpColors.OnSurfaceVariant, style = WnpTypography.Body)
