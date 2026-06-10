@@ -52,7 +52,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/presentation/, composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,App.kt}, composeApp/src/commonTest/
 
-- [ ] 5.2 全局操作反馈浮层(加入/移除/保存)
+- [x] 5.2 全局操作反馈浮层(加入/移除/保存)
   - accept: 加入声音、移除声音、保存混音均出现 2 秒浮层提示并自动消失
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/

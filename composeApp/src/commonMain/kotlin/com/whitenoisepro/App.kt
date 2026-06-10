@@ -56,6 +56,8 @@ fun WhiteNoiseProApp(
             miniPlayerSubtitle = miniPlayerSubtitle(state),
             isPlaying = state.isPlaying,
             onPlayPause = { store.dispatch(AppIntent.TogglePlayback) },
+            feedback = state.feedback,
+            onFeedbackDismiss = { store.dispatch(AppIntent.ClearFeedback) },
         ) {
             when (state.selectedTab) {
                 AppTab.Home -> HomeScreen(

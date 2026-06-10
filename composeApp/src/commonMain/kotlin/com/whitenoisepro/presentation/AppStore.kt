@@ -56,6 +56,7 @@ sealed interface AppIntent {
     data class ExtendTimer(val minutes: Int) : AppIntent
     data object CancelTimer : AppIntent
     data class SetStartLastMix(val enabled: Boolean) : AppIntent
+    data object ClearFeedback : AppIntent
 }
 
 interface AppClock {
@@ -161,6 +162,7 @@ class AppStore(
                         ),
                         syncPlaybackWhenPlaying = true,
                     )
+                    showFeedback("已加入「${SoundCatalog.nameOf(intent.soundId)}」")
                 } else {
                     existingLayers.forEach { layer ->
                         updateMix(
@@ -168,15 +170,19 @@ class AppStore(
                             syncPlaybackWhenPlaying = true,
                         )
                     }
+                    showFeedback("已移除「${SoundCatalog.nameOf(intent.soundId)}」")
                 }
             }
-            AppIntent.SaveCurrentMix -> updateMix(
-                MixIntent.SaveCurrentMix(
-                    savedMixId = idProvider.nextSavedMixId(state.mixState.currentMix.title),
-                    nowEpochMillis = clock.nowEpochMillis(),
-                ),
-                syncPlaybackWhenPlaying = false,
-            )
+            AppIntent.SaveCurrentMix -> {
+                updateMix(
+                    MixIntent.SaveCurrentMix(
+                        savedMixId = idProvider.nextSavedMixId(state.mixState.currentMix.title),
+                        nowEpochMillis = clock.nowEpochMillis(),
+                    ),
+                    syncPlaybackWhenPlaying = false,
+                )
+                showFeedback("混音已保存到「已保存」")
+            }
             is AppIntent.PlaySavedMix -> {
                 updateMix(
                     MixIntent.PlaySavedMix(
@@ -229,7 +235,15 @@ class AppStore(
                 state = state.copy(settings = state.settings.copy(startLastMix = intent.enabled))
                 saveSnapshot()
             }
+            AppIntent.ClearFeedback -> state = state.copy(feedback = null)
         }
+    }
+
+    private var feedbackCounter: Long = 0L
+
+    private fun showFeedback(text: String) {
+        feedbackCounter += 1
+        state = state.copy(feedback = UiFeedback(id = feedbackCounter, text = text))
     }
 
     fun visibleSounds(): List<Sound> =

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -38,6 +39,8 @@ import com.whitenoisepro.design.WnpRadius
 import com.whitenoisepro.design.WnpSpacing
 import com.whitenoisepro.design.WnpTypography
 import com.whitenoisepro.presentation.AppState
+import com.whitenoisepro.presentation.UiFeedback
+import kotlinx.coroutines.delay
 
 enum class AppTab(val title: String) {
     Home("首页"),
@@ -89,6 +92,8 @@ fun AppScaffold(
     isPlaying: Boolean,
     onPlayPause: () -> Unit,
     modifier: Modifier = Modifier,
+    feedback: UiFeedback? = null,
+    onFeedbackDismiss: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Box(
@@ -110,6 +115,29 @@ fun AppScaffold(
                     bottom = scaffoldPadding.bottom,
                 ),
             )
+        }
+
+        if (feedback != null) {
+            LaunchedEffect(feedback.id) {
+                delay(2200)
+                onFeedbackDismiss()
+            }
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = scaffoldPadding.bottomChromeInset + WnpSpacing.Md)
+                    .clip(RoundedCornerShape(WnpRadius.Chip))
+                    .background(WnpColors.SurfaceHigh)
+                    .padding(horizontal = WnpSpacing.Lg, vertical = WnpSpacing.Sm),
+            ) {
+                Text(
+                    text = feedback.text,
+                    color = WnpColors.OnSurface,
+                    style = WnpTypography.Label,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
 
         Column(

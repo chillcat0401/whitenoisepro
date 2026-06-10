@@ -288,6 +288,32 @@ class AppStoreTest {
     }
 
     @Test
+    fun feedbackEmittedOnToggleAndSaveAndClearable() = runTest {
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = RecordingPlaybackEngine(),
+            scope = this,
+            playbackObservationScope = backgroundScope,
+        )
+        advanceUntilIdle()
+
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        assertEquals("已加入「柔和海浪」", store.state.feedback?.text)
+        val firstId = store.state.feedback!!.id
+
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        assertEquals("已移除「柔和海浪」", store.state.feedback?.text)
+        assertTrue(store.state.feedback!!.id > firstId)
+
+        store.dispatch(AppIntent.SaveCurrentMix)
+        assertEquals("混音已保存到「已保存」", store.state.feedback?.text)
+
+        store.dispatch(AppIntent.ClearFeedback)
+        assertEquals(null, store.state.feedback)
+        advanceUntilIdle()
+    }
+
+    @Test
     fun removeAndMuteLayerUpdatePlaybackAndPersistence() = runTest {
         val repository = RecordingRepository()
         val playback = RecordingPlaybackEngine()

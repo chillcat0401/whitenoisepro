@@ -7,6 +7,11 @@ import com.whitenoisepro.domain.model.SleepTimerState
 import com.whitenoisepro.domain.model.UserSettings
 import com.whitenoisepro.domain.reducer.MixState
 
+data class UiFeedback(
+    val id: Long,
+    val text: String,
+)
+
 data class AppState(
     val selectedTab: AppTab = AppTab.Home,
     val mixState: MixState = MixState(
@@ -23,4 +28,5 @@ data class AppState(
     val isPlaying: Boolean = false,
     val libraryQuery: String = "",
     val selectedCategory: String = "全部",
+    val feedback: UiFeedback? = null,
 )
