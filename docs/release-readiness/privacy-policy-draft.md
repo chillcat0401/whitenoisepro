@@ -13,7 +13,7 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 - 隐私联系邮箱：[待补充：privacy/support email]
 - 支持邮箱：[待补充：support email，可与隐私联系邮箱相同]
 - 开发者所在地 / 地址：[待补充：按 Play Console 和公开政策要求填写]
-- 隐私政策公开 URL：[待补充：GitHub Pages URL，例如 `https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`]
+- 隐私政策公开 URL：`https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`(2026-06-10 已发布)
 - 生效日期：[待补充：YYYY-MM-DD]
 - 最近更新日期：[待补充：YYYY-MM-DD]
 

@@ -17,7 +17,7 @@
 
 | 项目 | 建议输入 | 状态 |
 | --- | --- | --- |
-| Privacy policy | [待补充：GitHub Pages URL，例如 `https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`] | blocked |
+| Privacy policy | `https://chillcat0401.github.io/whitenoisepro/privacy-policy.html`(2026-06-10 已发布,HTTP 200) | ready |
 | App access | No restricted app access / no login required | ready |
 | Ads | No ads | ready |
 | Content rating | [待补充：完成 Play Console 问卷；预期为低龄风险较低，但以问卷结果为准] | blocked |
