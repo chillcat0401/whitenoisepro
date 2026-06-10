@@ -15,7 +15,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/
 
-- [ ] 2.1 MixDice 生成器 + 规则测试
+- [x] 2.1 MixDice 生成器 + 规则测试
   - accept: 固定种子可复现;1 底噪 + 1~2 纹理 + 0~1 点缀;名称为场景词「·」连接
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*MixDiceTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/domain/, composeApp/src/commonTest/kotlin/com/whitenoisepro/domain/
