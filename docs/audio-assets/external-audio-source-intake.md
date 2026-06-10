@@ -79,7 +79,7 @@
 - 原始文件目录：`work/audio-intake/originals/`
 - 页面证据目录：`work/audio-intake/evidence/`
 - Manifest：`work/audio-intake/intake-manifest.json`
-- 已下载 CC0 原始 WAV：11 个
+- 已下载 CC0 原始素材:18 个(11 个首批 + 雷雨 + 6 个扩展品类,全部含许可证快照)
 - 原始文件总大小：约 420.8 MB
 - Git 策略：`work/audio-intake/` 已加入 `.gitignore`，原始音频和 intake JSON 不提交仓库
 

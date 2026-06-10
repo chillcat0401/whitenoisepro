@@ -11,7 +11,7 @@
 | App or game | App | ready |
 | Free or paid | Free | assumed |
 | Package name | `com.whitenoisepro` | ready |
-| Version | `0.1.0` / versionCode `1` | ready |
+| Version | `0.2.0` / versionCode `1` | ready |
 
 ## App Content
 

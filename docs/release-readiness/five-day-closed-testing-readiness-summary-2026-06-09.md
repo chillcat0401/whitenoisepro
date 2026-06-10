@@ -1,5 +1,7 @@
 # 五天 Google Play Closed Testing Readiness Summary
 
+> 注记(2026-06-10):本文为当日快照,声音目录与版本号已演进,当前状态以 `release-candidate-2026-06-10.md` 为准。
+
 日期：2026-06-09
 
 ## 结论

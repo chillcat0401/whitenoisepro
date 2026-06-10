@@ -61,7 +61,7 @@ WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 
 - 隐私政策 URL 已发布，且 Settings / Play Console / Data safety 使用同一 URL。
 - 开发者主体、支持邮箱和隐私联系邮箱已确认。
 - Data safety 草案完成。
-- 八个第一方声音已覆盖默认混音和声音库，生成清单与哈希已记录。
+- 默认混音与声音库由 18 个 CC0 素材 + 3 个运行时合成噪声覆盖,处理清单与哈希记录于 external-release-audio-manifest.json。
 - 商店图标已生成并通过尺寸、RGBA 与文件大小校验。
 - 已启用 Play App Signing，并在 Play Console 核对 upload certificate。
 - 真实设备音频 QA 至少完成一轮。
