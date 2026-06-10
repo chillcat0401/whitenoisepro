@@ -17,6 +17,7 @@ enum class AppIconKind {
     Cafe,
     Crickets,
     Delete,
+    Dice,
     Edit,
     Fan,
     Favorite,
@@ -220,6 +221,20 @@ fun AppIcon(
                 }
                 drawPath(path, tint, style = stroke)
                 line(0.3f, 0.82f, 0.7f, 0.82f)
+            }
+            AppIconKind.Dice -> {
+                val box = Path().apply {
+                    moveTo(width * 0.28f, height * 0.28f)
+                    lineTo(width * 0.72f, height * 0.28f)
+                    lineTo(width * 0.72f, height * 0.72f)
+                    lineTo(width * 0.28f, height * 0.72f)
+                    close()
+                }
+                drawPath(box, tint, style = stroke)
+                circle(0.4f, 0.4f, 0.035f, thinStroke)
+                circle(0.6f, 0.6f, 0.035f, thinStroke)
+                circle(0.6f, 0.4f, 0.035f, thinStroke)
+                circle(0.4f, 0.6f, 0.035f, thinStroke)
             }
             AppIconKind.Wind -> {
                 line(0.2f, 0.35f, 0.66f, 0.35f)

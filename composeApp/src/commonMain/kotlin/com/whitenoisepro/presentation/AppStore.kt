@@ -8,6 +8,7 @@ import com.whitenoisepro.data.AppRepository
 import com.whitenoisepro.data.AppSnapshot
 import com.whitenoisepro.data.PresetCatalog
 import com.whitenoisepro.data.SoundCatalog
+import com.whitenoisepro.domain.MixDice
 import com.whitenoisepro.domain.model.Sound
 import com.whitenoisepro.domain.model.SoundCategory
 import com.whitenoisepro.domain.model.PlaybackStatus
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -41,6 +43,7 @@ sealed interface AppIntent {
     data object SaveCurrentMix : AppIntent
     data class PlaySavedMix(val mixId: String) : AppIntent
     data class PlayPresetMix(val presetId: String) : AppIntent
+    data object RollDiceMix : AppIntent
     data class DeleteSavedMix(val mixId: String) : AppIntent
     data class RenameSavedMix(val mixId: String, val title: String) : AppIntent
     data class ToggleFavoriteSavedMix(val mixId: String) : AppIntent
@@ -88,6 +91,7 @@ class AppStore(
     private val platformSleepTimerRuntime: PlatformSleepTimerRuntime = NoOpPlatformSleepTimerRuntime,
     private val clock: AppClock = SystemAppClock(),
     private val idProvider: AppIdProvider = SequentialAppIdProvider(),
+    private val random: Random = Random.Default,
 ) {
     private var timerJob: Job? = null
 
@@ -165,6 +169,15 @@ class AppStore(
                 updateMix(
                     MixIntent.PlaySavedMix(
                         mixId = intent.mixId,
+                        nowEpochMillis = clock.nowEpochMillis(),
+                    ),
+                )
+                playbackEngine.play(state.mixState.currentMix)
+            }
+            AppIntent.RollDiceMix -> {
+                updateMix(
+                    MixIntent.ReplaceCurrentMix(
+                        mix = MixDice.roll(random),
                         nowEpochMillis = clock.nowEpochMillis(),
                     ),
                 )

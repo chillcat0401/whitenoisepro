@@ -348,6 +348,28 @@ class AppStoreTest {
     }
 
     @Test
+    fun rollDiceMixGeneratesStructuredMixAndPlays() = runTest {
+        val playback = RecordingPlaybackEngine()
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = playback,
+            scope = this,
+            playbackObservationScope = backgroundScope,
+            random = kotlin.random.Random(7),
+        )
+        advanceUntilIdle()
+
+        store.dispatch(AppIntent.RollDiceMix)
+        runCurrent()
+
+        val current = store.state.mixState.currentMix
+        assertTrue(current.id.startsWith("dice-"))
+        assertTrue(current.layers.size in 2..4)
+        assertEquals(current.id, playback.playedMixes.last().id)
+        assertEquals(current.id, store.state.mixState.recentMixes.first().id)
+    }
+
+    @Test
     fun playSavedMixUpdatesCurrentRecentAndPlayback() = runTest {
         val saved = testMix(id = "saved-focus", title = "专注")
         val repository = RecordingRepository(

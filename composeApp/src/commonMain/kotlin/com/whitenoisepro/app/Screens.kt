@@ -214,6 +214,7 @@ fun LibraryScreen(
     onQueryChange: (String) -> Unit,
     onCategorySelected: (String) -> Unit,
     onSoundSelected: (String) -> Unit,
+    onRollDice: () -> Unit,
 ) {
     val activeSoundIds = state.mixState.currentMix.layers.map { it.soundId }.toSet()
     val categories = listOf("全部") + SoundCatalog.availableCategories.map { it.displayName }
@@ -221,7 +222,16 @@ fun LibraryScreen(
         contentPadding = padding,
         verticalArrangement = Arrangement.spacedBy(WnpSpacing.SectionGap),
     ) {
-        item { TopBar(title = "声音库") }
+        item {
+            TopBar(
+                title = "声音库",
+                action = {
+                    IconButton(onClick = onRollDice) {
+                        AppIcon(AppIconKind.Dice, tint = WnpColors.Primary, modifier = Modifier.size(22.dp))
+                    }
+                },
+            )
+        }
         item {
             WnpTextField(
                 value = state.libraryQuery,

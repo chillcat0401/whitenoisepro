@@ -87,6 +87,7 @@ fun WhiteNoiseProApp(
                     onQueryChange = { query -> store.dispatch(AppIntent.SetLibraryQuery(query)) },
                     onCategorySelected = { category -> store.dispatch(AppIntent.SelectCategory(category)) },
                     onSoundSelected = { soundId -> store.dispatch(AppIntent.AddSound(soundId)) },
+                    onRollDice = { store.dispatch(AppIntent.RollDiceMix) },
                 )
                 AppTab.Timer -> TimerScreen(
                     state = state,

@@ -20,7 +20,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*MixDiceTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/domain/, composeApp/src/commonTest/kotlin/com/whitenoisepro/domain/
 
-- [ ] 2.2 AppIntent.RollDiceMix + 声音库骰子按钮(Dice 图标)
+- [x] 2.2 AppIntent.RollDiceMix + 声音库骰子按钮(Dice 图标)
   - accept: 点击骰子 → 生成混音替换当前并播放;Store 注入 Random 可测
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app,design}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/
