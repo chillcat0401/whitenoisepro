@@ -746,7 +746,7 @@ private fun LayerRow(
                 modifier = Modifier.size(20.dp),
             )
         }
-        Spacer(Modifier.size(WnpSpacing.Xs))
+        Spacer(Modifier.size(WnpSpacing.Md))
         IconButton(onClick = onRemove) {
             AppIcon(AppIconKind.Delete, tint = WnpColors.IconMuted, modifier = Modifier.size(20.dp))
         }
@@ -818,11 +818,11 @@ private fun MixCard(
             IconButton(onClick = onToggleFavorite) {
                 AppIcon(AppIconKind.Favorite, tint = if (mix.isFavorite) WnpColors.Secondary else WnpColors.OnSurfaceVariant, modifier = Modifier.size(20.dp))
             }
-            Spacer(Modifier.size(WnpSpacing.Xs))
+            Spacer(Modifier.size(WnpSpacing.Md))
             IconButton(onClick = { editing = !editing }) {
                 AppIcon(AppIconKind.Edit, tint = WnpColors.OnSurface, modifier = Modifier.size(20.dp))
             }
-            Spacer(Modifier.size(WnpSpacing.Xs))
+            Spacer(Modifier.size(WnpSpacing.Md))
             IconButton(onClick = onDelete) {
                 AppIcon(AppIconKind.Delete, tint = WnpColors.IconMuted, modifier = Modifier.size(20.dp))
             }

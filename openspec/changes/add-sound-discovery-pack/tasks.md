@@ -61,3 +61,16 @@
   - accept: 混音页标题栏可直接播放/暂停当前混音
   - verify: ./gradlew :composeApp:testDebugUnitTest && 模拟器实操
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,App.kt}
+
+## 6. 视觉打磨(2026-06-10 听审反馈第二批)
+
+- [x] 6.1 声音条目操作按钮间距与呼吸感
+  - accept: 声层行/已保存卡的圆形按钮间距 ≥12dp,文本与按钮区有明确分隔
+  - verify: ./gradlew :composeApp:testDebugUnitTest && 模拟器截图核对
+  - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,design}/
+
+- [ ] 6.2 Claude 风格字体体系(开源近似)
+  - accept: 标题/数字使用衬线字体(Lora),正文保持系统无衬线;中文正常回退;
+    DesignTokenTest 字阶断言不回归
+  - verify: ./gradlew :composeApp:check && 模拟器截图核对
+  - scope: composeApp/src/commonMain/(design,composeResources), composeApp/build.gradle.kts
