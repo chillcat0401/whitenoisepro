@@ -4,7 +4,7 @@
 
 定义本地声音目录的分类、搜索、稳定标识、可复现音频资产和无网络可发现性要求。目录元数据必须支持睡眠相关分类和中文搜索，并在离线状态下为 Library 与 Mixer 提供一致的数据来源。
 ## Requirements
-### Requirement: Local sound catalog
+### Requirement: Published sound catalog integrity
 
 The system SHALL expose only sound entries that have a bundled, publishable audio resource in the current release.
 
@@ -13,6 +13,13 @@ The system SHALL expose only sound entries that have a bundled, publishable audi
 - **WHEN** the user opens Library in the MVP release
 - **THEN** the catalog shows white noise, pink noise, brown noise, fan, rain, ocean, forest, and fireplace
 - **AND** it does not show sounds without corresponding owned or licensed bundled assets
+
+#### Scenario: Current release catalog is loaded
+
+- **WHEN** the app loads the published sound catalog
+- **THEN** it MUST include the existing first-party generated sounds
+- **AND** it MUST include the 11 promoted Freesound CC0 external sounds
+- **AND** every catalog sound id MUST resolve to a dedicated Android raw resource
 
 ### Requirement: Sound metadata
 Each sound SHALL include stable id, localized display name, category, icon intent, loop asset reference, and default volume.
@@ -36,7 +43,7 @@ The system SHALL support text search and category filtering over local sound met
 - **WHEN** the user enters a search term matching sound name or category
 - **THEN** Library displays matching sounds and preserves active mix indicators
 
-### Requirement: Stable sound identifiers
+### Requirement: Stable published sound identifiers
 
 Each published sound SHALL have a stable identifier that maps to one Android audio resource.
 
@@ -49,6 +56,12 @@ Each published sound SHALL have a stable identifier that maps to one Android aud
 
 - **WHEN** a restored layer contains an identifier not published in the current build
 - **THEN** Android falls back to the brown-noise resource without crashing
+
+#### Scenario: External sounds are promoted
+
+- **WHEN** external Freesound sounds are bundled for closed testing
+- **THEN** their ids MUST be stable snake_case values
+- **AND** unknown or legacy ids MUST continue to fall back to a safe bundled brown noise resource
 
 ### Requirement: First-party generated ambient assets
 

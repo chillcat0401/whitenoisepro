@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-09-add-light-rain-audio-candidates",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-09-add-light-rain-audio-candidates/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-09-add-light-rain-audio-candidates.md",
+    "review": "docs/code-review-add-light-rain-audio-candidates-2026-06-09.md",
+    "verification": [
+      "node --test tools/audio_synthesis_core.test.mjs",
+      "node --test tools/audio_synthesis_core.test.mjs tools/audio_asset_studio.test.mjs",
+      "node tools/audio_asset_studio.mjs --profile light-rain --count 5 --seed 260700 --prefix light-rain --duration-seconds 12 --out work/audio-candidates/light-rain-2026-06-09",
+      "node tools/generate_mvp_audio.mjs --verify",
+      "node --test tools/*.test.mjs",
+      "openspec validate add-light-rain-audio-candidates --strict"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "机器代理指标不能证明最终听感就是小雨，仍需要人工试听确认",
+    "light-rain 候选晋升到发布包需要独立 OpenSpec 变更、catalog 更新和 release-readiness 记录"
+  ],
+  "verifiedAt": "2026-06-09"
+}

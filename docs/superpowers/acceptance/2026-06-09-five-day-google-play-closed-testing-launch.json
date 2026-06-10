@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-09-five-day-google-play-closed-testing-launch",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-09-five-day-google-play-closed-testing-launch/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-09-five-day-google-play-closed-testing-launch.md",
+    "review": "docs/code-review-five-day-google-play-closed-testing-launch-2026-06-09.md",
+    "verification": [
+      "node --test tools/*.test.mjs",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:testDebugUnitTest",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:lintDebug",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:bundleRelease",
+      "node tools/verify_release_bundle.mjs composeApp/build/outputs/bundle/release/composeApp-release.aab",
+      "JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home ./gradlew :composeApp:assembleRelease",
+      "emulator-5554 release smoke pass with screenshots, logcat, activity, and MediaSession evidence",
+      "openspec validate five-day-google-play-closed-testing-launch --strict",
+      "openspec validate --all --strict"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "GitHub Pages privacy policy page still needs public deployment and URL confirmation",
+    "Developer identity, support email, privacy contact email, Play App Signing evidence, upload key backup, tester roster, feedback channel, and real-device audio QA remain owner-input blockers before closed testing submission",
+    "Emulator smoke cannot replace real Android device listening QA, Bluetooth, lock-screen, and interruption testing"
+  ],
+  "verifiedAt": "2026-06-09"
+}

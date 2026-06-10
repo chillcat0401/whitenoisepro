@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-09-internal-audio-asset-studio",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-09-internal-audio-asset-studio/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-09-internal-audio-asset-studio.md",
+    "review": "docs/code-review-internal-audio-asset-studio-2026-06-09.md",
+    "verification": [
+      "node --test tools/audio_synthesis_core.test.mjs tools/audio_asset_studio.test.mjs",
+      "node tools/generate_mvp_audio.mjs --verify",
+      "node tools/audio_asset_studio.mjs --profile rain --count 3 --seed 260609 --prefix rain-soft --duration-seconds 3 --out work/audio-candidates/rain-soft-2026-06-09",
+      "openspec validate internal-audio-asset-studio --strict",
+      "node --test tools/*.test.mjs"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "候选音频的机器 QA 不能替代人工睡眠场景听测",
+    "候选素材晋升到发布包需要独立 OpenSpec 变更、catalog 更新和 release-readiness 记录"
+  ],
+  "verifiedAt": "2026-06-09"
+}

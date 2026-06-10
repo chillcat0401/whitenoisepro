@@ -19,6 +19,16 @@ The project SHALL maintain a release-readiness checklist before attempting Googl
 - **WHEN** the bundled sound catalog changes
 - **THEN** release readiness docs reflect the current number of published sounds, their first-party generation status, and remaining human listening QA
 
+### Requirement: Five day closed testing release candidate
+
+The project SHALL maintain a release candidate record for the five-day Google Play closed testing push.
+
+#### Scenario: Release candidate is prepared
+
+- **WHEN** the five-day closed testing release candidate is built
+- **THEN** release-readiness docs MUST record AAB path, version, package name, SHA-256, package size, verification commands, emulator smoke result, and remaining Play Console blockers
+- **AND** blocked external owner inputs MUST remain marked as blocked rather than ready
+
 ### Requirement: Privacy and data safety consistency
 
 The project SHALL keep privacy policy content, Data safety answers, declared permissions, and actual code behavior consistent.
@@ -51,6 +61,16 @@ The project SHALL keep privacy policy content, Data safety answers, declared per
 - **THEN** the Data safety worksheet is updated before release
 - **AND** it states whether the current app collects or shares user data
 
+### Requirement: Public privacy policy page
+
+The project SHALL provide a static privacy policy page suitable for GitHub Pages publication.
+
+#### Scenario: Privacy policy is prepared
+
+- **WHEN** the app is prepared for Google Play testing
+- **THEN** the repository MUST include a static HTML privacy policy page that is public-URL-ready
+- **AND** it MUST describe current local-only data behavior, permissions, audio source posture, and contact placeholders
+
 ### Requirement: Notification permission rationale
 
 The Android app SHALL explain that system media controls support background and lock-screen playback and are not marketing notifications.
@@ -70,6 +90,21 @@ The MVP SHALL not treat generated silence or placeholder audio as publishable pr
 
 - **WHEN** a sound loop is considered for closed testing
 - **THEN** it is checked for loop quality, loudness consistency, licensing, package-size impact, naming, and category fit
+
+### Requirement: Candidate audio must not bypass release gates
+
+The project SHALL keep internally generated candidate audio separate from publishable release assets until it passes the release audio intake process.
+
+#### Scenario: Candidate audio is generated
+
+- **WHEN** the internal audio asset studio generates candidate audio
+- **THEN** the generated files MUST remain outside Android release resources by default
+- **AND** they MUST be marked non-publishable until a future release change adds them to the catalog with manifest evidence and human listening QA
+
+#### Scenario: Candidate is promoted to release asset
+
+- **WHEN** a candidate audio file is promoted into the app release package
+- **THEN** the release-readiness docs MUST include its source manifest, hash, generation parameters, machine QA metrics, and human listening QA status
 
 ### Requirement: Platform-neutral shared core
 
@@ -126,3 +161,26 @@ The Android release SHALL produce a signed Android App Bundle using a dedicated 
 
 - **WHEN** a release bundle task is requested without complete signing inputs
 - **THEN** the build fails with an actionable signing configuration error
+
+### Requirement: External audio release evidence
+
+The project SHALL keep release evidence for any external audio before it is bundled in an app build.
+
+#### Scenario: External audio is promoted
+
+- **WHEN** an external audio candidate is promoted into Android release resources
+- **THEN** release-readiness docs MUST include its source URL, license evidence, original hash, processed hash, processing steps, human listening QA, loop QA, loudness QA, and package-size impact
+
+#### Scenario: BBC Sound Effects candidate is proposed
+
+- **WHEN** a BBC Sound Effects recording is proposed for release
+- **THEN** it MUST be rejected unless a paid commercial license from the authorized licensing path is recorded
+
+### Requirement: External audio release manifest
+
+The release candidate SHALL include machine-readable evidence for all bundled external audio.
+
+#### Scenario: External audio is bundled
+
+- **WHEN** an external audio resource is added to Android release resources
+- **THEN** `docs/audio-assets/external-release-audio-manifest.json` MUST record original source evidence, original hash, processed hash, processing steps, loudness QA, loop QA, human listening QA, file size, and app sound id

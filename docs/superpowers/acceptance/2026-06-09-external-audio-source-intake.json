@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-09-external-audio-source-intake",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-09-external-audio-source-intake/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-09-external-audio-source-intake.md",
+    "review": "docs/code-review-external-audio-source-intake-2026-06-09.md",
+    "verification": [
+      "openspec validate external-audio-source-intake --strict",
+      "manifest check: 11 downloaded files present, 1 not-ready candidate remains not-ready",
+      "audition artifact check: 44 previews, 22 images, 11 metric json files",
+      "git status --ignored work/audio-intake confirms work/audio-intake/ is ignored"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "Freesound seed audio is accepted only as source material; release resources still require a separate promotion change with processing, loop QA, loudness QA, processed hashes, and package-size assessment",
+    "User-provided human listening evidence is recorded, but final app playback still requires Android release-build QA after processed assets are bundled"
+  ],
+  "verifiedAt": "2026-06-09"
+}

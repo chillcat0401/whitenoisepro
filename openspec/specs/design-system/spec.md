@@ -61,3 +61,12 @@ The system SHALL provide a less dense layout rhythm for bedtime use.
 #### Scenario: User scans sound library
 - **WHEN** Library shows sound cards
 - **THEN** each sound card uses a relaxed card ratio and padding sufficient to separate icon, title, and metadata
+
+### Requirement: Relaxed release-ready visual rhythm
+The app SHALL present a calm, modern, low-distraction visual rhythm suitable for sleep and focus use.
+
+#### Scenario: Lightweight UI polish is applied
+- **WHEN** the five-day closed testing release candidate is prepared
+- **THEN** UI polish MUST improve spacing, tonal contrast, icon coverage, and key card hierarchy
+- **AND** it MUST NOT change the existing tab navigation or core workflows
+- **AND** all on-screen text MUST remain readable without overlap on supported phone viewports

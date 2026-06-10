@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-09-tune-rain-audio-candidates",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-09-tune-rain-audio-candidates/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-09-tune-rain-audio-candidates.md",
+    "review": "docs/code-review-tune-rain-audio-candidates-2026-06-09.md",
+    "verification": [
+      "node --test tools/audio_synthesis_core.test.mjs tools/audio_asset_studio.test.mjs",
+      "node tools/generate_mvp_audio.mjs --verify",
+      "node tools/audio_asset_studio.mjs --profile rain --count 4 --seed 260620 --prefix rain-natural --duration-seconds 12 --out work/audio-candidates/rain-natural-2026-06-09",
+      "openspec validate tune-rain-audio-candidates --strict",
+      "node --test tools/*.test.mjs"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": [
+    "机器代理指标不能证明最终听感像自然雨声，仍需要人工试听确认",
+    "候选素材晋升到发布包需要独立 OpenSpec 变更、catalog 更新和 release-readiness 记录"
+  ],
+  "verifiedAt": "2026-06-09"
+}
