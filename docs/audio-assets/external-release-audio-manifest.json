@@ -506,8 +506,8 @@
         "rmsDbfs": -31.8,
         "durationSeconds": 140.0
       },
-      "humanListeningQa": "pending",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "531016",
@@ -529,8 +529,8 @@
         "rmsDbfs": -30.81,
         "durationSeconds": 74.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "446019",
@@ -552,8 +552,8 @@
         "rmsDbfs": -30.41,
         "durationSeconds": 58.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "404478",
@@ -575,8 +575,8 @@
         "rmsDbfs": -30.46,
         "durationSeconds": 43.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "333221",
@@ -598,8 +598,8 @@
         "rmsDbfs": -30.48,
         "durationSeconds": 120.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "341591",
@@ -621,8 +621,8 @@
         "rmsDbfs": -30.54,
         "durationSeconds": 120.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     },
     {
       "sourceId": "333944",
@@ -644,8 +644,8 @@
         "rmsDbfs": -30.62,
         "durationSeconds": 68.0
       },
-      "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
-      "releaseDecision": "pending-device-listening-qa"
+      "humanListeningQa": "human-pass(2026-06-10 开发者真机听审通过:接缝/响度/内容)",
+      "releaseDecision": "bundled-for-closed-testing"
     }
   ]
 }

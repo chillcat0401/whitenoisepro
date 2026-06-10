@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "changeId": "2026-06-10-library-tap-auto-preview",
+  "mode": "strict",
+  "status": "passed",
+  "evidence": {
+    "tasks": "openspec/changes/archive/2026-06-10-library-tap-auto-preview/tasks.md",
+    "plan": "docs/superpowers/plans/2026-06-10-library-tap-auto-preview.md",
+    "review": "docs/code-review-library-tap-auto-preview-2026-06-10.md",
+    "verification": [
+      "./gradlew :composeApp:testDebugUnitTest --tests \"*AppStoreTest\"",
+      "evidence: docs/superpowers/evidence/library-tap-auto-preview/1.1.md"
+    ]
+  },
+  "unverifiable": [],
+  "remainingRisks": ["夜间静默编排场景会自动出声(有意为之,迷你播放器一键可停)"],
+  "verifiedAt": "2026-06-10"
+}
