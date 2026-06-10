@@ -104,3 +104,9 @@ FOREGROUND_SERVICE_MEDIA_PLAYBACK
 - 加入远程配置或 A/B testing。
 - 加入第三方音频 CDN 或联网播放。
 - 改变 Manifest 权限或新增普通通知。
+
+## 2026-06-10 复核
+
+- 代码行为未变化:无网络权限、无 SDK、无数据收集/共享,全部偏好仅 DataStore 本地存储。
+- 新增的运行时噪声合成与新素材均为本地文件/本地计算,不影响 Data safety 答案。
+- 隐私政策 URL 已就绪(见 developer-info-template.md),与 Settings 文案一致性待开发者主体确认后终检。

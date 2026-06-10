@@ -43,11 +43,11 @@ WhiteNoisePro does not provide medical advice and does not claim to treat, cure,
 ```text
 把世界调低一点。
 
-WhiteNoisePro 是一款安静、低打扰的本地助眠声音应用，适合睡前、休息和专注背景播放。用白噪声、细雨、远海、夜林、风扇和炉火，为周围的杂音留出一层刚好的声音。
+WhiteNoisePro 是一款安静、低打扰的本地助眠声音应用，适合睡前、休息和专注背景播放。21 种声音横跨噪声、自然、居家与环境四类——细雨、雷雨、海浪、溪流、夏夜虫鸣、炉火、咖啡馆、列车、机舱,为周围的杂音留出一层刚好的声音。白/粉/棕噪声由设备实时合成,循环天然无缝。
 
 功能：
 - 白噪声、粉噪声、棕噪声
-- 柔和风扇、细雨、远海、夜林、暖炉声音
+- 21 种声音:雨声 ×5(含雷雨)、海浪 ×3、炉火 ×2、溪流、风、夏夜虫鸣、咖啡馆、列车、机舱等
 - 预设助眠混音
 - 声音层与音量控制
 - 支持快速选择和淡出的睡眠定时器
@@ -55,7 +55,7 @@ WhiteNoisePro 是一款安静、低打扰的本地助眠声音应用，适合睡
 - 后台和锁屏媒体控制
 - 当前版本无账号、无广告、无分析
 
-当前版本使用随应用本地打包的声音，包括第一方生成噪声和经过处理的 Creative Commons 0 录音素材。偏好和已保存混音仅保存在设备本地。
+当前版本声音全部本地可用:18 条经过循环化处理的 Creative Commons 0 录音素材随应用打包,白/粉/棕噪声由设备端实时合成(零网络依赖)。偏好和已保存混音仅保存在设备本地。
 
 WhiteNoisePro 不提供医疗建议，也不承诺治疗、治愈或诊断睡眠问题。
 ```
@@ -65,7 +65,7 @@ WhiteNoisePro 不提供医疗建议，也不承诺治疗、治愈或诊断睡眠
 ```text
 Initial closed testing release:
 - Local white noise and sleep sound playback
-- 19 local bundled sound loops
+- 21 local sounds: 18 processed CC0 recordings + 3 on-device synthesized noise colors
 - Mixer, saved mixes, and sleep timer
 - Background media playback controls
 - Brand-led Home copy: "把世界调低一点。"
