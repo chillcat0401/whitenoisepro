@@ -38,13 +38,16 @@ class SettingsContentTest {
         val rows = SettingsContent.releaseReady().rows()
         val text = rows.joinToString(" ") { "${it.title} ${it.subtitle}" }
 
-        assertTrue(text.contains("第一方"))
+        assertTrue(text.contains("第一方噪声"))
+        assertTrue(text.contains("CC0"))
+        assertTrue(text.contains("自然录音"))
         assertTrue(text.contains("本地"))
-        assertTrue(text.contains("生成"))
         assertTrue(text.contains("开发者信息待补充"))
         assertFalse(text.contains("治疗"))
         assertFalse(text.contains("治愈"))
         assertFalse(text.contains("改善失眠"))
+        assertFalse(text.contains("保证入睡"))
+        assertFalse(text.contains("医学级"))
     }
 
     @Test

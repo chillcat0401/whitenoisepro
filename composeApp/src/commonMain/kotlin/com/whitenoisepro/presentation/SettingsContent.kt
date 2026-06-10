@@ -58,7 +58,7 @@ data class SettingsContent(
                             ),
                             SettingsRowContent(
                                 title = "声音来源",
-                                subtitle = "当前声音为本地打包的第一方程序化生成音频",
+                                subtitle = BrandCopy.SettingsAudioSourceSubtitle,
                             ),
                             SettingsRowContent(
                                 title = "后台媒体控制",
