@@ -145,3 +145,20 @@
 | [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 锁屏后台播放 | [待补充：pass/fail] | [待补充] |
 | [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 蓝牙媒体键 | [待补充：pass/fail] | [待补充] |
 | [待补充：YYYY-MM-DD] | [待补充：设备型号] | [待补充] | [待补充：扬声器/有线/蓝牙] | 来电 / 其他音频打断 | [待补充：pass/fail] | [待补充] |
+
+## 2026-06-10 机器接缝 QA(7 个新素材)
+
+方法:解码 loop 文件,对比接缝两侧各 200ms 的 RMS 电平差(阈值 3dB)。
+
+| soundId | 电平差 | 结论 |
+|---|---|---|
+| rain_thunder | 0.70 dB | PASS |
+| wind_trees | 0.46 dB | PASS |
+| stream_gentle | 2.08 dB | PASS |
+| cafe_chatter | 0.19 dB(首切 7.58dB 撞人声峰,改 5-48s 重切) | PASS |
+| crickets_night | 0.24 dB | PASS |
+| airplane_cabin | 0.78 dB | PASS |
+| train_ride | 0.98 dB | PASS |
+
+机器 QA 不能替代真机人工听测(扬声器/耳机/低音量三档),后者完成前 manifest 中
+releaseDecision 保持 pending-device-listening-qa。

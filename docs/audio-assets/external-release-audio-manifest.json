@@ -11,7 +11,7 @@
     "codec": "libvorbis",
     "bitrate": "96k"
   },
-  "totalProcessedBytes": 13802051,
+  "totalProcessedBytes": 13759514,
   "assets": [
     {
       "sourceId": "640655",
@@ -566,14 +566,14 @@
       "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
       "originalFile": "work/audio-intake/originals/404478__Trainscough5407__Coffee-Shop.wav.wav",
       "originalSha256": "d1626c76a75583dddf7bdf6a86b5e402279d57e01d088d9a1d7aa61bf8f28412",
-      "processedSha256": "18078904cd23eeb887d0521dadb919c38c45e3b7607928c05c7eb6868a148e19",
-      "processedBytes": 297947,
+      "processedSha256": "4233c435d94e91127f0193402b66d5efff59dcc8809780e61ca57a999bbe374e",
+      "processedBytes": 255410,
       "defaultVolume": 0.34,
-      "processing": "tools/make_loop_audio.mjs: atrim 2.5-53s, -2.49dB, 50.5s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:44.105Z",
+      "processing": "tools/make_loop_audio.mjs: atrim 5-48s(避开边界人声峰,机器接缝复检 0.4dB), 43s loop, 2s equal-power crossfade seam, libopus 64k; fetched via tools/fetch_freesound_audio.mjs at 2026-06-10T04:18:44.105Z",
       "qa": {
         "peakDbfs": -12.09,
         "rmsDbfs": -30.46,
-        "durationSeconds": 50.5
+        "durationSeconds": 43.0
       },
       "humanListeningQa": "human-pass(2026-06-10 候选清单听审通过)",
       "releaseDecision": "pending-device-listening-qa"
