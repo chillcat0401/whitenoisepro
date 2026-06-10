@@ -1,163 +1,44 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.konan.target.Family
-
+/**
+ * 标准构建文件(默认 settings,Kotlin 2.0.21):仅保留 androidTarget,
+ * 用途 = 共享层单元测试与 Android 侧验证。鸿蒙产物走 build.2.0.ohos.gradle.kts。
+ * 自 demo/build.gradle.kts 派生裁剪:移除 js/ios/macos/cocoapods/core-wx/ktor。
+ */
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.google.devtools.ksp")
     id("org.jetbrains.compose")
-    id("com.tencent.kuikly-open.kuikly")
-}
-
-group = Publishing.kuiklyGroup
-version = "1.0.0"
-
-repositories {
-    google()
-    mavenCentral()
-    mavenLocal()
 }
 
 kotlin {
-
-    // target
-    androidTarget() {
-        publishLibraryVariantsGroupedByFlavor = true
-        publishLibraryVariants("release")
-    }
-
-    js(IR) {
-        moduleName = Output.name
-        browser {
-            webpackTask {
-                outputFileName = "${moduleName}.js" // 最后输出的名字
-            }
-
-            commonWebpackConfig {
-                output?.library = null // 不导出全局对象，只导出必要的入口函数
-                devtool = "source-map" // 不使用默认的 eval 执行方式构建出 source-map，而是构建单独的 sourceMap 文件
-            }
-        }
-        binaries.executable() //将kotlin.js与kotlin代码打包成一份可直接运行的js文件
-    }
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-    macosX64()
-    macosArm64()
+    androidTarget()
 
     sourceSets {
-        all {
-            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
-        }
-    }
-
-    // sourceSet
-    val commonMain by sourceSets.getting {
-        dependencies {
-            implementation(project(":core"))
-            implementation(project(":compose"))
-            implementation(project(":core-annotations"))
-//            compileOnly(project(":core-annotations"))
-            // showcases WeChat MiniProgram components / APIs. Apps that do not
-            // need WX capabilities simply omit this dependency and pay zero
-            // cost (no classes leaked into android/iOS artifacts).
-            // Declared in commonMain so cross-platform pages can conditionally
-            // use `WXButton {}` / `registerWXModules()` behind an
-            // `is_miniprogram` runtime check.
-        }
-    }
-
-    val jsMain by sourceSets.getting {
-        dependsOn(commonMain)
-//        kotlin.srcDir(
-//            "build/generated/ksp/js/jsMain/kotlin"
-//        )
-    }
-
-    val androidMain by sourceSets.getting {
-        dependsOn(commonMain)
-        dependencies {
-        }
-//        kotlin.srcDirs(
-//            "build/generated/ksp/android/androidDebug/kotlin",
-//            "build/generated/ksp/android/androidRelease/kotlin",
-//        )
-    }
-
-    sourceSets.iosMain {
-        dependsOn(commonMain)
-        dependencies {
-        }
-    }
-
-    sourceSets.appleMain {
-        dependsOn(commonMain)
-        dependencies {
-        }
-    }
-
-    targets.withType<KotlinNativeTarget> {
-        val mainSourceSets = this.compilations.getByName("main").defaultSourceSet
-        when {
-
-            konanTarget.family.isAppleFamily -> {
-                mainSourceSets.dependsOn(sourceSets.getByName("appleMain"))
-            }
-
-            konanTarget.family == Family.ANDROID -> {
-                binaries {
-                    val outputName = "nativevue"
-                    sharedLib(outputName, listOf(RELEASE)) {
-                        linkerOpts += linkerOpts + getLinkerArgs()
-                        freeCompilerArgs = freeCompilerArgs + getCommonCompilerArgs()
-                    }
-                    sharedLib(outputName, listOf(DEBUG)) {
-                        freeCompilerArgs = freeCompilerArgs + getCommonCompilerArgs()
-                    }
-                }
+        val commonMain by getting {
+            dependencies {
+                implementation(project(":core"))
+                implementation(project(":compose"))
+                implementation(project(":core-annotations"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1-KBA-003")
             }
         }
-    }
-
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-        osx.deploymentTarget = "10.13"
-//        podfile = project.file("../iosApp/Podfile")
-        framework {
-            isStatic = true
-            baseName = "shared"
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0-KBA-002")
+            }
         }
-        license = "MIT"
-        extraSpecAttributes["resources"] = "['src/commonMain/assets/**']"
+        val androidMain by getting {
+            dependsOn(commonMain)
+        }
     }
-}
-
-fun getPageNameList(): String {
-    return project.properties["pageNameList"] as? String ?: ""
-}
-
-ksp {
-    arg("pageName", getPageName())
-    arg("pageNameList", getPageNameList())
-    arg(Output.KEY_PACK_LOCAL_JS_BUNDLE, packLocalJsBundle())
 }
 
 dependencies {
     compileOnly(project(":core-ksp")) {
-        add("kspIosArm64", this)
-        add("kspIosX64", this)
-        add("kspIosSimulatorArm64", this)
-        add("kspMacosArm64", this)
-        add("kspMacosX64", this)
         add("kspAndroid", this)
-        add("kspJs", this)
     }
 }
 
@@ -168,58 +49,5 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 30
-    }
-
-//    buildTypes {
-//        release {
-//            ndk {
-//                abiFilters.add("arm64-v8a")
-//            }
-//        }
-//    }
-
-    sourceSets {
-        named("main") {
-            jniLibs.srcDirs("src/androidMain/libs/")
-            assets.srcDirs("src/commonMain/assets")
-        }
-    }
-
-}
-
-fun getPageName(): String {
-    return project.properties["pageName"] as? String ?: ""
-}
-
-fun packLocalJsBundle(): String {
-    return (project.properties[Output.KEY_PACK_LOCAL_JS_BUNDLE] as? String) ?: ""
-}
-
-fun getCommonCompilerArgs(): List<String> {
-    return listOf(
-        "-Xallocator=std"
-    )
-}
-
-fun getLinkerArgs(): List<String> {
-    return listOf(
-        "-Wl,--gc-sections,-s"
-    )
-}
-
-// Compose 编译器稳定性报告（按需开启，用于验证类的稳定性推断，会增加编译耗时）
-// composeCompiler {
-//     reportsDestination.set(layout.buildDirectory.dir("compose_compiler"))
-//     metricsDestination.set(layout.buildDirectory.dir("compose_compiler"))
-// }
-
-// Kuikly 插件配置
-kuikly {
-    // JS 产物配置
-    js {
-        // 构建产物名，与 KMM 插件 webpackTask#outputFileName 一致
-        outputName("nativevue2")
-        // 可选：分包构建时的页面列表，如果为空则构建全部页面
-        // addSplitPage("route","home")
     }
 }

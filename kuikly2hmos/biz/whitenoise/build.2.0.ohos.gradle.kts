@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
     id("org.jetbrains.compose")
     id("maven-publish")
@@ -53,6 +54,7 @@ kotlin {
                 implementation(project(":core"))
                 implementation(project(":core-annotations"))
                 implementation(project(":compose"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1-KBA-003")
             }
         }
 

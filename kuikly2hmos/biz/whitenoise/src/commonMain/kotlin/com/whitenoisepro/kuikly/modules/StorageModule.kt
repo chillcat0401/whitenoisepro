@@ -20,15 +20,15 @@ class StorageModule : Module() {
         toNative(false, "saveSnapshot", json, null, false)
     }
 
-    fun loadSnapshot(callback: (json: String?) -> Unit) {
+    fun loadSnapshot(onLoaded: (json: String?) -> Unit) {
         toNative(
-            false,
-            "loadSnapshot",
-            null,
-            callbackFn = { data ->
-                callback(data?.optString("json"))
+            keepCallbackAlive = false,
+            methodName = "loadSnapshot",
+            param = null,
+            callback = { data ->
+                onLoaded(data?.optString("json"))
             },
-            false,
+            syncCall = false,
         )
     }
 

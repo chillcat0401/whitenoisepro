@@ -5,7 +5,7 @@
   - verify: 附录含明确结论与约束清单
   - scope: kuikly2hmos/REPLICATION_PLAN.md
 
-- [ ] 0.2 whitenoise 模块接入工作区并编译出鸿蒙 so
+- [x] 0.2 whitenoise 模块接入工作区并编译出鸿蒙 so
   - accept: KuiklyUI 工作区 settings 注册 whitenoise;
     `:whitenoise:linkSharedDebugSharedOhosArm64` 产出 libshared.so + 头文件;
     编译驱动修正骨架(Module API 签名等)回写 biz/whitenoise
