@@ -12,6 +12,7 @@ object AndroidPlaybackEngineProvider {
         instance ?: synchronized(this) {
             instance ?: AndroidPlaybackEngine(context.applicationContext).also {
                 instance = it
+                SynthesizedSoundCache.prewarm(context)
             }
         }
 }

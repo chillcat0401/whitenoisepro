@@ -1,33 +1,82 @@
 package com.whitenoisepro.audio
 
-import com.whitenoisepro.R
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
+import kotlin.test.assertIs
+import kotlin.test.assertTrue
 
 class AndroidSoundResourceResolverTest {
-    @Test
-    fun publishedSoundIdsResolveToDedicatedResources() {
-        val resources = listOf(
-            AndroidSoundResourceResolver.resolve("white_noise"),
-            AndroidSoundResourceResolver.resolve("pink_noise"),
-            AndroidSoundResourceResolver.resolve("brown_noise"),
-            AndroidSoundResourceResolver.resolve("fan"),
-            AndroidSoundResourceResolver.resolve("rain"),
-            AndroidSoundResourceResolver.resolve("ocean"),
-            AndroidSoundResourceResolver.resolve("forest"),
-            AndroidSoundResourceResolver.resolve("fireplace"),
-        )
+    private val bundledSoundIds = listOf(
+        "rain_soft",
+        "rain_light_roof",
+        "rain_window",
+        "rain_roof",
+        "rain_thunder",
+        "ocean_gentle",
+        "ocean_waves",
+        "ocean_shore",
+        "fire_crackle",
+        "fire_hearth",
+        "fan_floor",
+        "wind_forest",
+    )
 
-        assertEquals(8, resources.toSet().size)
+    @Test
+    fun bundledSoundIdsResolveToDedicatedResources() {
+        val sources = bundledSoundIds.map(AndroidSoundResourceResolver::source)
+
+        sources.forEach { source -> assertIs<SoundSource.Resource>(source) }
+        assertEquals(
+            bundledSoundIds.size,
+            sources.filterIsInstance<SoundSource.Resource>().map { it.resId }.toSet().size,
+        )
     }
 
     @Test
-    fun unknownLegacyIdFallsBackToBrownNoise() {
+    fun noiseSoundIdsResolveToRuntimeSynthesis() {
         assertEquals(
-            R.raw.brown_noise_loop,
-            AndroidSoundResourceResolver.resolve("legacy_rain"),
+            SoundSource.Synthesized(NoiseProfile.White),
+            AndroidSoundResourceResolver.source("white_noise"),
         )
-        assertNotEquals(0, AndroidSoundResourceResolver.resolve("legacy_rain"))
+        assertEquals(
+            SoundSource.Synthesized(NoiseProfile.Pink),
+            AndroidSoundResourceResolver.source("pink_noise"),
+        )
+        assertEquals(
+            SoundSource.Synthesized(NoiseProfile.Brown),
+            AndroidSoundResourceResolver.source("brown_noise"),
+        )
+    }
+
+    @Test
+    fun legacyFirstPartyIdsResolveToReplacementAssets() {
+        assertEquals(
+            AndroidSoundResourceResolver.source("rain_soft"),
+            AndroidSoundResourceResolver.source("rain"),
+        )
+        assertEquals(
+            AndroidSoundResourceResolver.source("ocean_gentle"),
+            AndroidSoundResourceResolver.source("ocean"),
+        )
+        assertEquals(
+            AndroidSoundResourceResolver.source("wind_forest"),
+            AndroidSoundResourceResolver.source("forest"),
+        )
+        assertEquals(
+            AndroidSoundResourceResolver.source("fire_hearth"),
+            AndroidSoundResourceResolver.source("fireplace"),
+        )
+        assertEquals(
+            AndroidSoundResourceResolver.source("fan_floor"),
+            AndroidSoundResourceResolver.source("fan"),
+        )
+    }
+
+    @Test
+    fun unknownIdFallsBackToSynthesizedBrownNoise() {
+        val source = AndroidSoundResourceResolver.source("legacy_mystery")
+
+        assertIs<SoundSource.Synthesized>(source)
+        assertTrue(source.profile == NoiseProfile.Brown)
     }
 }

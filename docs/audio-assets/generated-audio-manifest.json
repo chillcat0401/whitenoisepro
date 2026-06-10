@@ -1,5 +1,8 @@
 {
   "schemaVersion": 1,
+  "status": "retired",
+  "retiredAt": "2026-06-10",
+  "retirementNote": "8 个一方合成 WAV 已从 res/raw 移除。white/pink/brown 噪声改为设备端运行时合成(composeApp/src/commonMain/kotlin/com/whitenoisepro/audio/NoiseSynthesizer.kt,确定性种子,零打包体积);rain/ocean/forest/fireplace/fan 目录项由 Freesound CC0 真实素材替代(旧 soundId 经 SoundCatalog.canonicalId 迁移)。以下为历史生成记录,仅作溯源。",
   "generatedAt": "2026-06-08",
   "ownership": "First-party generated assets; no third-party recordings or samples.",
   "parameters": {

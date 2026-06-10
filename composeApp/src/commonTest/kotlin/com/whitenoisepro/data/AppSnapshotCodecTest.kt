@@ -19,7 +19,7 @@ class AppSnapshotCodecTest {
                 SoundMix(
                     id = "saved-rain",
                     title = "雨夜",
-                    layers = listOf(SoundLayer.create("rain-layer", "rain", 0.55f, isMuted = true)),
+                    layers = listOf(SoundLayer.create("rain-layer", "rain_soft", 0.55f, isMuted = true)),
                     masterVolume = 0.64f,
                     isFavorite = true,
                     updatedAtEpochMillis = 42L,
@@ -47,6 +47,28 @@ class AppSnapshotCodecTest {
         val encoded = codec.encode(snapshot)
 
         assertEquals(snapshot, codec.decode(encoded))
+    }
+
+    @Test
+    fun migratesLegacyFirstPartySoundIdsOnDecode() {
+        val legacySnapshot = AppSnapshot(
+            currentMix = SoundMix(
+                id = "legacy-mix",
+                title = "旧版混音",
+                layers = listOf(
+                    SoundLayer.create("layer-rain", "rain", 0.5f),
+                    SoundLayer.create("layer-fan", "fan", 0.4f),
+                    SoundLayer.create("layer-brown", "brown_noise", 0.6f),
+                ),
+            ),
+        )
+
+        val decoded = codec.decode(codec.encode(legacySnapshot))
+
+        assertEquals(
+            listOf("rain_soft", "fan_floor", "brown_noise"),
+            decoded?.currentMix?.layers?.map { it.soundId },
+        )
     }
 
     @Test

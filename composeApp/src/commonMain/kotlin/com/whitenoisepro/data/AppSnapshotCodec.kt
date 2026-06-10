@@ -126,7 +126,7 @@ private fun PersistedSoundMix.toDomain(): SoundMix =
         layers = layers.map { layer ->
             SoundLayer.create(
                 id = layer.id,
-                soundId = layer.soundId,
+                soundId = SoundCatalog.canonicalId(layer.soundId),
                 volume = layer.volume,
                 isMuted = layer.isMuted,
             )
