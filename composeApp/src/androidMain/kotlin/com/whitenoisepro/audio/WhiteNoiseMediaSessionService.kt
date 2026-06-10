@@ -136,6 +136,9 @@ class WhiteNoiseMediaSessionService : MediaSessionService() {
         }
     }
 
+    // ForwardingPlayer 标注为 UnstableApi,但其行为(命令过滤代理)自 media3
+    // 1.0 起稳定存在;升级 media3 时由编译期接口变化兜底。
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     private fun ambientCardPlayer(delegate: Player): Player =
         object : ForwardingPlayer(delegate) {
             override fun getAvailableCommands(): Player.Commands =

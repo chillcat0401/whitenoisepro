@@ -4,7 +4,7 @@
 
 - versionCode 1 / versionName 0.2.0(targetSdk 36 / minSdk 26)
 - AAB:`composeApp/build/outputs/bundle/release/composeApp-release.aab`
-  - 24.1MB,SHA-256 `664b329ac28bb27ef7acb588a6d29594350e1077541ce8d40315cb8ef994a9b5`
+  - 24.1MB,SHA-256 `4156624035a58c193a0852bf1dd74a4511801ae7af5281b19b243a90b4fb6922`
   - `jarsigner -verify` 通过;upload key CN=WhiteNoisePro Upload,证书有效期至 2053,
     SHA-256 指纹 `6278bb97…c06385`
 - `:composeApp:check`(含归档验收门禁)全绿
