@@ -74,3 +74,9 @@
     DesignTokenTest 字阶断言不回归
   - verify: ./gradlew :composeApp:check && 模拟器截图核对
   - scope: composeApp/src/commonMain/(design,composeResources), composeApp/build.gradle.kts
+
+- [x] 6.3 中文衬线字体(霞鹜文楷 3500 常用字子集)
+  - accept: 中文标题渲染为文楷;拉丁/数字仍为 Lora;子集含 GB2312 一级字 +
+    源码扫描全部汉字 + 中文标点;子集脚本入 tools/ 可重跑
+  - verify: ./gradlew :composeApp:check && 模拟器截图核对
+  - scope: composeApp/src/commonMain/(design,composeResources), tools/, .gitignore

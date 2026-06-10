@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.sp
 import com.whitenoisepro.generated.resources.Res
 import com.whitenoisepro.generated.resources.lora_medium
 import com.whitenoisepro.generated.resources.lora_semibold
+import com.whitenoisepro.generated.resources.lxgw_wenkai_subset
 import org.jetbrains.compose.resources.Font
 
 object WnpColors {
@@ -155,9 +156,13 @@ val WnpColorScheme: ColorScheme = darkColorScheme(
 
 @Composable
 fun WhiteNoiseTheme(content: @Composable () -> Unit) {
+    // 回退链:Lora 管拉丁与数字;霞鹜文楷(GB2312 一级字子集,已剔除拉丁字形)
+    // 管中文;子集外生僻字回退系统字体。
     WnpFonts.display = FontFamily(
         Font(Res.font.lora_medium, weight = FontWeight.Medium),
         Font(Res.font.lora_semibold, weight = FontWeight.SemiBold),
+        Font(Res.font.lxgw_wenkai_subset, weight = FontWeight.Medium),
+        Font(Res.font.lxgw_wenkai_subset, weight = FontWeight.SemiBold),
     )
     MaterialTheme(
         colorScheme = WnpColorScheme,
