@@ -26,7 +26,7 @@
 | COVID / health claims | No medical or therapeutic claims | ready |
 | Data safety | Data collected: No; Data shared: No; no analytics, ads, account, crash SDK, billing, or cloud sync | ready |
 | Foreground service | Media playback only; permissions are `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | ready |
-| Notification permission | App does not declare `POST_NOTIFICATIONS`; MediaSession controls are not marketing notifications | ready |
+| Notification permission | Declares `POST_NOTIFICATIONS` solely for MediaSession playback controls + foreground service visibility; no marketing/reminder notifications | ready |
 
 ## Store Listing
 

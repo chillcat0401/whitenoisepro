@@ -20,7 +20,7 @@ WhiteNoisePro 当前可以作为工程 MVP 继续迭代，但不应直接进入 
 - 独立 upload key 和已签名 release AAB 已准备；密钥仍需完成离线备份。
 - 隐私政策和开发者信息模板已准备；公开 URL、开发者主体、联系邮箱和生效日期仍需发布前补齐。
 - Data safety 工作表与代码行为一致。
-- MediaSession 通知权限豁免结论已复核，Manifest 不声明不必要的 `POST_NOTIFICATIONS`。
+- Manifest 声明 `POST_NOTIFICATIONS` 并在 API 33+ 首启请求(2026-06-10 实测推翻豁免假设:无权限时媒体通知无法发出、服务无法升前台、熄屏后进程被冻结)。仅用于媒体控制,不发营销通知。
 - Settings placeholder 已处理为实现、禁用或隐藏。
 - 至少一台真实 Android 设备完成音频 QA。
 

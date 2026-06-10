@@ -23,7 +23,7 @@ FOREGROUND_SERVICE
 FOREGROUND_SERVICE_MEDIA_PLAYBACK
 ```
 
-当前不声明 `POST_NOTIFICATIONS`；仅使用 MediaSession 媒体控制，不用于营销通知。
+声明 `POST_NOTIFICATIONS`(2026-06-10 起):仅用于 MediaSession 媒体控制通知与前台服务可见性,不发送营销/提醒通知;通知权限不属于 Data safety 数据收集,本表答案不受影响。
 
 ## 数据收集判断
 

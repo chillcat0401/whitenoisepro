@@ -66,7 +66,10 @@ class WhiteNoiseMediaSessionService : MediaSessionService() {
                 )
             }
         player = exoPlayer
-        mediaSession = MediaSession.Builder(this, exoPlayer).build()
+        // 必须显式 addSession:本应用 UI 直接驱动播放引擎,没有 MediaController
+        // 连接来触发 onGetSession 的自动注册;不注册则 Media3 不会发媒体通知、
+        // 不会把服务升为前台,熄屏后进程会被系统冻结。
+        mediaSession = MediaSession.Builder(this, exoPlayer).build().also(::addSession)
         pendingNowPlaying?.let { updateSession(title = it.title, playing = it.playing) }
         pendingTimer?.let(timerRunner::schedule)
     }

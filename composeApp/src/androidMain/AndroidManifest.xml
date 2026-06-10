@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <!-- 仅用于 MediaSession 媒体控制通知(锁屏/通知栏播放控制与前台服务可见性),
+         不发送营销或提醒通知。API 33+ 实测无此权限时 Media3 无法发媒体通知,
+         服务无法升前台,熄屏后进程会被系统冻结导致后台播放中断。 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"

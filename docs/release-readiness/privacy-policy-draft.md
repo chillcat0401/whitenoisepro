@@ -50,7 +50,7 @@ WhiteNoisePro 是一款白噪音和助眠声音应用。当前 MVP 设计目标�
 - Foreground service：用于后台持续播放助眠声音。
 - Foreground service media playback：用于声明后台媒体播放类型。
 
-当前 Manifest 不声明 `POST_NOTIFICATIONS`。应用仅使用 Android MediaSession 媒体控制，让系统在播放时提供后台 / 锁屏控制；这些控制不用于营销通知。
+应用声明并请求通知权限,仅用于 Android MediaSession 媒体控制(通知栏/锁屏播放控制)与后台播放的前台服务可见性;不发送营销或提醒通知。拒绝授权不影响前台播放。
 
 ## 数据共享
 
