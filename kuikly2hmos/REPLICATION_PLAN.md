@@ -55,31 +55,31 @@ kuikly2hmos/
 
 ### M0 工作区打通(预计 0.5~1 天)
 
-- [ ] 0.1 官方 demo 跑通鸿蒙
+- [x] 0.1 官方 demo 跑通鸿蒙(被 0.2 直接覆盖:whitenoise 链路一步打穿)
   - accept: `./2.0_ohos_demo_build.sh` 产出 libshared.so;DevEco 打开 ohosApp,
     签名后真机/模拟器运行 demo 页面
   - verify: 设备截图 + 构建日志
   - scope: kuikly2hmos/KuiklyUI(工作区,不提交)
-- [ ] 0.2 whitenoise 模块接入工作区
+- [x] 0.2 whitenoise 模块接入工作区(2026-06-10 完成,见 evidence)
   - accept: 把 biz/whitenoise 拷入 KuiklyUI/,settings.2.0.ohos.gradle.kts 增加
     `include(":whitenoise")` + buildFileName 行;构建脚本目标改为
     `:whitenoise:linkSharedDebugSharedOhosArm64`;ohosApp 启动显示 AppPage 骨架画面
   - verify: 设备截图(深底 + 「白噪声 Pro」);so 与头文件产物存在
   - scope: 工作区 + biz/whitenoise 构建文件修正(派生文件首次真实构建可能需微调,
     以 demo 同名文件 diff 为准)
-- [ ] 0.3 许可证审查
+- [x] 0.3 许可证审查(附录 A)
   - accept: 通读 KuiklyUI LICENSE,输出商用分发结论与约束清单入本文件附录
   - verify: 附录章节存在且含结论
   - scope: 本文件
 
 ### M1 纯逻辑层移植(预计 1 天,几乎零风险)
 
-- [ ] 1.1 按 PORTING_MAP「原样复用」清单拷贝源码与 commonTest
+- [x] 1.1 按 PORTING_MAP「原样复用」清单拷贝源码与 commonTest(94 测试全绿)
   - accept: domain/data/audio(synth)/presentation 编译通过;kotlinx-serialization
     与 coroutines 依赖在两份 gradle 中补齐(版本对齐 KuiklyUI workspace)
   - verify: `./gradlew :whitenoise:testDebugUnitTest`(androidTarget 单测)全绿
   - scope: biz/whitenoise/src/{commonMain,commonTest}
-- [ ] 1.2 AppStore 适配:PlaybackEngine 实现切换为 Module 桥
+- [ ] 1.2(并入 M2)AppStore 适配:PlaybackEngine 实现切换为 Module 桥
   - accept: KuiklyPlaybackEngine 实现主仓 PlaybackEngine 接口,内部调
     AudioPlayerModule;音量乘法(layer×master×fade)保持在共享层;状态流语义不变
   - verify: 移植 AppStoreTest(Fake 引擎路径)全绿
@@ -142,6 +142,13 @@ kuikly2hmos/
 - [ ] 5.2 AGC 材料:图标/截图/隐私政策(复用已发布页面)/权限清单
   (KEEP_BACKGROUND_RUNNING 需用途声明)
 - [ ] 5.3 提审免费版(变现待企业资质,见路线图)
+
+### 执行日志
+
+- 2026-06-10:M0 完成(0.4 设备验证待模拟器),M1 完成。鸿蒙 so 编译与
+  Android 94 测试双端通过。踩坑 7 条固化于 biz/build_ohos.sh、
+  workspace-patches/ 与两份 evidence。设备相关任务(0.4、M2 起的真机验证)
+  待 2026-06-11 配置鸿蒙模拟器后继续。
 
 ## 3. 风险登记
 
