@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,7 +36,10 @@ import com.whitenoisepro.data.SampleContent
 import com.whitenoisepro.data.SoundCatalog
 import com.whitenoisepro.design.IconButton
 import com.whitenoisepro.design.PrimaryButton
+import com.whitenoisepro.design.SecondaryButton
 import com.whitenoisepro.design.SectionHeader
+import com.whitenoisepro.design.TimerProgressRing
+import com.whitenoisepro.design.WnpTextField
 import com.whitenoisepro.design.SettingsRow
 import com.whitenoisepro.design.SoundIcon
 import com.whitenoisepro.design.TimerPresetChip
@@ -51,13 +53,14 @@ import com.whitenoisepro.domain.model.Sound
 import com.whitenoisepro.domain.model.SoundLayer
 import com.whitenoisepro.domain.model.SoundMix
 import com.whitenoisepro.presentation.AppState
+import com.whitenoisepro.presentation.BrandCopy
 import com.whitenoisepro.presentation.recommendedBedtimeTimerMinutes
 import com.whitenoisepro.presentation.SettingsContent
 import com.whitenoisepro.presentation.SettingsRowContent
 import com.whitenoisepro.presentation.SettingsRowKind
 
 val timerPresetMinutes: List<Int> = listOf(15, 30, 45, 60, 120)
-val recommendedLibrarySoundIds: List<String> = listOf("rain", "ocean", "forest", "fireplace")
+val recommendedLibrarySoundIds: List<String> = listOf("rain_soft", "ocean_gentle", "wind_forest", "fire_hearth")
 
 @Composable
 fun HomeScreen(
@@ -68,27 +71,38 @@ fun HomeScreen(
     onToggleFavorite: () -> Unit,
     onMasterVolumeChange: (Float) -> Unit,
     onStartRecommendedTimer: () -> Unit,
+    onPlayRecentMix: (String) -> Unit,
+    onSoundSelected: (String) -> Unit,
 ) {
     LazyColumn(
         contentPadding = padding,
-        verticalArrangement = Arrangement.spacedBy(WnpSpacing.PageGap),
+        verticalArrangement = Arrangement.spacedBy(WnpSpacing.SectionGap),
     ) {
         item {
-            TopBar(
-                title = "晚安",
-                action = {
-                    Box(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clip(RoundedCornerShape(999.dp))
-                            .background(WnpColors.SurfaceHigh)
-                            .clickable { onNavigate(AppTab.Settings) },
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        AppIcon(AppIconKind.Settings, tint = WnpColors.OnSurface, modifier = Modifier.size(22.dp))
-                    }
-                },
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(WnpSpacing.Sm)) {
+                TopBar(
+                    title = "晚安",
+                    action = {
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .clip(RoundedCornerShape(999.dp))
+                                .background(WnpColors.SurfaceHigh)
+                                .clickable { onNavigate(AppTab.Settings) },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            AppIcon(AppIconKind.Settings, tint = WnpColors.OnSurface, modifier = Modifier.size(22.dp))
+                        }
+                    },
+                )
+                Text(
+                    text = BrandCopy.HomeSupportingLine,
+                    color = WnpColors.OnSurfaceVariant,
+                    style = WnpTypography.Body,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
         item {
             NowPlayingHero(
@@ -111,15 +125,23 @@ fun HomeScreen(
             SectionHeader(title = "最近使用", actionText = "全部", onActionClick = { onNavigate(AppTab.Saved) })
             Row(horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg)) {
                 state.mixState.recentMixes.take(3).forEach { mix ->
-                    CompactMixCard(mix = mix, modifier = Modifier.weight(1f))
+                    CompactMixCard(
+                        mix = mix,
+                        onClick = { onPlayRecentMix(mix.id) },
+                        modifier = Modifier.weight(1f),
+                    )
                 }
             }
         }
         item {
-            SectionHeader(title = "推荐声音", actionText = "浏览", onActionClick = { onNavigate(AppTab.Library) })
+            SectionHeader(title = BrandCopy.RecommendedSoundsTitle, actionText = "浏览", onActionClick = { onNavigate(AppTab.Library) })
             Row(horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg)) {
                 SampleContent.sounds.take(4).forEach { sound ->
-                    SoundPill(sound = sound, active = sound.id in state.mixState.currentMix.layers.map { it.soundId })
+                    SoundPill(
+                        sound = sound,
+                        selected = sound.id in state.mixState.currentMix.layers.map { it.soundId },
+                        onClick = { onSoundSelected(sound.id) },
+                    )
                 }
             }
         }
@@ -149,13 +171,14 @@ fun MixerScreen(
         items(state.mixState.currentMix.layers) { layer ->
             LayerRow(
                 layer = layer,
+                isPlaying = state.isPlaying,
                 onVolumeChange = { volume -> onLayerVolumeChange(layer.id, volume) },
                 onMutedChange = { muted -> onLayerMutedChange(layer.id, muted) },
                 onRemove = { onRemoveLayer(layer.id) },
             )
         }
         item {
-            PrimaryButton(text = "添加声音", onClick = onAddSound, modifier = Modifier.fillMaxWidth())
+            SecondaryButton(text = "添加声音", onClick = onAddSound, modifier = Modifier.fillMaxWidth())
         }
         item {
             SectionHeader(title = "主音量")
@@ -184,12 +207,11 @@ fun LibraryScreen(
     ) {
         item { TopBar(title = "声音库") }
         item {
-            OutlinedTextField(
+            WnpTextField(
                 value = state.libraryQuery,
                 onValueChange = onQueryChange,
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("搜索声音", color = WnpColors.OnSurfaceVariant) },
-                singleLine = true,
+                placeholder = "搜索声音",
             )
         }
         item {
@@ -204,7 +226,7 @@ fun LibraryScreen(
             }
         }
         item {
-            SectionHeader(title = "推荐入睡声音")
+            SectionHeader(title = BrandCopy.RecommendedSoundsTitle)
             Row(horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Md)) {
                 recommendedLibrarySoundIds.mapNotNull { soundId ->
                     SoundCatalog.all.firstOrNull { it.id == soundId }
@@ -248,22 +270,22 @@ private fun BedtimeTimerCallout(
             .fillMaxWidth()
             .clip(RoundedCornerShape(WnpRadius.Card))
             .background(WnpColors.SurfaceLow)
-            .padding(WnpSpacing.CardPadding),
-        horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg),
+            .padding(horizontal = WnpSpacing.CardPadding, vertical = WnpSpacing.Lg),
+        horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        SoundIcon(label = "定时器", active = true, iconKey = "timer", modifier = Modifier.size(56.dp))
+        SoundIcon(label = "定时器", active = false, selected = true, iconKey = "timer", modifier = Modifier.size(48.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text("推荐入睡定时", color = WnpColors.OnSurface, style = WnpTypography.Body)
+            Text(BrandCopy.BedtimeTimerTitle, color = WnpColors.OnSurface, style = WnpTypography.Body)
             Text(
-                "${recommendedBedtimeTimerMinutes} 分钟后淡出并停止",
+                BrandCopy.bedtimeTimerSubtitle(recommendedBedtimeTimerMinutes),
                 color = WnpColors.OnSurfaceVariant,
                 style = WnpTypography.Label,
-                maxLines = 1,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        PrimaryButton(text = "开始", onClick = onStart)
+        SecondaryButton(text = "开始", onClick = onStart)
         IconButton(onClick = onOpenTimer) {
             AppIcon(AppIconKind.Timer, tint = WnpColors.OnSurface, modifier = Modifier.size(20.dp))
         }
@@ -296,9 +318,20 @@ fun TimerScreen(
                     .padding(36.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$minutes", color = WnpColors.OnSurface, style = WnpTypography.Display)
-                    Text("分钟后停止", color = WnpColors.OnSurfaceVariant, style = WnpTypography.Body)
+                val duration = state.timerState.durationMillis
+                val progress = if (duration > 0L) {
+                    state.timerState.remainingMillis.toFloat() / duration.toFloat()
+                } else {
+                    0f
+                }
+                TimerProgressRing(
+                    progress = progress,
+                    modifier = Modifier.size(196.dp),
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("$minutes", color = WnpColors.OnSurface, style = WnpTypography.DisplayLarge)
+                        Text("分钟后停止", color = WnpColors.OnSurfaceVariant, style = WnpTypography.Body)
+                    }
                 }
             }
         }
@@ -309,7 +342,7 @@ fun TimerScreen(
                     timerPresetMinutes.take(3).forEach { minute ->
                         TimerPresetChip(
                             "$minute 分钟",
-                            selected = minute.toLong() == minutes,
+                            selected = minute * 60_000L == state.timerState.durationMillis,
                             onClick = { onPresetSelected(minute) },
                         )
                     }
@@ -318,7 +351,7 @@ fun TimerScreen(
                     timerPresetMinutes.drop(3).forEach { minute ->
                         TimerPresetChip(
                             if (minute == 60) "1 小时" else "2 小时",
-                            selected = minute.toLong() == minutes,
+                            selected = minute * 60_000L == state.timerState.durationMillis,
                             onClick = { onPresetSelected(minute) },
                         )
                     }
@@ -331,12 +364,11 @@ fun TimerScreen(
                 horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                OutlinedTextField(
+                WnpTextField(
                     value = customMinutes,
                     onValueChange = { value -> customMinutes = value.filter(Char::isDigit).take(4) },
                     modifier = Modifier.weight(1f),
-                    placeholder = { Text("分钟", color = WnpColors.OnSurfaceVariant) },
-                    singleLine = true,
+                    placeholder = "分钟",
                 )
                 val customValue = customMinutes.toIntOrNull()
                 PrimaryButton(
@@ -366,7 +398,7 @@ fun TimerScreen(
                     onClick = if (state.timerState.isActive) onCancel else onStart,
                     modifier = Modifier.weight(1f),
                 )
-                PrimaryButton(
+                SecondaryButton(
                     text = "延长 10 分钟",
                     onClick = { onExtend(10) },
                     modifier = Modifier.weight(1f),
@@ -491,11 +523,11 @@ private fun NowPlayingHero(
             .fillMaxWidth()
             .clip(RoundedCornerShape(WnpRadius.Sheet))
             .background(WnpColors.Surface)
-            .padding(WnpSpacing.HeroPadding),
+            .padding(horizontal = WnpSpacing.HeroPadding, vertical = WnpSpacing.CardPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SoundIcon(label = mix.title, active = true, iconKey = "mixer", modifier = Modifier.size(104.dp))
-        Spacer(Modifier.height(WnpSpacing.Xl))
+        SoundIcon(label = mix.title, active = isPlaying, iconKey = "mixer", modifier = Modifier.size(80.dp))
+        Spacer(Modifier.height(WnpSpacing.Md))
         Text(mix.title, color = WnpColors.OnSurface, style = WnpTypography.Display)
         Text(
             mix.layers.joinToString(" · ") { SampleContent.soundName(it.soundId) },
@@ -504,9 +536,13 @@ private fun NowPlayingHero(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        Spacer(Modifier.height(WnpSpacing.Xl))
-        PrimaryButton(text = if (isPlaying) "暂停" else "播放", onClick = onTogglePlay)
-        Spacer(Modifier.height(WnpSpacing.Lg))
+        Spacer(Modifier.height(WnpSpacing.Md))
+        PrimaryButton(
+            text = if (isPlaying) "暂停" else "播放",
+            onClick = onTogglePlay,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(WnpSpacing.Sm))
         Row(horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg)) {
             IconButton(onClick = onToggleFavorite) {
                 AppIcon(AppIconKind.Favorite, tint = if (mix.isFavorite) WnpColors.Tertiary else WnpColors.OnSurface, modifier = Modifier.size(22.dp))
@@ -523,9 +559,15 @@ private fun NowPlayingHero(
 }
 
 @Composable
-private fun SoundPill(sound: Sound, active: Boolean) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        SoundIcon(label = sound.name, active = active, iconKey = sound.iconKey)
+private fun SoundPill(sound: Sound, selected: Boolean, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(WnpRadius.Button))
+            .clickable(onClick = onClick)
+            .padding(WnpSpacing.Xs),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        SoundIcon(label = sound.name, active = false, selected = selected, iconKey = sound.iconKey)
         Text(
             sound.name,
             color = WnpColors.OnSurfaceVariant,
@@ -537,11 +579,12 @@ private fun SoundPill(sound: Sound, active: Boolean) {
 }
 
 @Composable
-private fun CompactMixCard(mix: SoundMix, modifier: Modifier = Modifier) {
+private fun CompactMixCard(mix: SoundMix, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(WnpRadius.Card))
             .background(WnpColors.SurfaceLow)
+            .clickable(onClick = onClick)
             .padding(WnpSpacing.CardPadding),
     ) {
         Text(mix.title, color = WnpColors.OnSurface, style = WnpTypography.Label, maxLines = 1)
@@ -552,6 +595,7 @@ private fun CompactMixCard(mix: SoundMix, modifier: Modifier = Modifier) {
 @Composable
 private fun LayerRow(
     layer: SoundLayer,
+    isPlaying: Boolean,
     onVolumeChange: (Float) -> Unit,
     onMutedChange: (Boolean) -> Unit,
     onRemove: () -> Unit,
@@ -564,7 +608,12 @@ private fun LayerRow(
             .padding(WnpSpacing.CardPadding),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        SoundIcon(label = SampleContent.soundName(layer.soundId), active = !layer.isMuted, iconKey = layer.soundId)
+        SoundIcon(
+            label = SampleContent.soundName(layer.soundId),
+            active = isPlaying && !layer.isMuted,
+            selected = !layer.isMuted,
+            iconKey = layer.soundId,
+        )
         Column(modifier = Modifier.weight(1f).padding(horizontal = WnpSpacing.Lg)) {
             Text(SampleContent.soundName(layer.soundId), color = WnpColors.OnSurface, style = WnpTypography.Body)
             VolumeSlider(value = layer.volume, onValueChange = onVolumeChange)
@@ -578,7 +627,7 @@ private fun LayerRow(
         }
         Spacer(Modifier.size(WnpSpacing.Xs))
         IconButton(onClick = onRemove) {
-            AppIcon(AppIconKind.Delete, tint = WnpColors.Danger, modifier = Modifier.size(20.dp))
+            AppIcon(AppIconKind.Delete, tint = WnpColors.IconMuted, modifier = Modifier.size(20.dp))
         }
     }
 }
@@ -599,7 +648,7 @@ private fun SoundGridCard(
             .padding(WnpSpacing.CardPadding),
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        SoundIcon(label = sound.name, active = active, iconKey = sound.iconKey)
+        SoundIcon(label = sound.name, active = false, selected = active, iconKey = sound.iconKey)
         Column {
             Text(sound.name, color = WnpColors.OnSurface, style = WnpTypography.Body, maxLines = 1)
             Text(sound.category.displayName, color = WnpColors.OnSurfaceVariant, style = WnpTypography.Label)
@@ -627,7 +676,7 @@ private fun MixCard(
         Row(verticalAlignment = Alignment.CenterVertically) {
             SoundIcon(
                 label = mix.title,
-                active = mix.isFavorite,
+                active = false,
                 iconKey = mix.layers.firstOrNull()?.soundId ?: "mixer",
             )
             Column(
@@ -646,7 +695,7 @@ private fun MixCard(
                 )
             }
             IconButton(onClick = onToggleFavorite) {
-                AppIcon(AppIconKind.Favorite, tint = if (mix.isFavorite) WnpColors.Tertiary else WnpColors.Primary, modifier = Modifier.size(20.dp))
+                AppIcon(AppIconKind.Favorite, tint = if (mix.isFavorite) WnpColors.Secondary else WnpColors.OnSurfaceVariant, modifier = Modifier.size(20.dp))
             }
             Spacer(Modifier.size(WnpSpacing.Xs))
             IconButton(onClick = { editing = !editing }) {
@@ -654,7 +703,7 @@ private fun MixCard(
             }
             Spacer(Modifier.size(WnpSpacing.Xs))
             IconButton(onClick = onDelete) {
-                AppIcon(AppIconKind.Delete, tint = WnpColors.Danger, modifier = Modifier.size(20.dp))
+                AppIcon(AppIconKind.Delete, tint = WnpColors.IconMuted, modifier = Modifier.size(20.dp))
             }
         }
         if (editing) {
@@ -663,11 +712,10 @@ private fun MixCard(
                 horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Lg),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                OutlinedTextField(
+                WnpTextField(
                     value = title,
                     onValueChange = { title = it.take(30) },
                     modifier = Modifier.weight(1f),
-                    singleLine = true,
                 )
                 PrimaryButton(
                     text = "保存",

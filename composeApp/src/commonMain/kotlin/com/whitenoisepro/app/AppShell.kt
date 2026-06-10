@@ -19,14 +19,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.whitenoisepro.design.AtmosphericLightPlacement
 import com.whitenoisepro.design.AppIcon
 import com.whitenoisepro.design.AppIconKind
 import com.whitenoisepro.design.IconButton
 import com.whitenoisepro.design.SoundIcon
 import com.whitenoisepro.design.VolumeSlider
+import com.whitenoisepro.design.WnpAtmosphericBackground
 import com.whitenoisepro.design.WnpColors
 import com.whitenoisepro.design.WnpDimens
 import com.whitenoisepro.design.WnpRadius
@@ -61,6 +66,7 @@ data class ScaffoldContentPadding(
     val top: androidx.compose.ui.unit.Dp,
     val end: androidx.compose.ui.unit.Dp,
     val bottom: androidx.compose.ui.unit.Dp,
+    val bottomChromeInset: androidx.compose.ui.unit.Dp,
 )
 
 fun scaffoldContentPadding(): ScaffoldContentPadding =
@@ -68,10 +74,10 @@ fun scaffoldContentPadding(): ScaffoldContentPadding =
         start = WnpSpacing.ScreenHorizontal,
         top = WnpSpacing.ScreenTop,
         end = WnpSpacing.ScreenHorizontal,
-        bottom = WnpDimens.BottomNavHeight +
+        bottom = WnpSpacing.BottomBreathingRoom,
+        bottomChromeInset = WnpDimens.BottomNavHeight +
             WnpDimens.BottomChromeGap +
-            WnpDimens.MiniPlayerHeight +
-            WnpSpacing.BottomBreathingRoom,
+            WnpDimens.MiniPlayerHeight,
     )
 
 @Composable
@@ -88,17 +94,23 @@ fun AppScaffold(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(WnpColors.Background),
+            .atmosphericAppBackground(),
     ) {
         val scaffoldPadding = scaffoldContentPadding()
-        content(
-            PaddingValues(
-                start = scaffoldPadding.start,
-                top = scaffoldPadding.top,
-                end = scaffoldPadding.end,
-                bottom = scaffoldPadding.bottom,
-            ),
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = scaffoldPadding.bottomChromeInset),
+        ) {
+            content(
+                PaddingValues(
+                    start = scaffoldPadding.start,
+                    top = scaffoldPadding.top,
+                    end = scaffoldPadding.end,
+                    bottom = scaffoldPadding.bottom,
+                ),
+            )
+        }
 
         Column(
             modifier = Modifier.align(Alignment.BottomCenter),
@@ -119,6 +131,40 @@ fun AppScaffold(
     }
 }
 
+private fun Modifier.atmosphericAppBackground(): Modifier =
+    background(WnpAtmosphericBackground.baseColor)
+        .drawBehind {
+            WnpAtmosphericBackground.layers.forEach { layer ->
+                val center = when (layer.placement) {
+                    AtmosphericLightPlacement.Top -> Offset(size.width * 0.52f, size.height * 0.06f)
+                    AtmosphericLightPlacement.Center -> Offset(size.width * 0.46f, size.height * 0.38f)
+                    AtmosphericLightPlacement.Bottom -> Offset(size.width * 0.58f, size.height * 0.92f)
+                }
+                val radius = when (layer.placement) {
+                    AtmosphericLightPlacement.Top -> size.maxDimension * 0.54f
+                    AtmosphericLightPlacement.Center -> size.maxDimension * 0.34f
+                    AtmosphericLightPlacement.Bottom -> size.maxDimension * 0.36f
+                }
+                drawRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            layer.color.copy(alpha = layer.alpha),
+                            layer.color.copy(alpha = 0f),
+                        ),
+                        center = center,
+                        radius = radius,
+                    ),
+                )
+            }
+            drawRect(
+                brush = Brush.verticalGradient(
+                    0f to WnpColors.SurfaceHigh.copy(alpha = 0.07f),
+                    0.34f to WnpColors.Background.copy(alpha = 0f),
+                    1f to WnpColors.SurfaceLow.copy(alpha = 0.12f),
+                ),
+            )
+        }
+
 @Composable
 fun TopBar(
     title: String,
@@ -135,7 +181,7 @@ fun TopBar(
         Text(
             text = title,
             color = WnpColors.OnSurface,
-            style = WnpTypography.Display,
+            style = WnpTypography.DisplayLarge,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),

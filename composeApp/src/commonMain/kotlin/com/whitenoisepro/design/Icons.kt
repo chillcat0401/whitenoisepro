@@ -35,11 +35,11 @@ enum class AppIconKind {
 }
 
 fun soundIconKind(iconKey: String): AppIconKind = when (iconKey) {
-    "fan" -> AppIconKind.Fan
-    "rain" -> AppIconKind.Rain
-    "ocean" -> AppIconKind.Ocean
-    "forest" -> AppIconKind.Forest
-    "fireplace" -> AppIconKind.Fireplace
+    "fan", "fan_floor" -> AppIconKind.Fan
+    "rain", "rain_soft", "rain_light_roof", "rain_window", "rain_roof" -> AppIconKind.Rain
+    "ocean", "ocean_gentle", "ocean_waves", "ocean_shore" -> AppIconKind.Ocean
+    "forest", "wind_forest" -> AppIconKind.Forest
+    "fireplace", "fire_crackle", "fire_hearth" -> AppIconKind.Fireplace
     "white_noise", "pink_noise", "brown_noise" -> AppIconKind.Noise
     else -> AppIconKind.Mixer
 }

@@ -46,13 +46,13 @@ class AppShellTest {
         assertEquals(WnpSpacing.ScreenHorizontal, padding.start)
         assertEquals(WnpSpacing.ScreenTop, padding.top)
         assertEquals(WnpSpacing.ScreenHorizontal, padding.end)
+        assertEquals(WnpSpacing.BottomBreathingRoom, padding.bottom)
         assertEquals(
             WnpDimens.BottomNavHeight +
                 WnpDimens.BottomChromeGap +
-                WnpDimens.MiniPlayerHeight +
-                WnpSpacing.BottomBreathingRoom,
-            padding.bottom,
+                WnpDimens.MiniPlayerHeight,
+            padding.bottomChromeInset,
         )
-        assertEquals(WnpSpacing.ScreenBottomWithPlayer, padding.bottom)
+        assertEquals(WnpSpacing.ScreenBottomWithPlayer, padding.bottom + padding.bottomChromeInset)
     }
 }
