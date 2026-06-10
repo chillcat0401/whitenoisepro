@@ -69,7 +69,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest && 模拟器截图核对
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,design}/
 
-- [ ] 6.2 Claude 风格字体体系(开源近似)
+- [x] 6.2 Claude 风格字体体系(开源近似)
   - accept: 标题/数字使用衬线字体(Lora),正文保持系统无衬线;中文正常回退;
     DesignTokenTest 字阶断言不回归
   - verify: ./gradlew :composeApp:check && 模拟器截图核对

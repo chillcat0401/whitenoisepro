@@ -82,6 +82,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
+        // Compose 资源(字体等)生成类的包名在下方 compose.resources 配置
         applicationId = "com.whitenoisepro"
         minSdk = 26
         targetSdk = 36
@@ -112,4 +113,8 @@ android {
 check(!releaseArtifactRequested || hasReleaseSigning) {
     "Release signing is not configured. Copy keystore.properties.example to keystore.properties " +
         "or provide all four WHITENOISE_UPLOAD_* environment variables."
+}
+
+compose.resources {
+    packageOfResClass = "com.whitenoisepro.generated.resources"
 }

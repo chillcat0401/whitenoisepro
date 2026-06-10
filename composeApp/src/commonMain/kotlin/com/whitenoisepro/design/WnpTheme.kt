@@ -10,6 +10,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whitenoisepro.generated.resources.Res
+import com.whitenoisepro.generated.resources.lora_medium
+import com.whitenoisepro.generated.resources.lora_semibold
+import org.jetbrains.compose.resources.Font
 
 object WnpColors {
     val Background = Color(0xFF151411)
@@ -87,36 +91,49 @@ object WnpDimens {
     val BottomChromeGap = 10.dp
 }
 
+/**
+ * 展示字族由主题在启动时注入(Lora 衬线,Claude 风格的开源近似);
+ * 拉丁字母与数字走衬线,中文字形自动回退系统字体。正文保持系统无衬线。
+ */
+object WnpFonts {
+    var display: FontFamily = FontFamily.Serif
+}
+
 object WnpTypography {
-    val DisplayLarge = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 34.sp,
-        lineHeight = 42.sp,
-    )
-    val Display = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 28.sp,
-        lineHeight = 34.sp,
-    )
-    val Title = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
-        lineHeight = 26.sp,
-    )
+    val DisplayLarge: TextStyle
+        get() = TextStyle(
+            fontFamily = WnpFonts.display,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 34.sp,
+            lineHeight = 42.sp,
+        )
+    val Display: TextStyle
+        get() = TextStyle(
+            fontFamily = WnpFonts.display,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 28.sp,
+            lineHeight = 34.sp,
+        )
+    val Title: TextStyle
+        get() = TextStyle(
+            fontFamily = WnpFonts.display,
+            fontWeight = FontWeight.Medium,
+            fontSize = 20.sp,
+            lineHeight = 26.sp,
+        )
     val Body = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
         fontSize = 15.sp,
         lineHeight = 22.sp,
+        letterSpacing = 0.1.sp,
     )
     val Label = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Medium,
         fontSize = 13.sp,
         lineHeight = 18.sp,
+        letterSpacing = 0.2.sp,
     )
 }
 
@@ -138,6 +155,10 @@ val WnpColorScheme: ColorScheme = darkColorScheme(
 
 @Composable
 fun WhiteNoiseTheme(content: @Composable () -> Unit) {
+    WnpFonts.display = FontFamily(
+        Font(Res.font.lora_medium, weight = FontWeight.Medium),
+        Font(Res.font.lora_semibold, weight = FontWeight.SemiBold),
+    )
     MaterialTheme(
         colorScheme = WnpColorScheme,
         content = content,
