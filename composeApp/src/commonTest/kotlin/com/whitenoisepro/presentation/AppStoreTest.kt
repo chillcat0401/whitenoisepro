@@ -224,7 +224,7 @@ class AppStoreTest {
         )
         advanceUntilIdle()
 
-        store.dispatch(AppIntent.AddSound("ocean"))
+        store.dispatch(AppIntent.ToggleSound("ocean"))
         store.dispatch(AppIntent.SetMasterVolume(0.42f))
         store.dispatch(AppIntent.SetLayerVolume("layer-ocean-new", 0.31f))
         advanceUntilIdle()
@@ -249,13 +249,42 @@ class AppStoreTest {
         )
         advanceUntilIdle()
 
-        store.dispatch(AppIntent.AddSound("pink_noise"))
+        store.dispatch(AppIntent.ToggleSound("pink_noise"))
         advanceUntilIdle()
 
         assertEquals(
             SoundCatalog.all.first { it.id == "pink_noise" }.defaultVolume,
             store.state.mixState.currentMix.layers.last().volume,
         )
+    }
+
+    @Test
+    fun toggleSoundRemovesExistingLayerInsteadOfDuplicating() = runTest {
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = RecordingPlaybackEngine(),
+            scope = this,
+            playbackObservationScope = backgroundScope,
+            idProvider = FixedIdProvider(layerIds = listOf("layer-ocean-1", "layer-ocean-2")),
+        )
+        advanceUntilIdle()
+        val initialCount = store.state.mixState.currentMix.layers.size
+
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        advanceUntilIdle()
+        assertEquals(initialCount + 1, store.state.mixState.currentMix.layers.size)
+        assertEquals(1, store.state.mixState.currentMix.layers.count { it.soundId == "ocean_gentle" })
+
+        // 再点同一声音 = 移除,而不是重复添加
+        store.dispatch(AppIntent.ToggleSound("ocean_gentle"))
+        advanceUntilIdle()
+        assertEquals(initialCount, store.state.mixState.currentMix.layers.size)
+        assertEquals(0, store.state.mixState.currentMix.layers.count { it.soundId == "ocean_gentle" })
+
+        // 默认混音里已有的声音,点击应当移除
+        store.dispatch(AppIntent.ToggleSound("rain_soft"))
+        advanceUntilIdle()
+        assertEquals(0, store.state.mixState.currentMix.layers.count { it.soundId == "rain_soft" })
     }
 
     @Test
@@ -293,7 +322,7 @@ class AppStoreTest {
 
         store.dispatch(AppIntent.TogglePlayback)
         runCurrent()
-        store.dispatch(AppIntent.AddSound("ocean"))
+        store.dispatch(AppIntent.ToggleSound("ocean"))
 
         assertEquals(listOf("deep-night-noise", "deep-night-noise"), playback.playedMixIds)
         assertEquals("ocean", playback.playedMixes.last().layers.last().soundId)

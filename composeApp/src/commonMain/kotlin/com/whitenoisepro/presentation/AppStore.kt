@@ -39,7 +39,7 @@ sealed interface AppIntent {
     data class SetLayerMuted(val layerId: String, val muted: Boolean) : AppIntent
     data class RemoveLayer(val layerId: String) : AppIntent
     data object ToggleFavoriteCurrent : AppIntent
-    data class AddSound(val soundId: String) : AppIntent
+    data class ToggleSound(val soundId: String) : AppIntent
     data object SaveCurrentMix : AppIntent
     data class PlaySavedMix(val mixId: String) : AppIntent
     data class PlayPresetMix(val presetId: String) : AppIntent
@@ -149,15 +149,27 @@ class AppStore(
                 MixIntent.ToggleFavoriteCurrent,
                 syncPlaybackWhenPlaying = false,
             )
-            is AppIntent.AddSound -> updateMix(
-                MixIntent.AddSound(
-                    layerId = idProvider.nextLayerId(intent.soundId),
-                    soundId = intent.soundId,
-                    volume = SoundCatalog.all.firstOrNull { it.id == intent.soundId }?.defaultVolume
-                        ?: com.whitenoisepro.domain.model.SoundLayer.DefaultVolume,
-                ),
-                syncPlaybackWhenPlaying = true,
-            )
+            is AppIntent.ToggleSound -> {
+                val existingLayers = state.mixState.currentMix.layers.filter { it.soundId == intent.soundId }
+                if (existingLayers.isEmpty()) {
+                    updateMix(
+                        MixIntent.AddSound(
+                            layerId = idProvider.nextLayerId(intent.soundId),
+                            soundId = intent.soundId,
+                            volume = SoundCatalog.all.firstOrNull { it.id == intent.soundId }?.defaultVolume
+                                ?: com.whitenoisepro.domain.model.SoundLayer.DefaultVolume,
+                        ),
+                        syncPlaybackWhenPlaying = true,
+                    )
+                } else {
+                    existingLayers.forEach { layer ->
+                        updateMix(
+                            MixIntent.RemoveLayer(layer.id),
+                            syncPlaybackWhenPlaying = true,
+                        )
+                    }
+                }
+            }
             AppIntent.SaveCurrentMix -> updateMix(
                 MixIntent.SaveCurrentMix(
                     savedMixId = idProvider.nextSavedMixId(state.mixState.currentMix.title),

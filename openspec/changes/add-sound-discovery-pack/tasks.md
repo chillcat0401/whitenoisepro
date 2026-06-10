@@ -44,3 +44,20 @@
   - accept: check 全绿;模拟器上预设/骰子/实验室全部出声
   - verify: ./gradlew :composeApp:check :composeApp:assembleDebug
   - scope: 全仓(只读验证)
+
+## 5. 听审反馈修复(2026-06-10 真机听审发现)
+
+- [x] 5.1 声音点击改为切换语义(已选再点 = 移除,杜绝重复层)
+  - accept: 同一 soundId 重复点击在加入/移除间切换;不会产生重复层
+  - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
+  - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/presentation/, composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,App.kt}, composeApp/src/commonTest/
+
+- [ ] 5.2 全局操作反馈浮层(加入/移除/保存)
+  - accept: 加入声音、移除声音、保存混音均出现 2 秒浮层提示并自动消失
+  - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
+  - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/
+
+- [ ] 5.3 混音页试听/暂停控件
+  - accept: 混音页标题栏可直接播放/暂停当前混音
+  - verify: ./gradlew :composeApp:testDebugUnitTest && 模拟器实操
+  - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{app,App.kt}

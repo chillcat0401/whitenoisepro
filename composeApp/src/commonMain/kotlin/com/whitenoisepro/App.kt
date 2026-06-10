@@ -67,7 +67,7 @@ fun WhiteNoiseProApp(
                     onMasterVolumeChange = { volume -> store.dispatch(AppIntent.SetMasterVolume(volume)) },
                     onStartRecommendedTimer = { store.dispatch(AppIntent.StartRecommendedBedtimeTimer) },
                     onPlayRecentMix = { mixId -> store.dispatch(AppIntent.PlaySavedMix(mixId)) },
-                    onSoundSelected = { soundId -> store.dispatch(AppIntent.AddSound(soundId)) },
+                    onSoundSelected = { soundId -> store.dispatch(AppIntent.ToggleSound(soundId)) },
                     onPlayPreset = { presetId -> store.dispatch(AppIntent.PlayPresetMix(presetId)) },
                 )
                 AppTab.Mixer -> MixerScreen(
@@ -86,7 +86,7 @@ fun WhiteNoiseProApp(
                     padding = it,
                     onQueryChange = { query -> store.dispatch(AppIntent.SetLibraryQuery(query)) },
                     onCategorySelected = { category -> store.dispatch(AppIntent.SelectCategory(category)) },
-                    onSoundSelected = { soundId -> store.dispatch(AppIntent.AddSound(soundId)) },
+                    onSoundSelected = { soundId -> store.dispatch(AppIntent.ToggleSound(soundId)) },
                     onRollDice = { store.dispatch(AppIntent.RollDiceMix) },
                 )
                 AppTab.Timer -> TimerScreen(
