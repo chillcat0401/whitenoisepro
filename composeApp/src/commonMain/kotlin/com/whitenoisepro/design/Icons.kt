@@ -13,6 +13,9 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 
 enum class AppIconKind {
     Add,
+    Airplane,
+    Cafe,
+    Crickets,
     Delete,
     Edit,
     Fan,
@@ -30,17 +33,26 @@ enum class AppIconKind {
     Rain,
     Saved,
     Settings,
+    Stream,
     Timer,
+    Train,
     Volume,
+    Wind,
 }
 
 fun soundIconKind(iconKey: String): AppIconKind = when (iconKey) {
     "fan", "fan_floor" -> AppIconKind.Fan
-    "rain", "rain_soft", "rain_light_roof", "rain_window", "rain_roof" -> AppIconKind.Rain
+    "rain", "rain_soft", "rain_light_roof", "rain_window", "rain_roof", "rain_thunder" -> AppIconKind.Rain
     "ocean", "ocean_gentle", "ocean_waves", "ocean_shore" -> AppIconKind.Ocean
     "forest", "wind_forest" -> AppIconKind.Forest
     "fireplace", "fire_crackle", "fire_hearth" -> AppIconKind.Fireplace
     "white_noise", "pink_noise", "brown_noise" -> AppIconKind.Noise
+    "wind", "wind_trees" -> AppIconKind.Wind
+    "stream", "stream_gentle" -> AppIconKind.Stream
+    "crickets", "crickets_night" -> AppIconKind.Crickets
+    "cafe", "cafe_chatter" -> AppIconKind.Cafe
+    "train", "train_ride" -> AppIconKind.Train
+    "airplane", "airplane_cabin" -> AppIconKind.Airplane
     else -> AppIconKind.Mixer
 }
 
@@ -208,6 +220,67 @@ fun AppIcon(
                 }
                 drawPath(path, tint, style = stroke)
                 line(0.3f, 0.82f, 0.7f, 0.82f)
+            }
+            AppIconKind.Wind -> {
+                line(0.2f, 0.35f, 0.66f, 0.35f)
+                line(0.26f, 0.5f, 0.8f, 0.5f)
+                line(0.2f, 0.65f, 0.58f, 0.65f)
+            }
+            AppIconKind.Stream -> {
+                val flow = { x: Float ->
+                    Path().apply {
+                        moveTo(width * x, height * 0.24f)
+                        cubicTo(
+                            width * (x - 0.1f), height * 0.42f,
+                            width * (x + 0.1f), height * 0.58f,
+                            width * x, height * 0.76f,
+                        )
+                    }
+                }
+                drawPath(flow(0.38f), tint, style = stroke)
+                drawPath(flow(0.62f), tint, style = stroke)
+            }
+            AppIconKind.Cafe -> {
+                val cup = Path().apply {
+                    moveTo(width * 0.28f, height * 0.42f)
+                    lineTo(width * 0.64f, height * 0.42f)
+                    lineTo(width * 0.6f, height * 0.72f)
+                    lineTo(width * 0.32f, height * 0.72f)
+                    close()
+                }
+                drawPath(cup, tint, style = stroke)
+                drawArc(tint, -70f, 140f, false, topLeft = p(0.6f, 0.46f), size = Size(width * 0.18f, height * 0.18f), style = thinStroke)
+                line(0.39f, 0.24f, 0.39f, 0.33f)
+                line(0.53f, 0.22f, 0.53f, 0.31f)
+            }
+            AppIconKind.Train -> {
+                val body = Path().apply {
+                    moveTo(width * 0.32f, height * 0.26f)
+                    lineTo(width * 0.68f, height * 0.26f)
+                    lineTo(width * 0.68f, height * 0.62f)
+                    lineTo(width * 0.32f, height * 0.62f)
+                    close()
+                }
+                drawPath(body, tint, style = stroke)
+                line(0.32f, 0.44f, 0.68f, 0.44f)
+                circle(0.41f, 0.72f, 0.045f, thinStroke)
+                circle(0.59f, 0.72f, 0.045f, thinStroke)
+            }
+            AppIconKind.Crickets -> {
+                drawArc(tint, 50f, 260f, false, topLeft = p(0.26f, 0.28f), size = Size(width * 0.44f, height * 0.44f), style = stroke)
+                line(0.74f, 0.28f, 0.74f, 0.4f)
+                line(0.68f, 0.34f, 0.8f, 0.34f)
+            }
+            AppIconKind.Airplane -> {
+                val plane = Path().apply {
+                    moveTo(width * 0.78f, height * 0.26f)
+                    lineTo(width * 0.22f, height * 0.52f)
+                    lineTo(width * 0.46f, height * 0.6f)
+                    lineTo(width * 0.52f, height * 0.76f)
+                    close()
+                }
+                drawPath(plane, tint, style = stroke)
+                line(0.46f, 0.6f, 0.78f, 0.26f)
             }
         }
     }

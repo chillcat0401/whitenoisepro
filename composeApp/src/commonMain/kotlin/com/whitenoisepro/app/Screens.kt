@@ -2,6 +2,8 @@ package com.whitenoisepro.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -215,8 +217,11 @@ fun LibraryScreen(
             )
         }
         item {
-            Row(horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Md)) {
-                categories.take(4).forEach { category ->
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Md),
+            ) {
+                categories.forEach { category ->
                     TimerPresetChip(
                         text = category,
                         selected = category == state.selectedCategory,
