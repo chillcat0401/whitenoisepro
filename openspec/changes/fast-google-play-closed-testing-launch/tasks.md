@@ -9,7 +9,7 @@
 - [x] 2.1 Build a signed release AAB using the existing release signing workflow and record the command, version, artifact path, and signing verification result.
 - [x] 2.2 Run unit tests, lint, bundle verification, and release assemble/bundle checks for the release candidate.
 - [x] 2.3 Run emulator smoke QA for Home, Library, Mixer, Timer, Saved, Settings, playback, MediaSession, and no-crash log checks.
-- [ ] 2.4 Run at least one real Android device audio QA covering loop comfort, background playback, lock-screen/media controls, Bluetooth or wired output if available, and interruption behavior.
+- [x] 2.4 Run at least one real Android device audio QA covering loop comfort, background playback, lock-screen/media controls, Bluetooth or wired output if available, and interruption behavior.
 
 ## 3. Tester Feedback Operations
 
