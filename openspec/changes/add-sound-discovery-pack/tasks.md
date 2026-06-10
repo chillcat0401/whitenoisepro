@@ -10,7 +10,7 @@
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*MixReducerTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/domain/, composeApp/src/commonTest/kotlin/com/whitenoisepro/domain/
 
-- [ ] 1.3 AppIntent.PlayPresetMix + 首页「场景入睡」横滑区
+- [x] 1.3 AppIntent.PlayPresetMix + 首页「场景入睡」横滑区
   - accept: 点击预设卡 → currentMix 替换并开始播放;AppStoreTest 覆盖播放副作用
   - verify: ./gradlew :composeApp:testDebugUnitTest --tests "*AppStoreTest"
   - scope: composeApp/src/commonMain/kotlin/com/whitenoisepro/{presentation,app}/, composeApp/src/commonMain/kotlin/com/whitenoisepro/App.kt, composeApp/src/commonTest/

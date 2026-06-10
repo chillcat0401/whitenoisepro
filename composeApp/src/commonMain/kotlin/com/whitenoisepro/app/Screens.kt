@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.whitenoisepro.design.AppIcon
 import com.whitenoisepro.design.AppIconKind
+import com.whitenoisepro.data.PresetCatalog
 import com.whitenoisepro.data.SampleContent
 import com.whitenoisepro.data.SoundCatalog
 import com.whitenoisepro.design.IconButton
@@ -75,6 +77,7 @@ fun HomeScreen(
     onStartRecommendedTimer: () -> Unit,
     onPlayRecentMix: (String) -> Unit,
     onSoundSelected: (String) -> Unit,
+    onPlayPreset: (String) -> Unit,
 ) {
     LazyColumn(
         contentPadding = padding,
@@ -122,6 +125,17 @@ fun HomeScreen(
                 onStart = onStartRecommendedTimer,
                 onOpenTimer = { onNavigate(AppTab.Timer) },
             )
+        }
+        item {
+            SectionHeader(title = "场景入睡")
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(WnpSpacing.Md),
+            ) {
+                PresetCatalog.all.forEach { preset ->
+                    PresetCard(preset = preset, onClick = { onPlayPreset(preset.id) })
+                }
+            }
         }
         item {
             SectionHeader(title = "最近使用", actionText = "全部", onActionClick = { onNavigate(AppTab.Saved) })
@@ -575,6 +589,34 @@ private fun SoundPill(sound: Sound, selected: Boolean, onClick: () -> Unit) {
         SoundIcon(label = sound.name, active = false, selected = selected, iconKey = sound.iconKey)
         Text(
             sound.name,
+            color = WnpColors.OnSurfaceVariant,
+            style = WnpTypography.Label,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+@Composable
+private fun PresetCard(preset: SoundMix, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .width(168.dp)
+            .clip(RoundedCornerShape(WnpRadius.Card))
+            .background(WnpColors.SurfaceLow)
+            .clickable(onClick = onClick)
+            .padding(WnpSpacing.Lg),
+        verticalArrangement = Arrangement.spacedBy(WnpSpacing.Sm),
+    ) {
+        SoundIcon(
+            label = preset.title,
+            active = false,
+            selected = true,
+            iconKey = preset.layers.firstOrNull()?.soundId ?: "mixer",
+        )
+        Text(preset.title, color = WnpColors.OnSurface, style = WnpTypography.Body, maxLines = 1)
+        Text(
+            preset.layers.joinToString(" · ") { SampleContent.soundName(it.soundId) },
             color = WnpColors.OnSurfaceVariant,
             style = WnpTypography.Label,
             maxLines = 1,

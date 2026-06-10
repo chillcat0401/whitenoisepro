@@ -68,6 +68,7 @@ fun WhiteNoiseProApp(
                     onStartRecommendedTimer = { store.dispatch(AppIntent.StartRecommendedBedtimeTimer) },
                     onPlayRecentMix = { mixId -> store.dispatch(AppIntent.PlaySavedMix(mixId)) },
                     onSoundSelected = { soundId -> store.dispatch(AppIntent.AddSound(soundId)) },
+                    onPlayPreset = { presetId -> store.dispatch(AppIntent.PlayPresetMix(presetId)) },
                 )
                 AppTab.Mixer -> MixerScreen(
                     state = state,

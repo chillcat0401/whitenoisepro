@@ -321,6 +321,33 @@ class AppStoreTest {
     }
 
     @Test
+    fun playPresetMixReplacesCurrentAndStartsPlayback() = runTest {
+        val playback = RecordingPlaybackEngine()
+        val store = AppStore(
+            repository = RecordingRepository(),
+            playbackEngine = playback,
+            scope = this,
+            playbackObservationScope = backgroundScope,
+            clock = FixedClock(now = 789L),
+        )
+        advanceUntilIdle()
+
+        store.dispatch(AppIntent.PlayPresetMix("preset-rain-train"))
+        runCurrent()
+        advanceUntilIdle()
+
+        assertEquals("preset-rain-train", store.state.mixState.currentMix.id)
+        assertEquals(789L, store.state.mixState.currentMix.updatedAtEpochMillis)
+        assertEquals("preset-rain-train", store.state.mixState.recentMixes.first().id)
+        assertEquals(listOf("preset-rain-train"), playback.playedMixIds)
+
+        store.dispatch(AppIntent.PlayPresetMix("preset-unknown"))
+        runCurrent()
+        assertEquals("preset-rain-train", store.state.mixState.currentMix.id)
+        assertEquals(1, playback.playedMixIds.size)
+    }
+
+    @Test
     fun playSavedMixUpdatesCurrentRecentAndPlayback() = runTest {
         val saved = testMix(id = "saved-focus", title = "专注")
         val repository = RecordingRepository(

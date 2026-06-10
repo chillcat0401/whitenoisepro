@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import com.whitenoisepro.app.AppTab
 import com.whitenoisepro.data.AppRepository
 import com.whitenoisepro.data.AppSnapshot
+import com.whitenoisepro.data.PresetCatalog
 import com.whitenoisepro.data.SoundCatalog
 import com.whitenoisepro.domain.model.Sound
 import com.whitenoisepro.domain.model.SoundCategory
@@ -39,6 +40,7 @@ sealed interface AppIntent {
     data class AddSound(val soundId: String) : AppIntent
     data object SaveCurrentMix : AppIntent
     data class PlaySavedMix(val mixId: String) : AppIntent
+    data class PlayPresetMix(val presetId: String) : AppIntent
     data class DeleteSavedMix(val mixId: String) : AppIntent
     data class RenameSavedMix(val mixId: String, val title: String) : AppIntent
     data class ToggleFavoriteSavedMix(val mixId: String) : AppIntent
@@ -163,6 +165,16 @@ class AppStore(
                 updateMix(
                     MixIntent.PlaySavedMix(
                         mixId = intent.mixId,
+                        nowEpochMillis = clock.nowEpochMillis(),
+                    ),
+                )
+                playbackEngine.play(state.mixState.currentMix)
+            }
+            is AppIntent.PlayPresetMix -> {
+                val preset = PresetCatalog.byId(intent.presetId) ?: return
+                updateMix(
+                    MixIntent.ReplaceCurrentMix(
+                        mix = preset,
                         nowEpochMillis = clock.nowEpochMillis(),
                     ),
                 )
