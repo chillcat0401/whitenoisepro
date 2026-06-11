@@ -75,7 +75,15 @@ function requireValue(argv, index, option) {
 
 async function listArchiveIds(root) {
   const archiveRoot = path.join(root, "openspec/changes/archive");
-  const entries = await readdir(archiveRoot, { withFileTypes: true });
+  let entries;
+  try {
+    entries = await readdir(archiveRoot, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      return []; // 尚无任何归档(新项目),视为通过
+    }
+    throw error;
+  }
   return entries
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
