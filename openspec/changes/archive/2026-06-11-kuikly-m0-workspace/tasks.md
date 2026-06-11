@@ -12,7 +12,7 @@
   - verify: 构建日志 + 产物路径存在
   - scope: kuikly2hmos/biz/whitenoise/, kuikly2hmos/KuiklyUI(工作区不入库)
 
-- [ ] 0.4 (依赖设备,可延后)官方 demo / whitenoise 装入 ohosApp 真机验证
+- [x] 0.4 (依赖设备,可延后)官方 demo / whitenoise 装入 ohosApp 真机验证
   - accept: DevEco 运行 ohosApp 显示 AppPage 骨架画面
   - verify: 设备截图
   - scope: 工作区

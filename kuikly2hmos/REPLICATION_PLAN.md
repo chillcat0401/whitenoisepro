@@ -152,6 +152,9 @@ kuikly2hmos/
 - 2026-06-11:DevEco 升级 6.1.1(外置盘 + /Applications 软链,KBA 构建链
   绕缓存全量验证通过);软链失效根因分析与挂载触发自愈机制部署,
   见 docs/ops/deveco-symlink-ops.md。
+- 2026-06-11:**0.4 首屏点亮**——模拟器(aarch64)装载 hap 成功,AppPage
+  Compose DSL 渲染正确(evidence 0.4 截图)。壳定制(剥离 bugly + 默认路由)
+  固化 biz/ohos-snippets/0002。M0/M1 变更归档。下一步 M2 音频桥。
 
 ## 3. 风险登记
 
