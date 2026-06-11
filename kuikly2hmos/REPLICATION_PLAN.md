@@ -149,6 +149,9 @@ kuikly2hmos/
   Android 94 测试双端通过。踩坑 7 条固化于 biz/build_ohos.sh、
   workspace-patches/ 与两份 evidence。设备相关任务(0.4、M2 起的真机验证)
   待 2026-06-11 配置鸿蒙模拟器后继续。
+- 2026-06-11:DevEco 升级 6.1.1(外置盘 + /Applications 软链,KBA 构建链
+  绕缓存全量验证通过);软链失效根因分析与挂载触发自愈机制部署,
+  见 docs/ops/deveco-symlink-ops.md。
 
 ## 3. 风险登记
 

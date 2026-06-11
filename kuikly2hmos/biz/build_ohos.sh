@@ -7,6 +7,12 @@
 #    并стub 其输出文件(下两行);
 #  - 构建命令勿接管道,否则退出码被吞。
 set -e
+# 软链健康前置检查(失效根因与自愈机制见 docs/ops/deveco-symlink-ops.md)
+if [ ! -e /Applications/DevEco-Studio.app/Contents/sdk/default/openharmony ]; then
+  echo "✗ DevEco SDK 路径不可达。先跑: ~/.local/bin/volume-symlink-doctor.sh" >&2
+  ls -la /Applications/DevEco-Studio.app 2>&1 | head -1 >&2
+  exit 1
+fi
 mkdir -p whitenoise/build && echo "15.4" > whitenoise/build/xcode-version.txt
 KUIKLY_AGP_VERSION="7.4.2" KUIKLY_KOTLIN_VERSION="2.0.21-KBA-010" \
   ./gradlew -c settings.2.0.ohos.gradle.kts \
