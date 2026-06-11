@@ -73,7 +73,7 @@ private fun AppRoot(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("白噪声 Pro", color = Color(0xFF9AD6C5), fontSize = 28.sp)
+        Text("白噪屿", color = Color(0xFF9AD6C5), fontSize = 28.sp)
         Text("Kuikly · HarmonyOS 复刻骨架", color = Color(0xFFC9C0B2), fontSize = 14.sp)
 
         Text(

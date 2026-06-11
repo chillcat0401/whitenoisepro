@@ -11,7 +11,7 @@ index 98c1e71..5bae9cc 100644
      "versionCode": 1000000,
      "versionName": "1.0.0",
 diff --git a/ohosApp/AppScope/resources/base/element/string.json b/ohosApp/AppScope/resources/base/element/string.json
-index 6ef4ac5..fcc3d9a 100644
+index 6ef4ac5..9d7addc 100644
 --- a/ohosApp/AppScope/resources/base/element/string.json
 +++ b/ohosApp/AppScope/resources/base/element/string.json
 @@ -2,7 +2,7 @@
@@ -19,7 +19,7 @@ index 6ef4ac5..fcc3d9a 100644
      {
        "name": "app_name",
 -      "value": "Kuikly"
-+      "value": "白噪声 Pro"
++      "value": "白噪屿"
      }
    ]
  }
@@ -213,3 +213,50 @@ index 4ff1ea5..7d406db 100644
            pageData: this.pageData ?? {},
            delegate: this.kuiklyViewDelegate,
            contextCode: this.contextCode,
+diff --git a/ohosApp/entry/src/main/module.json5 b/ohosApp/entry/src/main/module.json5
+index 9bf385a..df33687 100644
+--- a/ohosApp/entry/src/main/module.json5
++++ b/ohosApp/entry/src/main/module.json5
+@@ -12,7 +12,9 @@
+     ],
+     "requestPermissions": [
+       {
+-        "name": "ohos.permission.INTERNET"
++        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
++        "reason": "$string:bg_audio_reason",
++        "usedScene": { "abilities": ["EntryAbility"], "when": "inuse" }
+       }
+     ],
+     "deliveryWithInstall": true,
+@@ -27,6 +29,7 @@
+         "label": "$string:EntryAbility_label",
+         "startWindowIcon": "$media:startIcon",
+         "startWindowBackground": "$color:start_window_background",
++        "backgroundModes": ["audioPlayback"],
+         "exported": true,
+         "skills": [
+           {
+diff --git a/ohosApp/entry/src/main/resources/base/element/string.json b/ohosApp/entry/src/main/resources/base/element/string.json
+index f945955..f6de9b8 100644
+--- a/ohosApp/entry/src/main/resources/base/element/string.json
++++ b/ohosApp/entry/src/main/resources/base/element/string.json
+@@ -1,5 +1,9 @@
+ {
+   "string": [
++    {
++      "name": "bg_audio_reason",
++      "value": "息屏后持续播放助眠声音"
++    },
+     {
+       "name": "module_desc",
+       "value": "module description"
+@@ -10,7 +14,7 @@
+     },
+     {
+       "name": "EntryAbility_label",
+-      "value": "label"
++      "value": "白噪屿"
+     }
+   ]
+ }
+\ No newline at end of file
