@@ -9,3 +9,12 @@
   Index.ets 默认路由改 WhiteNoiseApp
 
 注:0002 含 CrashReport.ets 整文件删除;apply 后需 `ohpm install --all` 重装依赖。
+
+更新(2026-06-11,M2.1):
+- `modules/WNPAudioPlayerModule.ets` — 新增文件,拷入
+  `ohosApp/entry/src/main/ets/kuikly/modules/`(0002 补丁只含已有文件修改);
+- rawfile 测试声源:从主仓 `composeApp/src/androidMain/res/raw/` 拷
+  `rain_soft_loop.ogg`、`ocean_gentle_loop.ogg` 到
+  `ohosApp/entry/src/main/resources/rawfile/`;
+- 0002 补丁现含:bundleName(com.whitenoisepro.hmos)、应用名(白噪声 Pro)、
+  bugly 剥离、默认路由、模块注册。

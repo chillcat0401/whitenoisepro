@@ -19,6 +19,8 @@ KUIKLY_AGP_VERSION="7.4.2" KUIKLY_KOTLIN_VERSION="2.0.21-KBA-010" \
   :whitenoise:linkSharedDebugSharedOhosArm64 -x :whitenoise:xcodeVersion "$@"
 echo "产物:"
 ls -la whitenoise/build/bin/ohosArm64/sharedDebugShared/
-# 装入壳工程(0.4 设备验证时取消注释)
-# cp whitenoise/build/bin/ohosArm64/sharedDebugShared/libshared.so ohosApp/entry/libs/arm64-v8a/
-# cp whitenoise/build/bin/ohosArm64/sharedDebugShared/libshared_api.h ohosApp/entry/src/main/cpp/thirdparty/biz_entry/
+# 装入壳工程:so 与 API 头必须同一次构建配套部署(坑 #10:只换 so 不换头
+# 会因函数表错位触发 initKuikly 断言 cppcrash);换 so 后 hvigor 需 clean(坑 #11)
+cp whitenoise/build/bin/ohosArm64/sharedDebugShared/libshared.so ohosApp/entry/libs/arm64-v8a/
+cp whitenoise/build/bin/ohosArm64/sharedDebugShared/libshared_api.h ohosApp/entry/src/main/cpp/thirdparty/biz_entry/
+echo "已配套部署 so + 头文件到 ohosApp(记得 hvigorw clean 后再 assembleHap)"

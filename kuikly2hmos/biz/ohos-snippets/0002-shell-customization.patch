@@ -1,3 +1,28 @@
+diff --git a/ohosApp/AppScope/app.json5 b/ohosApp/AppScope/app.json5
+index 98c1e71..5bae9cc 100644
+--- a/ohosApp/AppScope/app.json5
++++ b/ohosApp/AppScope/app.json5
+@@ -1,6 +1,6 @@
+ {
+   "app": {
+-    "bundleName": "com.tencent.kuiklyohosdemo",
++    "bundleName": "com.whitenoisepro.hmos",
+     "vendor": "example",
+     "versionCode": 1000000,
+     "versionName": "1.0.0",
+diff --git a/ohosApp/AppScope/resources/base/element/string.json b/ohosApp/AppScope/resources/base/element/string.json
+index 6ef4ac5..fcc3d9a 100644
+--- a/ohosApp/AppScope/resources/base/element/string.json
++++ b/ohosApp/AppScope/resources/base/element/string.json
+@@ -2,7 +2,7 @@
+   "string": [
+     {
+       "name": "app_name",
+-      "value": "Kuikly"
++      "value": "白噪声 Pro"
+     }
+   ]
+ }
 diff --git a/ohosApp/entry/oh-package-lock.json5 b/ohosApp/entry/oh-package-lock.json5
 index d0a1f89..2f7c0df 100644
 --- a/ohosApp/entry/oh-package-lock.json5
@@ -155,6 +180,26 @@ index 63972b1..0000000
 -    Bugly.postCrashRelatedError(name, message, stack)
 -  }
 -}
+diff --git a/ohosApp/entry/src/main/ets/kuikly/KuiklyViewDelegate.ets b/ohosApp/entry/src/main/ets/kuikly/KuiklyViewDelegate.ets
+index 259617c..5266139 100644
+--- a/ohosApp/entry/src/main/ets/kuikly/KuiklyViewDelegate.ets
++++ b/ohosApp/entry/src/main/ets/kuikly/KuiklyViewDelegate.ets
+@@ -21,6 +21,7 @@ import { KRBridgeModule } from './modules/KRBridgeModule';
+ import { KROhosStreamRequestModule } from './modules/KROhosStreamRequestModule';
+ import { KuiklyPageView } from './components/KuiklyPageView';
+ import { KRMyLogModule } from './modules/KRMyLogModule';
++import { WNPAudioPlayerModule } from './modules/WNPAudioPlayerModule';
+ 
+ 
+ export class KuiklyViewDelegate extends IKuiklyViewDelegate {
+@@ -45,6 +46,7 @@ export class KuiklyViewDelegate extends IKuiklyViewDelegate {
+     map.set(KRMyModule.MODULE_NAME, () => new KRMyModule());
+     map.set(KROhosStreamRequestModule.MODULE_NAME, () => new KROhosStreamRequestModule());
+     map.set(KRMyLogModule.MODULE_NAME, () => new KRMyLogModule());
++    map.set(WNPAudioPlayerModule.MODULE_NAME, () => new WNPAudioPlayerModule());
+     return map;
+   }
+ 
 diff --git a/ohosApp/entry/src/main/ets/pages/Index.ets b/ohosApp/entry/src/main/ets/pages/Index.ets
 index 4ff1ea5..7d406db 100644
 --- a/ohosApp/entry/src/main/ets/pages/Index.ets
